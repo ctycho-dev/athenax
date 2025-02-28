@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-1: #1A1A1A;
+  --color-dark-2: #666666;
+  --color-light-1: #007DDA;
+  --color-light-2: #0066B8;
+  --color-light-3: #FF3838; /* red */
+  --color-light-4: #07D215; /* green */
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Light Theme */
+  --dsr-bg-light: #ffffff;
+  --dsr-text-light: #000000;
+
+  /* Dark Theme */
+  --dsr-bg-dark: #000;
+  --dsr-text-dark: #ffffff;
+
+  --color-dark-1: #1A1A1A;
+  --color-dark-2: #666666;
+  --color-light-1: #007DDA;
+  --color-light-2: #0066B8;
+  --color-light-3: #FF3838; /* red */
+  --color-light-4: #07D215; /* green */
+}
+
+body {
+  background-color: var(--dsr-bg-dark);
+  color: var(--dsr-text-dark);
+}
+
+/* Light theme */
+.light body {
+  background-color: var(--dsr-bg-light);
+  color: var(--dsr-text-light);
+}
+
+/* Override autofill background and text color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px var(--color-dark-1) inset !important; /* Replace with your bg-dark-1 color */
+    -webkit-text-fill-color: var(--dsr-text-dark) !important; /* Replace with your text color */
+    transition: background-color 5000s ease-in-out 0s; /* Prevent background color change */
+}
