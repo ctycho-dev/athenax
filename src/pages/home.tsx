@@ -5,8 +5,11 @@ import gradientTop from '../assets/gradient-top.png';
 import gradientBottom from '../assets/gradient-bottom.png';
 import checkIcon from '../assets/check.svg';
 
-import { BsTwitterX, BsDiscord } from "react-icons/bs";
-import { FaTelegram } from "react-icons/fa6";
+import { 
+    BsTwitterX, 
+    // BsDiscord 
+} from "react-icons/bs";
+// import { FaTelegram } from "react-icons/fa6";
 import axios from "axios";
 import { Toaster, toast } from 'sonner';
 
