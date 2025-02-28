@@ -38,7 +38,7 @@ export const Home: React.FC<HomeProps> = ({ }) => {
         const email = emailRef.current.value;
 
         try {
-            const res = await axios.post('https://athenax-backend.tech/store-email', {
+            const res = await axios.post('https://athenax-backend.tech/store-email/', {
                 email: email
             });
 
