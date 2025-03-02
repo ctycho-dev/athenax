@@ -70,7 +70,7 @@ export const Home: React.FC<HomeProps> = ({ }) => {
                     </div>
                 </div>
                 <div>
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">Athena X: Your All-in-One<br /> Web3 Data &<br /> Research Hub</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">Your All-in-One<br /> Web3 Data & Research Hub</h1>
                     <h3 className="text-sm sm:text-md md:text-lg text-center mb-12">
                         Access in-depth blockchain data analytics<br /> and cryptocurrency insights.<br />Leverage expert-driven research for real-time Web3 intelligence.
                     </h3>
