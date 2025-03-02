@@ -121,10 +121,10 @@ export const Home: React.FC<HomeProps> = ({ }) => {
                     {/* <FaTelegram className="text-2xl text-dark-2 hover:text-gray-600" /> */}
                 </div>
             </div>
-            <div className="absolute left-0 top-0 -z-10">
+            <div className="fixed left-0 top-0 -z-10">
                 <img src={gradientTop} alt="" />
             </div>
-            <div className="absolute right-0 bottom-0 -z-10">
+            <div className="fixed right-0 bottom-0 -z-10">
                 <img src={gradientBottom} alt="" />
             </div>
             <Toaster richColors position="top-right" />
