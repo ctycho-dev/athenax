@@ -1,15 +1,10 @@
 import React, { useRef, useState, FormEvent } from "react";
-import { Link } from "react-router-dom";
-import logoWhite from '/athenax-white.svg';
 import gradientTop from '../assets/gradient-top.png';
 import gradientBottom from '../assets/gradient-bottom.png';
 import checkIcon from '../assets/check.svg';
+import { Header } from "@/components/header/header";
+import { Footer } from "@/components/footer/footer";
 
-import { 
-    BsTwitterX, 
-    // BsDiscord 
-} from "react-icons/bs";
-// import { FaTelegram } from "react-icons/fa6";
 import axios from "axios";
 import { Toaster, toast } from 'sonner';
 
@@ -64,11 +59,7 @@ export const Home: React.FC<HomeProps> = ({ }) => {
     return (
         <>
             <div className="pt-14 px-4 h-screen flex flex-col justify-between">
-                <div className="flex flex-col justify-center">
-                    <div className="flex justify-center">
-                        <img src={logoWhite} alt="" className="h-12 md:h-14 z-10" />
-                    </div>
-                </div>
+                <Header />
                 <div>
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">Your All-in-One<br /> Web3 Data & Research Hub</h1>
                     <h3 className="text-sm sm:text-md md:text-lg text-center mb-12">
@@ -113,13 +104,7 @@ export const Home: React.FC<HomeProps> = ({ }) => {
                         )}
                     </div>
                 </div>
-                <div className="py-6 flex justify-center gap-x-6 z-10">
-                    <Link to={'https://x.com/athenax_co?s=21'} target="_blank">
-                        <BsTwitterX className="text-2xl text-dark-2 hover:text-gray-600" />
-                    </Link>
-                    {/* <BsDiscord className="text-2xl text-dark-2 hover:text-gray-600" /> */}
-                    {/* <FaTelegram className="text-2xl text-dark-2 hover:text-gray-600" /> */}
-                </div>
+                <Footer />
             </div>
             <div className="fixed left-0 top-0 -z-10">
                 <img src={gradientTop} alt="" />
