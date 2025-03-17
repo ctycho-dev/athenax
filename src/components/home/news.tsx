@@ -8,7 +8,9 @@ import CardSubtitle from "../cardSubtitle";
 import Card from "@/components/card";
 
 
-import newsDigest from '@/assets/home/news/news.png'
+import news1 from '@/assets/home/news/news-1x.png'
+import news2 from '@/assets/home/news/news-2x.png'
+import news3 from '@/assets/home/news/news-3x.png'
 import img1 from '@/assets/home/news/img_1.svg'
 import img2 from '@/assets/home/news/img_2.svg'
 import img3 from '@/assets/home/news/img_3.svg'
@@ -28,8 +30,8 @@ export const News: React.FC<NewsProps> = ({ }) => {
         <CustomSection>
             <div className="flex flex-col items-center justify-center">
                 <Button className="mb-6">News</Button>
-                <Title className="mb-6">Smart News Digests</Title>
-                <Subtitle className="z-10">
+                <Title className="mb-[8px]">Smart News Digests</Title>
+                <Subtitle className="z-10 mb-[32px] md:mb-[48px]">
                     AI-powered newsfeed summarising news from hundreds of sources
                 </Subtitle>
             </div>
@@ -37,7 +39,7 @@ export const News: React.FC<NewsProps> = ({ }) => {
                 <Card className="p-6 md:p-10">
                     <div className="h-full flex flex-col justify-between">
                         <div className="mb-6">
-                            <img src={newsDigest} alt="" />
+                            <img src={news3} alt="" srcSet={`${news1} 1x, ${news2} 2x, ${news3} 3x`} />
                         </div>
                         <div className="mt-6">
                             <CardTitle className="mb-2">Daily & Real-Time Updates</CardTitle>

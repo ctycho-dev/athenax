@@ -18,8 +18,8 @@ export const Charts: React.FC<ChartsProps> = ({ }) => {
         <CustomSection>
             <div className="flex flex-col items-center justify-center mb-14">
                 <Button className="mb-6">Charts</Button>
-                <Title className="mb-6">Comparative Charts</Title>
-                <Subtitle className="z-10">
+                <Title className="mb-[8px]">Comparative Charts</Title>
+                <Subtitle className="z-10 mb-[32px] md:mb-[48px]">
                     Track and analyse multiple assets on one comprehensive chart
                 </Subtitle>
             </div>

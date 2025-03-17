@@ -233,3 +233,24 @@ a[href="https://unicorn.studio?utm_source=public-url"] {
     position: absolute !important;
   }
 }
+
+.main-btn {
+  background: #007DDA;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 34px;
+  letter-spacing: 0;
+  font-weight: 600;
+  padding: 16px 24px;
+}
+
+.main-btn:hover {
+  background: #0066B3;
+}
+
+@media screen and (max-width: 640px) {
+  .main-btn {
+    width: 100%;
+  }
+}

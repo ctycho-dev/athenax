@@ -49,7 +49,7 @@ export const Description: React.FC<DescriptionProps> = ({ }) => {
                     <p
                         ref={container}
                         // className="text-2xl sm:text-3xl md:text-5xl font-bold lg:w-2/3 leading-[42px] md:leading-[150%]"
-                        className="flex text-2xl sm:text-3xl md:text-5xl font-bold leading-[40px] md:leading-[150%] lg:w-2/3 flex-wrap"
+                        className="flex text-[32px] md:text-[48px] font-[900] leading-[40px] md:leading-[115%] -tracking-[1px] md:-tracking-[2.69px] lg:w-2/3 flex-wrap"
                     >
                         {words.map((word, i) => {
                             const start = i / words.length;

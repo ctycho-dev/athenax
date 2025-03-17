@@ -6,7 +6,7 @@ interface CustomSectionProps {
 }
 
 const CustomSection: React.FC<CustomSectionProps> = ({ children, className = ''}) => {
-    return <section className={`max-w-7xl m-auto py-24 sm:py-24 px-4 ${className}`}>{children}</section>
+    return <section className={`max-w-7xl m-auto py-12 sm:py-24 px-4 ${className}`}>{children}</section>
 }
 
 export default CustomSection;

@@ -19,8 +19,8 @@ export const Research: React.FC<ResearchProps> = ({ }) => {
         <CustomSection className="relative">
             <div className="flex flex-col items-center justify-center">
                 <Button className="mb-6">Research</Button>
-                <Title className="mb-6">Uncover Alpha Early</Title>
-                <Subtitle className="z-10">
+                <Title className="mb-[8px]">Uncover Alpha Early</Title>
+                <Subtitle className="z-10 mb-[32px] md:mb-[48px]">
                     Discover new projects way before everyone else
                 </Subtitle>
             </div>

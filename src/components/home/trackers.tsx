@@ -7,7 +7,9 @@ import CardTitle from '@/components/cardTitle'
 import CardSubtitle from "../cardSubtitle";
 import Card from "@/components/card";
 
-import watchlist from '@/assets/home/trackers/watchlist.png'
+import watchlist1 from '@/assets/home/trackers/watchlist-1x.png'
+import watchlist2 from '@/assets/home/trackers/watchlist-2x.png'
+import watchlist3 from '@/assets/home/trackers/watchlist-3x.png'
 import notification from '@/assets/home/trackers/notification.png'
 import trends from '@/assets/home/trackers/trends.png'
 
@@ -19,8 +21,8 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
         <CustomSection>
             <div className="flex flex-col items-center justify-center">
                 <Button className="mb-6">Trackers</Button>
-                <Title className="mb-6">Customized Crypto Trackers</Title>
-                <Subtitle className="z-10">
+                <Title className="mb-[8px]">Customized Crypto Trackers</Title>
+                <Subtitle className="z-10 mb-[32px] md:mb-[48px]">
                     AI-curated daily or weekly summaries based on your watchlists
                 </Subtitle>
             </div>
@@ -31,7 +33,7 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
                         <CardSubtitle>Track your favorite tokens, protocols,<br />and DeFi projects in one place</CardSubtitle>
                     </div>
                     <div>
-                        <img src={watchlist} alt="" className="" />
+                        <img src={watchlist3} alt="" srcSet={`${watchlist1} 1x, ${watchlist2} 2x, ${watchlist3} 3x`} />
                     </div>
                 </Card>
                 <Card className="col-span-12 md:col-span-6 p-6 md:p-10">

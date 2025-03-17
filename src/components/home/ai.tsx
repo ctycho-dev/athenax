@@ -22,8 +22,8 @@ export const AI: React.FC<AIProps> = ({ }) => {
             <CustomSection className="relative">
                 <div className="flex flex-col items-center justify-center">
                     <Button className="mb-6">AI</Button>
-                    <Title className="mb-6">AI Recaps on Any Asset</Title>
-                    <Subtitle className="z-10">
+                    <Title className="mb-[8px]">AI Recaps on Any Asset</Title>
+                    <Subtitle className="z-10 mb-[32px] md:mb-[48px]">
                         Quick, AI-generated insights on any cryptocurrency
                     </Subtitle>
                 </div>
