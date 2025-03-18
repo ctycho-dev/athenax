@@ -45,8 +45,8 @@ export const Charts: React.FC<ChartsProps> = ({ }) => {
                         <CardSubtitle>Download or share your custom comparisons for easy collaboration</CardSubtitle>
                     </div>
                 </div>
-                <div className=""><img src={chart} alt="" className="hidden md:block"/></div>
-                <img src={chart3} srcSet={`${chart1} 1x, ${chart2} 2x, ${chart3} 3x`} alt="" className="md:hidden" />
+                <div className=""><img src={chart} alt="" className="hidden md:block" /></div>
+                <img src={chart3} srcSet={`${chart1} 1x, ${chart2} 2x, ${chart3} 3x`} alt="" className="md:hidden mt-12 flex-1 max-w-96" />
             </div>
         </CustomSection>
     )
