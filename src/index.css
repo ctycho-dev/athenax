@@ -91,6 +91,7 @@
 }
 
 body {
+  overflow-x: hidden;
   background-color: var(--dsr-bg-dark);
   color: var(--dsr-text-dark);
 }

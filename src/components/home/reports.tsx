@@ -44,7 +44,7 @@ export const Reports: React.FC<ReportsProps> = ({ }) => {
                     </Card>
                     <Card className="p-6 md:p-10 flex flex-col justify-between">
                         <div className="flex-1 flex justify-center overflow-hidden">
-                            <iframe src="https://unicorn.studio/embed/ogeen1Qu7P7Q9noHiKtg"  loading="lazy" width={1200} height={290} className="scale-[195%]"></iframe>
+                            <iframe src="https://unicorn.studio/embed/ogeen1Qu7P7Q9noHiKtg" width={1200} className="scale-[195%] h-[280px] md:h-[310px]"></iframe>
                         </div>
                         <div className="pt-6">
                             <CardTitle className="mb-2">Expert Insights & Market Trends</CardTitle>

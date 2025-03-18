@@ -63,8 +63,8 @@ export const Footer: React.FC<FooterProps> = ({ formRef }) => {
     };
 
     return (
-        <footer className="relative">
-            <CustomSection>
+        <footer className="relative h-[calc(90vh-48px)] md:h-[calc(90vh-96px)] flex flex-col">
+            <CustomSection className="w-full flex-1 flex flex-col justify-center">
                 <Title className="mb-10">Join Waitlist Now</Title>
                 <div className="md:flex justify-center">
                     {submitted ? (
