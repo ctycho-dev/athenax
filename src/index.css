@@ -231,7 +231,7 @@ input:-webkit-autofill:active {
   }
 }
 
-.main-btn {
+.custom-btn {
   background: #007DDA;
   border-radius: 8px;
   color: #fff;
@@ -242,9 +242,15 @@ input:-webkit-autofill:active {
   padding: 16px 24px;
 }
 
-.main-btn:hover {
+.custom-btn:hover {
   background: #0066B3;
 }
+
+.sticked-btn {
+  font-size: 18px;
+  padding: 12px 24px;
+}
+
 
 @media screen and (max-width: 640px) {
   .main-btn {

@@ -13,7 +13,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ id, children, type = 'butto
         <button
             id={id}
             type={type}
-            className={`main-btn ${className} disabled:opacity-50 hover:cursor-pointer transition-all duration-100`}
+            className={`custom-btn ${className} disabled:opacity-50 hover:cursor-pointer transition-all duration-100`}
             onClick={handler}
             // disabled
         >
