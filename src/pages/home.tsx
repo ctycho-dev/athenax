@@ -1,117 +1,47 @@
-import React, { useRef, useState, FormEvent } from "react";
-import gradientTop from '../assets/gradient-top.png';
-import gradientBottom from '../assets/gradient-bottom.png';
-import checkIcon from '../assets/check.svg';
-import { Header } from "@/components/header/header";
-import { Footer } from "@/components/footer/footer";
+import React, { useRef } from "react";
+import { Toaster } from 'sonner';
 
-import axios from "axios";
-import { Toaster, toast } from 'sonner';
+import gradientTop from '../assets/gradient-top.png';
+import { Header } from "@/components/header/header";
+import { Main } from "@/components/home/main";
+import { Description } from "@/components/home/description";
+import { News } from "@/components/home/news";
+import { Trackers } from "@/components/home/trackers";
+import { Reports } from "@/components/home/reports";
+import { Charts } from "@/components/home/charts";
+import { AI } from "@/components/home/ai";
+import { Research } from "@/components/home/research";
+import { X } from "@/components/home/x";
+import { Footer } from "@/components/footer/footer";
+import UnicornStudioEmbed from "@/components/uvicornStudioEmbed";
+
+
 
 interface HomeProps { }
 
 export const Home: React.FC<HomeProps> = ({ }) => {
-    const emailRef = useRef<HTMLInputElement>(null);
-    const [isDisabled, setIsDisabled] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState('');
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
+    const wishlistRef = useRef<HTMLDivElement>(null);
 
-        if (!emailRef.current || !emailRef.current.value) {
-            setError('Please enter an email address.');
-            return;
-        }
-
-        if (!emailRef.current.checkValidity()) {
-            setError('Please enter a valid email address.');
-            return;
-        }
-
-        setIsDisabled(true)
-        const email = emailRef.current.value;
-
-        try {
-            const res = await axios.post('https://athenax-backend.tech/store-email/', {
-                email: email
-            });
-
-            if (res.status !== 200) {
-                toast.error('Something went wrong. Try again in a few minutes.');
-            } else {
-                setSubmitted(true);
-                setError('');
-            }
-        } catch (error) {
-            toast.error('Something went wrong. Try again in a few minutes.');
-        } finally {
-            setIsDisabled(false);
-        }
-    };
-
-    const handleInputChange = () => {
-        if (error) {
-            setError('');
+    const scrollToWishlist = () => {
+        if (wishlistRef && wishlistRef.current) {
+            wishlistRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
     return (
         <>
-            <div className="pt-14 px-4 h-screen flex flex-col justify-between">
-                <Header />
-                <div>
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">Your All-in-One<br /> Web3 Data & Research Hub</h1>
-                    <h3 className="text-sm sm:text-md md:text-lg text-center mb-12">
-                        Access in-depth blockchain data analytics<br /> and cryptocurrency insights.<br />Leverage expert-driven research for real-time Web3 intelligence.
-                    </h3>
-                    <div className="flex justify-center">
-                        {submitted ? (
-                            <div className="flex items-center justify-center gap-x-2 text-light-4">
-                                <img src={checkIcon} alt="Check" />
-                                Thanks! We‘ve added you to the waitlist.
-                            </div>
-                        ) : (
-                            <form action='#' onSubmit={handleSubmit} noValidate className="w-full flex justify-center">
-                                <div className="w-full justify-center grid gap-y-2 sm:flex">
-                                    <div className="">
-                                        <input
-                                            ref={emailRef}
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            autoComplete="email"
-                                            placeholder="Enter Your Email"
-                                            className={`h-12 sm:h-14 w-80 sm:w-96 bg-dark-1 px-4 outline-none rounded-lg ${
-                                                error ? 'border border-red-500' : ''
-                                            } disabled:opacity-50 disabled:cursor-not-allowed`}
-                                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                                            required
-                                            onChange={handleInputChange}
-                                            disabled={isDisabled}
-                                        />
-                                        {error && <div className="text-xs text-red-500 mt-2">{error}</div>}
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        className="h-12 sm:h-14 px-4 sm:-ml-4 bg-light-1 hover:bg-light-2 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                                        disabled={isDisabled}
-                                    >
-                                        Join the Waitlist Now
-                                    </button>
-                                </div>
-                            </form>
-                        )}
-                    </div>
-                </div>
-                <Footer />
-            </div>
-            <div className="fixed left-0 top-0 -z-10">
-                <img src={gradientTop} alt="" />
-            </div>
-            <div className="fixed right-0 bottom-0 -z-10">
-                <img src={gradientBottom} alt="" />
-            </div>
+            <Header />
+            <Main scrollToWishlist={scrollToWishlist} />
+            <Description />
+            <News />
+            <Trackers />
+            <Reports />
+            <Charts />
+            <AI />
+            <Research />
+            <X />
+            <Footer formRef={wishlistRef}/>
             <Toaster richColors position="top-right" />
         </>
     );

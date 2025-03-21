@@ -7,10 +7,19 @@
 @theme {
   --color-dark-1: #1A1A1A;
   --color-dark-2: #666666;
+  --color-dark-3: #1C1C1C;
+  --color-dark-subtitle: #9F9F9F;
+  --color-dark-card: #101010;
   --color-light-1: #007DDA;
   --color-light-2: #0066B8;
-  --color-light-3: #FF3838; /* red */
-  --color-light-4: #07D215; /* green */
+  --color-light-3: #FF3838;
+  /* red */
+  --color-light-4: #07D215;
+  /* green */
+  --color-light-blue-1: #007DDA;
+  --color-light-blue-2: #0066B3;
+  --color-light-gold-1: #F1C526;
+  --color-light-gold-2: #E0B522;
 }
 
 :root {
@@ -35,15 +44,66 @@
 
   --color-dark-1: #1A1A1A;
   --color-dark-2: #666666;
+  --color-dark-3: #1C1C1C;
+  --color-dark-subtitle: #9F9F9F;
+  --color-dark-card: #101010;
   --color-light-1: #007DDA;
   --color-light-2: #0066B8;
-  --color-light-3: #FF3838; /* red */
-  --color-light-4: #07D215; /* green */ --background: oklch(1 0 0); --foreground: oklch(0.145 0 0); --card: oklch(1 0 0); --card-foreground: oklch(0.145 0 0); --popover: oklch(1 0 0); --popover-foreground: oklch(0.145 0 0); --primary: oklch(0.205 0 0); --primary-foreground: oklch(0.985 0 0); --secondary: oklch(0.97 0 0); --secondary-foreground: oklch(0.205 0 0); --muted: oklch(0.97 0 0); --muted-foreground: oklch(0.556 0 0); --accent: oklch(0.97 0 0); --accent-foreground: oklch(0.205 0 0); --destructive: oklch(0.577 0.245 27.325); --destructive-foreground: oklch(0.577 0.245 27.325); --border: oklch(0.922 0 0); --input: oklch(0.922 0 0); --ring: oklch(0.708 0 0); --chart-1: oklch(0.646 0.222 41.116); --chart-2: oklch(0.6 0.118 184.704); --chart-3: oklch(0.398 0.07 227.392); --chart-4: oklch(0.828 0.189 84.429); --chart-5: oklch(0.769 0.188 70.08); --radius: 0.625rem; --sidebar: oklch(0.985 0 0); --sidebar-foreground: oklch(0.145 0 0); --sidebar-primary: oklch(0.205 0 0); --sidebar-primary-foreground: oklch(0.985 0 0); --sidebar-accent: oklch(0.97 0 0); --sidebar-accent-foreground: oklch(0.205 0 0); --sidebar-border: oklch(0.922 0 0); --sidebar-ring: oklch(0.708 0 0);
+  --color-light-3: #FF3838;
+  /* red */
+  --color-light-4: #07D215;
+  /* green */
+  --color-light-gold-1: #F1C526;
+  --color-light-gold-2: #E0B522;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 body {
+  overflow-x: hidden;
   background-color: var(--dsr-bg-dark);
   color: var(--dsr-text-dark);
+}
+
+/* For light mode */
+:root[data-mantine-color-scheme="light"] body {
+  --mantine-color-body: var(--mantine-color-gray-1);
+}
+
+/* For dark mode */
+:root[data-mantine-color-scheme="dark"] body {
+  --mantine-color-body: #000;
 }
 
 /* Light theme */
@@ -57,9 +117,12 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px var(--color-dark-1) inset !important; /* Replace with your bg-dark-1 color */
-    -webkit-text-fill-color: var(--dsr-text-dark) !important; /* Replace with your text color */
-    transition: background-color 5000s ease-in-out 0s; /* Prevent background color change */
+  -webkit-box-shadow: 0 0 0 1000px var(--color-dark-1) inset !important;
+  /* Replace with your bg-dark-1 color */
+  -webkit-text-fill-color: var(--dsr-text-dark) !important;
+  /* Replace with your text color */
+  transition: background-color 5000s ease-in-out 0s;
+  /* Prevent background color change */
 }
 
 .dark {
@@ -140,7 +203,57 @@ input:-webkit-autofill:active {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(180deg, #FFFFFF 25%, #6E6E6E 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card-bg {
+  background-image: url('/src/assets/home/trackers/bg.png');
+}
+
+
+@media screen and (min-width: 640px) {
+  .wishlist-btn {
+    height: 46px !important;
+    margin: 2px !important;
+    right: 0;
+    top: 0;
+    position: absolute !important;
+  }
+}
+
+.custom-btn {
+  background: #007DDA;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 20px;
+  line-height: 34px;
+  letter-spacing: 0;
+  font-weight: 600;
+  padding: 16px 24px;
+}
+
+.custom-btn:hover {
+  background: #0066B3;
+}
+
+.sticked-btn {
+  font-size: 18px;
+  padding: 12px 24px;
+}
+
+
+@media screen and (max-width: 640px) {
+  .main-btn {
+    width: 100%;
   }
 }
