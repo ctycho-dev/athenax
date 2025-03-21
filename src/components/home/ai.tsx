@@ -39,7 +39,7 @@ export const AI: React.FC<AIProps> = ({ }) => {
                         <div className="flex justify-center"><img src={analysis} alt="" /></div>
                         <div className="pt-6">
                             <CardTitle className="mb-2">Market Sentiment Analysis</CardTitle>
-                            <CardSubtitle>Track real-time shifts in investor sentiment<br /> and emerging trends across the crypto space</CardSubtitle>
+                            <CardSubtitle>Track real-time shifts in investor sentiment<br className="hidden md:block" /> and emerging trends across the crypto space</CardSubtitle>
                         </div>
                     </Card>
                 </div>
