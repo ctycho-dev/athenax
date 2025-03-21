@@ -40,7 +40,7 @@ export const Reports: React.FC<ReportsProps> = ({ }) => {
                         <div className="flex justify-center"><img src={trends} alt="" /></div>
                         <div className="pt-6">
                             <CardTitle className="mb-2">Expert Insights & Market Trends</CardTitle>
-                            <CardSubtitle>Access quarterly reports with deep dives into blockchain ecosystems, tokenomics, and key market shifts</CardSubtitle>
+                            <CardSubtitle className="w-2/3">Access quarterly reports with deep dives into blockchain ecosystems, tokenomics, and key market shifts</CardSubtitle>
                         </div>
                     </Card>
                     <Card className="p-6 md:p-10 flex flex-col justify-between">
@@ -53,7 +53,7 @@ export const Reports: React.FC<ReportsProps> = ({ }) => {
                         </div>
                         <div className="pt-6">
                             <CardTitle className="mb-2">Exclusive Pro Membership</CardTitle>
-                            <CardSubtitle className="">Get premium research and data-driven investment insights, tailored for traders, investors, and analysts</CardSubtitle>
+                            <CardSubtitle className="w-2/3">Get premium research and data-driven investment insights, tailored for traders, investors, and analysts</CardSubtitle>
                         </div>
                     </Card>
                 </div>

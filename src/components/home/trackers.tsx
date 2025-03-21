@@ -42,14 +42,14 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
                     </div>
                     <div className="pt-6">
                         <CardTitle className='mb-2'>Email & Web Notifications</CardTitle>
-                        <CardSubtitle>Receive key updates directly in your<br className="hidden md:block" /> inbox or via browser notifications</CardSubtitle>
+                        <CardSubtitle className="w-2/3">Receive key updates directly in your inbox or via browser notifications</CardSubtitle>
                     </div>
                 </Card>
                 <Card className="card-bg relative col-span-12 md:col-span-6 pl-6 md:pl-10 py-6 md:py-10 -z-10 flex flex-col justify-between">
                     <img src={trends} alt="" className="" />
                     <div className="pt-6">
                         <CardTitle className='mb-2'>Actionable Market Trends</CardTitle>
-                        <CardSubtitle>AI highlights trends, price movements,<br className="hidden md:block" /> and potential opportunities</CardSubtitle>
+                        <CardSubtitle className="w-2/3">AI highlights trends, price movements, and potential opportunities</CardSubtitle>
                     </div>
                 </Card>
             </div>

@@ -43,7 +43,7 @@ export const News: React.FC<NewsProps> = ({ }) => {
                         </div>
                         <div className="mt-6">
                             <CardTitle className="mb-2">Daily & Real-Time Updates</CardTitle>
-                            <CardSubtitle>Receive daily recaps or real-time breaking news<br className="hidden md:block" /> alerts on key market movements</CardSubtitle>
+                            <CardSubtitle className="w-2/3">Receive daily recaps or real-time breaking news alerts on key market movements</CardSubtitle>
                         </div>
                     </div>
                 </Card>
