@@ -7,7 +7,6 @@ import { Toaster, toast } from 'sonner';
 
 import CustomSection from "@/components/customSection";
 import Title from '@/components/title'
-import Subtitle from '@/components/subtitle'
 import {
     BsTwitterX,
     // BsDiscord 
@@ -15,8 +14,7 @@ import {
 import { FaLinkedin } from "react-icons/fa6";
 // import { FaTelegram } from "react-icons/fa6";
 
-import checkIcon from '@/assets/check.svg';
-import gradient from '@/assets/footer-gradient.png';
+import checkIcon from '@/assets/home/check.svg';
 
 
 
@@ -107,7 +105,11 @@ export const Footer: React.FC<FooterProps> = ({ formRef }) => {
                 </div>
             </div>
             <div className="absolute left-0 bottom-0 -z-10 w-96">
-                <img src={gradient} alt="" />
+                <picture>
+                    <source srcSet="https://link.storjshare.io/raw/jwrof5hro7gcailiwsxdjr4nzuqq/athenax/footer-gradient.webp" type="image/webp" />
+                    <source srcSet="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" type="image/png" />
+                    <img src="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" srcSet="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" alt="Footer gradient"/>
+                </picture>
             </div>
             <Toaster richColors position="top-right" />
         </footer>
