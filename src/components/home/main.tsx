@@ -52,7 +52,7 @@ export const Main: React.FC<MainProps> = ({ scrollToWishlist }) => {
             <div className={`w-full flex justify-center px-4 fixed bottom-[64px] z-20 ${isButtonVisible ? '' : 'translate-y-36'} transition-all duration-500`}>
                 <CustomButton className="z-20 sticked-btn" handler={scrollToWishlist} >Join the Waitlist Now</CustomButton>
             </div>
-            <div className="relative md:static w-full">
+            <div className="relative md:static w-full flex justify-center">
                 <img src={dashboard4} alt="" srcSet={`${dashboard1} 1x, ${dashboard2} 2x, ${dashboard4} 4x`} className="hidden md:block" />
                 <img src={mdash4} srcSet={`${mdash1} 1x, ${mdash2} 2x, ${mdash4} 4x`} alt="" className="md:hidden w-full" />
                 <img src={circle} alt="" className="hidden md:block absolute -z-10 left-1/2 top-52 md:top-72 -translate-x-1/2 -translate-y-1/2 max-w-full md:max-w-3xl" />
