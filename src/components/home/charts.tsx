@@ -7,10 +7,10 @@ import CardTitle from '@/components/cardTitle'
 import CardSubtitle from "../cardSubtitle";
 import Card from "@/components/card";
 
-import chart from '@/assets/home/charts/chart.png'
-import chart1 from '@/assets/home/charts/chart-1x.png'
 import chart2 from '@/assets/home/charts/chart-2x.png'
 import chart3 from '@/assets/home/charts/chart-3x.png'
+import mchart2 from '@/assets/home/charts/mchart-2x.png'
+import mchart3 from '@/assets/home/charts/mchart-3x.png'
 
 interface ChartsProps { }
 
@@ -19,7 +19,7 @@ export const Charts: React.FC<ChartsProps> = ({ }) => {
 
     return (
         <CustomSection>
-            <div className="flex flex-col items-center justify-center mb-14">
+            <div className="flex flex-col items-center justify-center md:mb-14">
                 <Button className="mb-6">Charts</Button>
                 <Title className="mb-[8px]">Comparative Charts</Title>
                 <Subtitle className="z-10 mb-[32px] md:mb-[48px]">
@@ -45,8 +45,10 @@ export const Charts: React.FC<ChartsProps> = ({ }) => {
                         <CardSubtitle>Download or share your custom comparisons for easy collaboration</CardSubtitle>
                     </div>
                 </div>
-                <div className=""><img src={chart} alt="" className="hidden md:block" /></div>
-                <img src={chart3} srcSet={`${chart1} 1x, ${chart2} 2x, ${chart3} 3x`} alt="" className="md:hidden mt-12 flex-1 max-w-96" />
+                <div className="flex justify-center md:justify-end">
+                    <img src={chart3} srcSet={`${chart2} 2x, ${chart3} 3x`} alt="" className="hidden md:block w-full max-w-3xl" />
+                    <img src={mchart3} srcSet={`${mchart2} 2x, ${mchart3} 3x`} alt="" className="md:hidden mt-12 flex-1 w-full max-w-96" />
+                </div>
             </div>
         </CustomSection>
     )
