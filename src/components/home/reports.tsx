@@ -7,7 +7,6 @@ import CardTitle from '@/components/cardTitle'
 import CardSubtitle from "../cardSubtitle";
 import Card from "@/components/card";
 
-import gradient from '@/assets/home/reports-gradient.png'
 import vip from '@/assets/home/reports/vip.svg'
 
 interface ReportsProps { }
@@ -61,7 +60,11 @@ export const Reports: React.FC<ReportsProps> = ({ }) => {
                     </Card>
                 </div>
             </CustomSection>
-            <div><img src={gradient} alt="" className="-z-10 absolute left-0 top-0 -translate-y-1/3" /></div>
+            <picture className="-z-10 absolute left-0 top-0 -translate-y-1/3">
+                <source srcSet="https://link.storjshare.io/raw/jvnkzqyanj3jn4en7uwl57bh3wbq/athenax/reports/gradient.webp" type="image/webp" />
+                <source srcSet="https://link.storjshare.io/raw/jvyywdwrn35su2fdrpkzowmchhna/athenax/reports/gradient.png" type="image/png" />
+                <img src="https://link.storjshare.io/raw/jvyywdwrn35su2fdrpkzowmchhna/athenax/reports/gradient.png" srcSet="https://link.storjshare.io/raw/jvyywdwrn35su2fdrpkzowmchhna/athenax/reports/gradient.png" alt="Notification" />
+            </picture>
         </div>
     )
 } 

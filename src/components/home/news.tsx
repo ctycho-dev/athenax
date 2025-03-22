@@ -8,9 +8,6 @@ import CardSubtitle from "../cardSubtitle";
 import Card from "@/components/card";
 
 
-import news1 from '@/assets/home/news/news-1x.png'
-import news2 from '@/assets/home/news/news-2x.png'
-import news3 from '@/assets/home/news/news-3x.png'
 import img1 from '@/assets/home/news/img_1.svg'
 import img2 from '@/assets/home/news/img_2.svg'
 import img3 from '@/assets/home/news/img_3.svg'
@@ -39,7 +36,11 @@ export const News: React.FC<NewsProps> = ({ }) => {
                 <Card className="p-6 md:p-10">
                     <div className="h-full flex flex-col justify-between">
                         <div className="mb-6">
-                            <img loading="lazy" src={news3} alt="" srcSet={`${news1} 1x, ${news2} 2x, ${news3} 3x`} />
+                            <picture>
+                                <source srcSet="https://link.storjshare.io/raw/jxtfgdwv6l5qa4xoccju7y5gslza/athenax/news/news-2x.webp 2x, https://link.storjshare.io/raw/jwm5csk2omaaw62khyq36bf56z7q/athenax/news/news-3x.webp 3x" type="image/webp" />
+                                <source srcSet="https://link.storjshare.io/raw/jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png 2x, https://link.storjshare.io/raw/jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png 3x" type="image/png" />
+                                <img src="https://link.storjshare.io/raw/jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png" srcSet="https://link.storjshare.io/raw/jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png 2x, https://link.storjshare.io/raw/jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png 3x" alt="News" />
+                            </picture>
                         </div>
                         <div className="mt-6">
                             <CardTitle className="mb-2">Daily & Real-Time Updates</CardTitle>

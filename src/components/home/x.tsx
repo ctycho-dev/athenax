@@ -45,12 +45,23 @@ export const X: React.FC<XProps> = ({ }) => {
                 </div>
                 <div>
                     <div className="relative flex justify-center md:justify-end w-full md:mt-12">
+                        {/* Desktop */}
                         <div className="hidden md:flex">
                             <img loading="lazy" src={progress} alt="" className="max-h-[180px] lg:max-h-[227px] -mr-[20%] -mt-[10%] z-[2]" />
-                            <img loading="lazy" src={followers} alt="" className="max-h-[190px] lg:max-h-[233px] absolute bottom-2 lg:bottom-0 left-10" />
+                            <picture>
+                                <source srcSet="https://link.storjshare.io/raw/jw4svo7bhaz4crrajogzytmkd3lq/athenax/x/followers.webp" type="image/webp" />
+                                <source srcSet="https://link.storjshare.io/raw/jvjf4wr2gbuog2vsupvi3e23osoq/athenax/x/followers.png" type="image/png" />
+                                <img src="https://link.storjshare.io/raw/jvjf4wr2gbuog2vsupvi3e23osoq/athenax/x/followers.png" srcSet="https://link.storjshare.io/raw/jvjf4wr2gbuog2vsupvi3e23osoq/athenax/x/followers.png" alt="Dashboard" className="max-h-[190px] lg:max-h-[233px] absolute bottom-2 lg:bottom-0 left-10"/>
+                            </picture>
+                            {/* <img loading="lazy" src={followers} alt="" className="max-h-[190px] lg:max-h-[233px] absolute bottom-2 lg:bottom-0 left-10" /> */}
                             <img loading="lazy" src={graph} alt="" className="max-h-[400px] top-16 right-0  w-[80%] z-[1]" />
                         </div>
-                        <img loading="lazy" src={x3} alt="" srcSet={`${x1} 1x, ${x2} 2x, ${x3} 3x`} className="md:hidden w-full" />
+                        {/* Mobile */}
+                        <picture className="flex justify-center md:hidden w-full">
+                            <source srcSet="https://link.storjshare.io/raw/jxbx2bk3mb6crq4ooucdthvis7tq/athenax/x/x-2x.webp 2x, https://link.storjshare.io/raw/jx7n4jtbuaga7q7hc5zfxrz36v5q/athenax/x/x-3x.webp 3x" type="image/webp" />
+                            <source srcSet="https://link.storjshare.io/raw/jx34skqr5fbvr46f3t2gcx6slgea/athenax/x/x-2x.png 2x, https://link.storjshare.io/raw/juduffrluxgs5urc6q2ds3fzupgq/athenax/x/x-3x.png 3x" type="image/png" />
+                            <img src="https://link.storjshare.io/raw/juduffrluxgs5urc6q2ds3fzupgq/athenax/x/x-3x.png" srcSet="https://link.storjshare.io/raw/jx34skqr5fbvr46f3t2gcx6slgea/athenax/x/x-2x.png 2x, https://link.storjshare.io/raw/juduffrluxgs5urc6q2ds3fzupgq/athenax/x/x-3x.png 3x" alt="News" />
+                        </picture>
                     </div>
                 </div>
             </div>
