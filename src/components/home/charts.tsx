@@ -46,8 +46,8 @@ export const Charts: React.FC<ChartsProps> = ({ }) => {
                     </div>
                 </div>
                 <div className="flex justify-center md:justify-end">
-                    <img src={chart3} srcSet={`${chart2} 2x, ${chart3} 3x`} alt="" className="hidden md:block w-full max-w-3xl" />
-                    <img src={mchart3} srcSet={`${mchart2} 2x, ${mchart3} 3x`} alt="" className="md:hidden mt-12 flex-1 w-full max-w-96" />
+                    <img loading="lazy" src={chart3} srcSet={`${chart2} 2x, ${chart3} 3x`} alt="" className="hidden md:block w-full max-w-3xl" />
+                    <img loading="lazy" src={mchart3} srcSet={`${mchart2} 2x, ${mchart3} 3x`} alt="" className="md:hidden mt-12 flex-1 w-full max-w-96" />
                 </div>
             </div>
         </CustomSection>

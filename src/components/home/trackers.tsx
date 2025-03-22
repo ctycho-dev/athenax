@@ -33,12 +33,12 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
                         <CardSubtitle>Track your favorite tokens, protocols,<br className="hidden md:block" />and DeFi projects in one place</CardSubtitle>
                     </div>
                     <div>
-                        <img src={watchlist3} alt="" srcSet={`${watchlist1} 1x, ${watchlist2} 2x, ${watchlist3} 3x`} />
+                        <img loading="lazy" src={watchlist3} alt="" srcSet={`${watchlist1} 1x, ${watchlist2} 2x, ${watchlist3} 3x`} />
                     </div>
                 </Card>
                 <Card className="col-span-12 md:col-span-6 p-6 md:p-10">
                     <div className="flex justify-center">
-                        <img src={notification} alt="" />
+                        <img loading="lazy" src={notification} alt="" />
                     </div>
                     <div className="pt-6">
                         <CardTitle className='mb-2'>Email & Web Notifications</CardTitle>
@@ -46,7 +46,7 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
                     </div>
                 </Card>
                 <Card className="card-bg relative col-span-12 md:col-span-6 pl-6 md:pl-10 py-6 md:py-10 -z-10 flex flex-col justify-between">
-                    <img src={trends} alt="" className="" />
+                    <img loading="lazy" src={trends} alt="" className="" />
                     <div className="pt-6">
                         <CardTitle className='mb-2'>Actionable Market Trends</CardTitle>
                         <CardSubtitle className="w-2/3">AI highlights trends, price movements, and potential opportunities</CardSubtitle>

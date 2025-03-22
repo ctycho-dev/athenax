@@ -46,11 +46,11 @@ export const X: React.FC<XProps> = ({ }) => {
                 <div>
                     <div className="relative flex justify-center md:justify-end w-full md:mt-12">
                         <div className="hidden md:flex">
-                            <img src={progress} alt="" className="max-h-[180px] lg:max-h-[227px] -mr-[20%] -mt-[10%] z-[2]" />
-                            <img src={followers} alt="" className="max-h-[190px] lg:max-h-[233px] absolute bottom-2 lg:bottom-0 left-10" />
-                            <img src={graph} alt="" className="max-h-[400px] top-16 right-0  w-[80%] z-[1]" />
+                            <img loading="lazy" src={progress} alt="" className="max-h-[180px] lg:max-h-[227px] -mr-[20%] -mt-[10%] z-[2]" />
+                            <img loading="lazy" src={followers} alt="" className="max-h-[190px] lg:max-h-[233px] absolute bottom-2 lg:bottom-0 left-10" />
+                            <img loading="lazy" src={graph} alt="" className="max-h-[400px] top-16 right-0  w-[80%] z-[1]" />
                         </div>
-                        <img src={x3} alt="" srcSet={`${x1} 1x, ${x2} 2x, ${x3} 3x`} className="md:hidden w-full" />
+                        <img loading="lazy" src={x3} alt="" srcSet={`${x1} 1x, ${x2} 2x, ${x3} 3x`} className="md:hidden w-full" />
                     </div>
                 </div>
             </div>

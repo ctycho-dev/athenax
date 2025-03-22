@@ -29,14 +29,14 @@ export const AI: React.FC<AIProps> = ({ }) => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                     <Card className="p-6 md:p-10">
-                        <div className="flex justify-center"><img src={summ} alt="" /></div>
+                        <div className="flex justify-center"><img loading="lazy" src={summ} alt="" /></div>
                         <div className="pt-6">
                             <CardTitle className="mb-2">Instant AI Summaries</CardTitle>
                             <CardSubtitle>Get concise updates on news, price movements,<br />and key project developments for any asset</CardSubtitle>
                         </div>
                     </Card>
                     <Card className="p-6 md:p-10">
-                        <div className="flex justify-center"><img src={analysis} alt="" /></div>
+                        <div className="flex justify-center"><img loading="lazy" src={analysis} alt="" /></div>
                         <div className="pt-6">
                             <CardTitle className="mb-2">Market Sentiment Analysis</CardTitle>
                             <CardSubtitle>Track real-time shifts in investor sentiment<br className="hidden md:block" /> and emerging trends across the crypto space</CardSubtitle>

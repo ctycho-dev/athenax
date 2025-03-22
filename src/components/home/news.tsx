@@ -39,7 +39,7 @@ export const News: React.FC<NewsProps> = ({ }) => {
                 <Card className="p-6 md:p-10">
                     <div className="h-full flex flex-col justify-between">
                         <div className="mb-6">
-                            <img src={news3} alt="" srcSet={`${news1} 1x, ${news2} 2x, ${news3} 3x`} />
+                            <img loading="lazy" src={news3} alt="" srcSet={`${news1} 1x, ${news2} 2x, ${news3} 3x`} />
                         </div>
                         <div className="mt-6">
                             <CardTitle className="mb-2">Daily & Real-Time Updates</CardTitle>
@@ -51,20 +51,20 @@ export const News: React.FC<NewsProps> = ({ }) => {
                     <div className="h-full flex flex-col justify-between">
                         <div className="flex justify-center">
                             <div className="pt-4 lg:pt-8 grid grid-cols-3 md:grid-cols-4 justify-center gap-4 lg:gap-14 w-max">
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img1} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img2} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img3} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img4} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img5} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img6} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img7} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img src={img8} alt="" className="w-14 lg:w-auto" /></div>
-                                <div className="p-2 rounded-lg bg-dark-3 w-max md:hidden"><img src={img9} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img1} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img2} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img3} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img4} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img5} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img6} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img7} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max"><img loading="lazy" src={img8} alt="" className="w-14 lg:w-auto" /></div>
+                                <div className="p-2 rounded-lg bg-dark-3 w-max md:hidden"><img loading="lazy" src={img9} alt="" className="w-14 lg:w-auto" /></div>
                             </div>
                         </div>
                         <div className="mt-6">
                             <CardTitle className="mb-2">Customizable News Feed</CardTitle>
-                            <CardSubtitle>Personalize your feed by selecting preferred<br className="hidden md:block" /> sources, categories, or assets</CardSubtitle>
+                            <CardSubtitle className="w-2/3">Personalize your feed by selecting preferred sources, categories, or assets</CardSubtitle>
                         </div>
                     </div>
                 </Card>
