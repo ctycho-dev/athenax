@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Toaster } from 'sonner';
 
-import gradientTop from '../assets/gradient-top.png';
 import { Header } from "@/components/header/header";
 import { Main } from "@/components/home/main";
 import { Description } from "@/components/home/description";
@@ -13,7 +12,6 @@ import { AI } from "@/components/home/ai";
 import { Research } from "@/components/home/research";
 import { X } from "@/components/home/x";
 import { Footer } from "@/components/footer/footer";
-import UnicornStudioEmbed from "@/components/uvicornStudioEmbed";
 
 
 
