@@ -5,6 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --color-gray-1: #1B1B1E;
+  --color-gray-2: #2B3740;
+  --color-gray-3: #949FA8;
   --color-dark-1: #1A1A1A;
   --color-dark-2: #666666;
   --color-dark-3: #1C1C1C;
@@ -18,8 +21,12 @@
   /* green */
   --color-light-blue-1: #007DDA;
   --color-light-blue-2: #0066B3;
+  --color-light-blue-3: #0092FF;
   --color-light-gold-1: #F1C526;
   --color-light-gold-2: #E0B522;
+  --spacing-xs: 8px;
+  --spacing-sm: 17px;
+  --spacing-md: 24px;
 }
 
 :root {
@@ -41,7 +48,9 @@
   /* Dark Theme */
   --dsr-bg-dark: #000;
   --dsr-text-dark: #ffffff;
-
+  --color-gray-1: #1B1B1E;
+  --color-gray-2: #2B3740;
+  --color-gray-3: #949FA8;
   --color-dark-1: #1A1A1A;
   --color-dark-2: #666666;
   --color-dark-3: #1C1C1C;
@@ -55,6 +64,10 @@
   /* green */
   --color-light-gold-1: #F1C526;
   --color-light-gold-2: #E0B522;
+  --spacing-xs: 8px;
+  --spacing-sm: 17px;
+  --spacing-md: 24px;
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -256,4 +269,12 @@ input:-webkit-autofill:active {
   .main-btn {
     width: 100%;
   }
+}
+
+.navbar-item:hover .navbar-icon path {
+  stroke: #0092ff;
+}
+
+.active .navbar-icon path {
+  stroke: #0092ff;
 }

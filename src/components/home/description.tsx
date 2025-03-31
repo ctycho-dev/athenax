@@ -5,7 +5,8 @@ import CustomSection from "@/components/customSection";
 // import gradient from '@/assets/home/desc-gradient.png'
 
 
-const paragraph = 'Athena X is a cryptocurrency research and data analytics platform with a mission to bring transparency to the cryptoeconomy. It targets investors, regulators, founders, builders, business developers, and professional services in the crypto space, offering tools to navigate the complex cryptocurrency landscape.'
+// const paragraph = 'Athena X is a cryptocurrency research and data analytics platform with a mission to bring transparency to the cryptoeconomy. It targets investors, regulators, founders, builders, business developers, and professional services in the crypto space, offering tools to navigate the complex cryptocurrency landscape.'
+const paragraph = 'Athena X is a cryptocurrency data and research analytics platform built to bring transparency to the cryptoeconomy. We empower investors, regulators, founders, builders, business developers, and service professionals with powerful tools to navigate the complex world of crypto. Our mission is to simplify insights, support smarter decisions, and shape a more transparent digital asset landscape.'
 
 
 

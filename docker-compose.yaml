@@ -1,19 +1,19 @@
-version: "3.8"
+# version: "3.8"
 
-services:
-  react-app:
-    image: athenax
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
-    ports:
-      - "5125:5000"
-    environment:
-      NODE_ENV: production
-      REACT_APP_BACKEND: ${REACT_APP_BACKEND}
-    restart: always
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:5000"]
-    #   interval: 60s
-    #   timeout: 10s
-    #   retries: 3
+# services:
+#   react-app:
+#     image: athenax
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5125:5000"
+#     environment:
+#       NODE_ENV: production
+#       REACT_APP_BACKEND: ${REACT_APP_BACKEND}
+#     restart: always
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:5000"]
+#       interval: 60s
+#       timeout: 10s
+#       retries: 3
