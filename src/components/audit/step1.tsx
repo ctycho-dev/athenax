@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import {
-    Input,
-    InputWrapper,
     Textarea,
-    Select
+    Select,
+    TextInput
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { FormValues } from '@/types';
-
+import { FormValues } from '@/types/audit';
+import { ecosystemCategory, blochainList } from "@/store/index";
 
 
 interface Step1Props {
@@ -17,142 +16,77 @@ interface Step1Props {
 
 export const Step1: React.FC<Step1Props> = ({ form }) => {
 
-    // const inputStyles = {
-    //     input: {
-    //         background: '#0F1011',
-    //         height: '48px',
-    //         border: 'none',
-    //         color: 'white'
-    //     }
-    // };
-
-    // const labelStyles = {
-    //     label: {
-    //         color: '#949FA8',
-    //         marginBottom: '12px'
-    //     }
-    // };
-
-    // const dropDownStyles = {
-    //     dropdown: {
-    //         background: '#0F1011',
-    //     }
-    // }
-
-    // const textareaStyles = {
-    //     input: {
-    //         minHeight: '150px',
-    //         background: '#0F1011',
-    //         border: 'none',
-    //         padding: '16px',
-    //         color: 'white',
-    //         fontSize: '14px'
-    //     }
-    // }
-
     return (
         <>
             <div className="mb-8">
                 <div className="mb-8 grid grid-cols-2 gap-x-8">
-                    <InputWrapper label='Project Name'
-                        // styles={labelStyles}
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="Athena"
-                            // styles={inputStyles}
-                            {...form.getInputProps('one.name')}
-                        />
-                    </InputWrapper>
-                    <InputWrapper
+                    <TextInput
+                        label='Project Name'
+                        placeholder="Athena"
+                        {...form.getInputProps('step1.name')}
+                    />
+                    <TextInput
                         label='Official Website URL'
-                        // styles={labelStyles}
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="athena.co"
-                            // styles={inputStyles}
-                            {...form.getInputProps('one.website')}
-                        />
-                    </InputWrapper>
+                        placeholder="athena.co"
+                        {...form.getInputProps('step1.website')}
+                    />
                 </div>
                 <div className="mb-8 grid grid-cols-2 gap-x-8">
-                    <InputWrapper
+                    <TextInput
                         label='Contact Person Name'
-                        description=''
-                        // styles={labelStyles}
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="Enter contact person name"
-                            // styles={inputStyles}
-                            {...form.getInputProps('one.contactName')}
-                        />
-                    </InputWrapper>
-                    <InputWrapper
+                        placeholder="Enter contact person name"
+                        {...form.getInputProps('step1.contactName')}
+                    />
+                    <TextInput
                         label='Contact Email'
-                        description=''
-                        // styles={labelStyles}
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="Enter contact email"
-                            // styles={inputStyles}
-                            {...form.getInputProps('one.contactEmail')}
-                        />
-                    </InputWrapper>
+                        placeholder="Enter contact email"
+                        {...form.getInputProps('step1.contactEmail')}
+                    />
                 </div>
             </div>
             <div className="mb-8 grid grid-cols-2 gap-x-8">
-                <InputWrapper
-                    label='Telegram / Discord Handle'
-                    description=''
-                    // styles={labelStyles}
-                    className="min-w-80"
-                >
-                    <Input
-                        placeholder="Enter one of the handles"
-                        // styles={inputStyles}
-                        {...form.getInputProps('one.telegram')}
-                    />
-                </InputWrapper>
+                <TextInput
+                    label={
+                        <div className="flex gap-2 items-center">
+                            <span>Telegram / Discord Handle</span>
+                            <span className="text-gray-3 opacity-50">Optional</span>
+                        </div>
+                    }
+                    placeholder="Enter one of the handles"
+                    {...form.getInputProps('step1.telegram')}
+                />
                 <Select
                     label="Ecosystem Category"
                     placeholder="Select One"
-                    data={['React', 'Angular', 'Vue', 'Svelte']}
-                    // styles={{
-                    //     ...labelStyles,
-                    //     ...inputStyles,
-                    //     ...dropDownStyles
-                    // }}
-                    {...form.getInputProps('one.ecosystem')}
+                    error="Invalid name"
+                    data={ecosystemCategory}
+                    searchable
+                    {...form.getInputProps('step1.ecosystem')}
                     className="w-full"
                 />
             </div>
             <div className="mb-8 grid grid-cols-2 gap-x-8">
                 <Select
                     label="Blockchains Used"
+                    error
                     placeholder="Select One"
-                    data={['React', 'Angular', 'Vue', 'Svelte']}
-                    // styles={{
-                    //     ...labelStyles,
-                    //     ...inputStyles,
-                    //     ...dropDownStyles
-                    // }}
-                    {...form.getInputProps('one.blockchain')}
+                    data={blochainList}
+                    searchable
+                    {...form.getInputProps('step1.blockchain')}
                     className="w-full"
                 />
                 <div></div>
             </div>
             <div className="mb-8">
                 <Textarea
-                    label="Brief Description of the Project"
+                    label={
+                        <div className="flex gap-2 items-center">
+                            <span>Brief Description of the Project</span>
+                            <span className="text-gray-3 opacity-50">1–3 sentences</span>
+                        </div>
+                    }
                     placeholder="Enter the project description"
-                    // styles={{
-                    //     ...labelStyles,
-                    //     ...textareaStyles
-                    // }}
-                    {...form.getInputProps('one.description')}
+                    {...form.getInputProps('step1.description')}
                 />
             </div>
         </>

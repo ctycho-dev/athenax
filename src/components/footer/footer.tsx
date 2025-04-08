@@ -13,6 +13,8 @@ import {
 } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa6";
 // import { FaTelegram } from "react-icons/fa6";
+import wishlistService from '@/api/wishlistService';
+
 
 import checkIcon from '@/assets/home/check.svg';
 
@@ -44,11 +46,9 @@ export const Footer: React.FC<FooterProps> = ({ formRef }) => {
         setIsDisabled(true)
 
         try {
-            const res = await axios.post('https://athenax-backend.tech/store-email/', {
-                email: form.values.email
-            });
+            const response = await wishlistService.addToWishlist(form.values.email);
 
-            if (res.status !== 200) {
+            if (response.status !== 200) {
                 toast.error('Something went wrong. Try again in a few minutes.');
             } else {
                 setSubmitted(true);
@@ -108,7 +108,7 @@ export const Footer: React.FC<FooterProps> = ({ formRef }) => {
                 <picture>
                     <source srcSet="https://link.storjshare.io/raw/jwrof5hro7gcailiwsxdjr4nzuqq/athenax/footer-gradient.webp" type="image/webp" />
                     <source srcSet="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" type="image/png" />
-                    <img src="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" srcSet="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" alt="Footer gradient"/>
+                    <img src="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" srcSet="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" alt="Footer gradient" />
                 </picture>
             </div>
             <Toaster richColors position="top-right" />

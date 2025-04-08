@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Group, Text } from '@mantine/core';
 import { Dropzone, MIME_TYPES, FileRejection } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
-import { FormValues, FileFields } from '@/types/audit';
+import { FormValues, FileFields } from '@/types/research';
 import { FileType } from '@/types';
 
 import storjService from '@/api/storjService';

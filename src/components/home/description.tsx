@@ -10,7 +10,6 @@ const paragraph = 'Athena X is a cryptocurrency data and research analytics plat
 
 
 
-
 interface DescriptionProps { }
 
 
@@ -36,11 +35,6 @@ export const Description: React.FC<DescriptionProps> = ({ }) => {
   });
 
   const words = paragraph.split(' ');
-
-  useEffect(() => {
-    scrollYProgress.on('change', e => console.log(e))
-  }, [])
-
 
   return (
     <div className="relative">

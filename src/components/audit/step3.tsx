@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import {
     Radio,
     Group,
-    Input,
-    InputWrapper,
+    TextInput,
     Textarea
 } from '@mantine/core';
-import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
-import { FormValues } from '@/types';
-import { BaseDemo } from "./dropbox";
+import { FormValues } from '@/types/audit';
+import { Dropbox } from "./dropbox";
 
 
 interface Step3Props {
@@ -24,7 +22,7 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
             <div className="mb-8">
                 <Radio.Group
                     label="Whitepaper or Litepaper"
-                    {...form.getInputProps('three.whitepaper')}
+                    {...form.getInputProps('step3.whitepaper')}
                 >
                     <Group mt="xs">
                         <Radio
@@ -43,26 +41,22 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
                 </Radio.Group>
             </div>
 
-            {form.values.three.whitepaper === 'link' && (
+            {form.values.step3.whitepaper === 'link' && (
                 <div className="mb-8">
-                    <InputWrapper
+                    <TextInput
                         label="Link your whitepaper or litepaper"
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="https://github.com/repo/xxx"
-                            {...form.getInputProps('three.whitepaperLink')}
-                        />
-                    </InputWrapper>
+                        placeholder="https://github.com/repo/xxx"
+                        {...form.getInputProps('step3.whitepaperLink')}
+                    />
                 </div>
             )}
 
-            {form.values.three.whitepaper === 'zip' && (
+            {form.values.step3.whitepaper === 'zip' && (
                 <div className="mb-8">
-                    <BaseDemo
-                    // onFilesSelected={(files) => {
-                    //     form.setFieldValue('three.uploadedDocument', files);
-                    // }}
+                    <Dropbox
+                        form={form}
+                        name="step3.whitepaperZip"
+                        bucket='audit-form'
                     />
                 </div>
             )}
@@ -70,7 +64,7 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
             <div className="mb-8">
                 <Radio.Group
                     label="Technical specification docs"
-                    {...form.getInputProps('three.techDocs')}
+                    {...form.getInputProps('step3.techDocs')}
                 >
                     <Group mt="xs">
                         <Radio
@@ -89,26 +83,22 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
                 </Radio.Group>
             </div>
 
-            {form.values.three.techDocs === 'link' && (
+            {form.values.step3.techDocs === 'link' && (
                 <div className="mb-8">
-                    <InputWrapper
+                    <TextInput
                         label="Link your technical docs"
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="Please link your technical docs"
-                            {...form.getInputProps('three.techDocsLink')}
-                        />
-                    </InputWrapper>
+                        placeholder="Please link your technical docs"
+                        {...form.getInputProps('step3.techDocsLink')}
+                    />
                 </div>
             )}
 
-            {form.values.three.techDocs === 'zip' && (
+            {form.values.step3.techDocs === 'zip' && (
                 <div className="mb-8">
-                    <BaseDemo
-                    // onFilesSelected={(files) => {
-                    //     form.setFieldValue('three.uploadedDocument', files);
-                    // }}
+                    <Dropbox
+                        form={form}
+                        name="step3.techDocsZip"
+                        bucket='audit-form'
                     />
                 </div>
             )}
@@ -117,7 +107,7 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
             <div className="mb-8">
                 <Radio.Group
                     label="Tokenomics"
-                    {...form.getInputProps('three.tokenomics')}
+                    {...form.getInputProps('step3.tokenomics')}
                 >
                     <Group mt="xs">
                         <Radio
@@ -136,26 +126,22 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
                 </Radio.Group>
             </div>
 
-            {form.values.three.tokenomics === 'link' && (
+            {form.values.step3.tokenomics === 'link' && (
                 <div className="mb-8">
-                    <InputWrapper
+                    <TextInput
                         label="Link your tokenomics"
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="Please link your technical docs"
-                            {...form.getInputProps('three.tokenomicsLink')}
-                        />
-                    </InputWrapper>
+                        placeholder="Please link your technical docs"
+                        {...form.getInputProps('step3.tokenomicsLink')}
+                    />
                 </div>
             )}
 
-            {form.values.three.tokenomics === 'zip' && (
+            {form.values.step3.tokenomics === 'zip' && (
                 <div className="mb-8">
-                    <BaseDemo
-                    // onFilesSelected={(files) => {
-                    //     form.setFieldValue('three.uploadedDocument', files);
-                    // }}
+                    <Dropbox
+                        form={form}
+                        name="step3.tokenomicsZip"
+                        bucket='audit-form'
                     />
                 </div>
             )}
@@ -163,7 +149,7 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
             <div className="mb-8">
                 <Radio.Group
                     label="Smart contract architecture diagrams"
-                    {...form.getInputProps('three.smartContract')}
+                    {...form.getInputProps('step3.smartContract')}
                 >
                     <Group mt="xs">
                         <Radio
@@ -182,26 +168,22 @@ export const Step3: React.FC<Step3Props> = ({ form }) => {
                 </Radio.Group>
             </div>
 
-            {form.values.three.smartContract === 'link' && (
+            {form.values.step3.smartContract === 'link' && (
                 <div className="mb-8">
-                    <InputWrapper
+                    <TextInput
                         label="Link your smart contract diagram"
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="Please link your smart contract diagram"
-                            {...form.getInputProps('three.smartContractLink')}
-                        />
-                    </InputWrapper>
+                        placeholder="Please link your smart contract diagram"
+                        {...form.getInputProps('step3.smartContractLink')}
+                    />
                 </div>
             )}
 
-            {form.values.three.smartContract === 'zip' && (
+            {form.values.step3.smartContract === 'zip' && (
                 <div className="mb-8">
-                    <BaseDemo
-                    // onFilesSelected={(files) => {
-                    //     form.setFieldValue('three.uploadedDocument', files);
-                    // }}
+                    <Dropbox
+                        form={form}
+                        name="step3.smartContractZip"
+                        bucket='audit-form'
                     />
                 </div>
             )}

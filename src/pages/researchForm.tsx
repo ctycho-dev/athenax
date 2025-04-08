@@ -5,31 +5,37 @@ import { useForm } from '@mantine/form';
 
 import { FormHeader } from '@/components/form/formHeader';
 import { FormNavigation } from '@/components/form/formNavigation';
-import { validateCurrentStep, formValidationRules } from '@/utils/audit/validateAuditForm';
 
 import { Steps } from '@/components/form/steps';
-import { Step1 } from '@/components/audit/step1';
-import { Step2 } from '@/components/audit/step2';
-import { Step3 } from '@/components/audit/step3';
-import { Step4 } from '@/components/audit/step4';
+import { Step1 } from '@/components/research/step1';
+import { Step2 } from '@/components/research/step2';
+import { Step3 } from '@/components/research/step3';
+import { Step4 } from '@/components/research/step4';
+import { Step5 } from '@/components/research/step5';
+import { Step6 } from '@/components/research/step6';
+import { Step7 } from '@/components/research/step7';
+import { Step8 } from '@/components/research/step8';
+import { Step9 } from '@/components/research/step9';
+import { Step10 } from '@/components/research/step10';
 
-import { AuditSteps } from "@/store/auditSteps";
-import { FormValues, StepsCompletion } from '@/types/audit';
-import auditService from '@/api/auditService';
+import { ResearchSteps } from "@/store/researchSteps";
+import { FormValues, StepsCompletionResearch } from '@/types/research';
+import { validateCurrentStep, formValidationRules } from '@/utils/research/validateResearchForm';
+import { initializeStepsCompletion } from '@/utils/research/initializeStepsCompletion';
+import researchService from '@/api/researchService';
 
+import { initializeForm } from '@/utils/research/initializeResearchForm';
 import { getLocalStorageObject } from '@/utils/useLocalStorage';
-import { initializeStepsCompletion } from '@/utils/audit/initializeStepsCompletion';
-import { initializeForm } from '@/utils/audit/initializeAuditForm';
-import { FORM_STORAGE_KEY, STEPS_STORAGE_KEY, numberOfSteps } from '@/constants/audit';
+import { FORM_STORAGE_KEY, STEPS_STORAGE_KEY, numberOfSteps } from '@/constants/research';
 
 
-interface AuditFormProps { }
+interface ResearchFormProps { }
 
-export const AuditForm: React.FC<AuditFormProps> = () => {
+export const ResearchForm: React.FC<ResearchFormProps> = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const isFirstRender = useRef(true);
-    const [stepsCompleted, setStepsCompleted] = useState<StepsCompletion>(initializeStepsCompletion);
+    const [stepsCompleted, setStepsCompleted] = useState<StepsCompletionResearch>(initializeStepsCompletion);
 
 
     const form = useForm<FormValues>({
@@ -75,6 +81,12 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
             case 2: return <Step2 form={form} />;
             case 3: return <Step3 form={form} />;
             case 4: return <Step4 form={form} />;
+            case 5: return <Step5 form={form} />;
+            case 6: return <Step6 form={form} />;
+            case 7: return <Step7 form={form} />;
+            case 8: return <Step8 form={form} />;
+            case 9: return <Step9 form={form} />;
+            case 10: return <Step10 form={form} />;
             default: return null;
         }
     };
@@ -90,7 +102,7 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
 
         if (currentStep === numberOfSteps[numberOfSteps.length - 1]) {
             try {
-                const response = await auditService.addAuditForm(form.values);
+                const response = await researchService.addResearchForm(form.values);
                 if (response.status === 200) {
                     localStorage.removeItem(FORM_STORAGE_KEY);
                     localStorage.removeItem(STEPS_STORAGE_KEY);
@@ -127,7 +139,7 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
                     <div className="flex h-full">
                         <div className="pr-16 text-gray-3">
                             <div className="text-xs font-normal mb-2">content</div>
-                            <Steps steps={AuditSteps} currentStep={currentStep} stepsCompleted={stepsCompleted} />
+                            <Steps steps={ResearchSteps} currentStep={currentStep} stepsCompleted={stepsCompleted} />
                         </div>
 
                         <div className='relative flex-1'>

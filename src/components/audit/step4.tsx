@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import {
     Radio,
     Group,
-    Input,
-    InputWrapper,
+    TextInput,
     Textarea
 } from '@mantine/core';
-import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
-import { FormValues } from '@/types';
-import { BaseDemo } from "./dropbox";
+import { FormValues } from '@/types/audit';
 
 
 
@@ -23,21 +20,17 @@ export const Step4: React.FC<Step4Props> = ({ form }) => {
     return (
         <>
             <div className="mb-8 grid grid-cols-2 gap-x-8">
-                <InputWrapper
+                <TextInput
                     label="What development framework are you using?"
-                    className="min-w-80"
-                >
-                    <Input
-                        placeholder="Hardhat / Foundry / Truffle / Brownie / Other"
-                        {...form.getInputProps('four.framework')}
-                    />
-                </InputWrapper>
+                    placeholder="Hardhat / Foundry / Truffle / Brownie / Other"
+                    {...form.getInputProps('step4.framework')}
+                />
                 <div></div>
             </div>
             <div className="mb-8">
                 <Radio.Group
                     label="Do you have automated tests written?"
-                    {...form.getInputProps('four.test')}
+                    {...form.getInputProps('step4.test')}
                 >
                     <Group mt="xs">
                         <Radio
@@ -52,12 +45,12 @@ export const Step4: React.FC<Step4Props> = ({ form }) => {
                 </Radio.Group>
             </div>
 
-            {form.values.four.test === 'yes' && (
+            {form.values.step4.test === 'yes' && (
                 <div className="mb-8">
                     <Textarea
                         label="Test instructions"
                         placeholder="Please provide instructions on how to run them"
-                        {...form.getInputProps('four.testDesc')}
+                        {...form.getInputProps('step4.testDesc')}
                     />
                 </div>
             )}
@@ -65,7 +58,7 @@ export const Step4: React.FC<Step4Props> = ({ form }) => {
             <div className="mb-8">
                 <Radio.Group
                     label="Have you deployed on testnet?"
-                    {...form.getInputProps('four.testnet')}
+                    {...form.getInputProps('step4.testnet')}
                 >
                     <Group mt="xs">
                         <Radio
@@ -80,17 +73,13 @@ export const Step4: React.FC<Step4Props> = ({ form }) => {
                 </Radio.Group>
             </div>
 
-            {form.values.four.testnet === 'yes' && (
+            {form.values.step4.testnet === 'yes' && (
                 <div className="mb-8 grid grid-cols-2 gap-x-8">
-                    <InputWrapper
+                    <TextInput
                         label="Testnet addresses"
-                        className="min-w-80"
-                    >
-                        <Input
-                            placeholder="Please provide testnet addresses"
-                            {...form.getInputProps('four.testnetLink')}
-                        />
-                    </InputWrapper>
+                        placeholder="Please provide testnet addresses"
+                        {...form.getInputProps('step4.testnetLink')}
+                    />
                     <div></div>
                 </div>
             )}
@@ -98,7 +87,7 @@ export const Step4: React.FC<Step4Props> = ({ form }) => {
                 <Textarea
                     label="Is there a known threat model or list of concerns you want us to focus on?"
                     placeholder="Optional, but helpful"
-                    {...form.getInputProps('four.thread')}
+                    {...form.getInputProps('step4.thread')}
                 />
             </div>
         </>
