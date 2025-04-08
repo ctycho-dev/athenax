@@ -11,6 +11,7 @@ export type FileFields = {
 
 
 export type FormValues = {
+    [key: string]: any;
     step1: {
         name: string;
         website: string;

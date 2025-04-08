@@ -22,7 +22,16 @@ export const Dropbox: React.FC<DropboxProps> = ({ form, name, bucket }) => {
 
   useEffect(() => {
     const [parent, field] = name.split('.');
-    setCurrentFile(form.values[parent as keyof FormValues][field as keyof FormValues[keyof FormValues]] as FileType | null)
+
+    // Check if parent exists in form.values
+    if (parent && field && form.values[parent as keyof typeof form.values]) {
+      const parentObject = form.values[parent as keyof typeof form.values];
+
+      // Type guard to check if parentObject is an object with the field property
+      if (typeof parentObject === 'object' && parentObject !== null && field in parentObject) {
+        setCurrentFile(parentObject[field as keyof typeof parentObject] as FileType | null);
+      }
+    }
   }, [])
 
   const handleDrop = async (files: File[]) => {
