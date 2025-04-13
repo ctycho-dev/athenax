@@ -45,11 +45,13 @@ export const Step2: React.FC<Step2Props> = ({ form }) => {
                             label='Add Github Link'
                             placeholder="https://github.com/repo/xxx"
                             {...form.getInputProps('step2.gitLink')}
+                            error={form.errors['step2.gitLink']}
                         />
                         <TextInput
                             label='Branch Hash for Audit'
                             placeholder="https://github.com/repo/xxx"
                             {...form.getInputProps('step2.gitHash')}
+                            error={form.errors['step2.gitHash']}
                         />
                     </div>
                     <div className="mb-8 grid grid-cols-2 gap-x-8">
@@ -57,6 +59,7 @@ export const Step2: React.FC<Step2Props> = ({ form }) => {
                             label='Branch / Commit Hash for Audit'
                             placeholder="Enter the branch ot commit hash"
                             {...form.getInputProps('step2.gitBranch')}
+                            error={form.errors['step2.gitBranch']}
                         />
                     </div>
                 </div>

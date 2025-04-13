@@ -1,4 +1,5 @@
-import { StepsCompletion } from "@/types/audit";
+import { Link, useNavigate } from "react-router-dom";
+import { StepsCompletion } from '@/types';
 import { Step } from "@/types";
 
 
@@ -7,16 +8,19 @@ interface CheckIconProps {
 }
 
 interface StepItemProps {
+  step: number
   label: string;
   active: boolean;
   isFirst: boolean;
   stepCompleted: boolean
+  updateParam: (value: string) => void
 }
 
 interface StepsProps {
   steps: Step[]
   currentStep: number
   stepsCompleted: StepsCompletion | null
+  updateParam: (value: string) => void
 }
 
 const CheckIcon: React.FC<CheckIconProps> = ({ active }) => (
@@ -36,25 +40,28 @@ const CheckIcon: React.FC<CheckIconProps> = ({ active }) => (
   </svg>
 );
 
-const StepItem: React.FC<StepItemProps> = ({ label, active, isFirst, stepCompleted }) => (
-  <div
-    className={`flex gap-x-2 items-center ${isFirst ? 'group' : ''}`}
+const StepItem: React.FC<StepItemProps> = ({ step, label, active, isFirst, stepCompleted, updateParam }) => (
+  <button
+    onClick={() => { updateParam(step.toString()) }}
+    className={`flex gap-x-2 items-center ${isFirst ? 'group' : ''} hover:cursor-pointer`}
     style={{ lineHeight: '40px' }}
   >
     {stepCompleted && <CheckIcon active={active} />}
-    <span className={active ? 'text-white' : ''}>{label}</span>
-  </div>
+    <span className={active ? 'text-white font-semibold' : ''}>{label}</span>
+  </button>
 );
 
-export const Steps: React.FC<StepsProps> = ({ steps, currentStep, stepsCompleted }) => (
+export const Steps: React.FC<StepsProps> = ({ steps, currentStep, stepsCompleted, updateParam }) => (
   <div>
     {steps.map((step, index) => (
       <StepItem
         key={step.id}
+        step={step.id}
         label={step.label}
         active={currentStep === step.id}
         isFirst={index === 0}
         stepCompleted={stepsCompleted ? stepsCompleted[step.id] : false}
+        updateParam={updateParam}
       />
     ))}
   </div>

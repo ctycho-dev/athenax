@@ -22,12 +22,12 @@ export const Step1: React.FC<Step1Props> = ({ form }) => {
                 <div className="mb-8 grid grid-cols-2 gap-x-8">
                     <TextInput
                         label='Project Name'
-                        placeholder="Athena"
+                        placeholder="Enter Project Name"
                         {...form.getInputProps('step1.name')}
                     />
                     <TextInput
                         label='Official Website URL'
-                        placeholder="athena.co"
+                        placeholder="Enter official URL"
                         {...form.getInputProps('step1.website')}
                     />
                 </div>

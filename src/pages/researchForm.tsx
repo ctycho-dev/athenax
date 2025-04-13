@@ -20,18 +20,20 @@ import { Step10 } from '@/components/research/step10';
 
 import { ResearchSteps } from "@/store/researchSteps";
 import { FormValues, StepsCompletionResearch } from '@/types/research';
-import { validateCurrentStep, formValidationRules } from '@/utils/research/validateResearchForm';
+import { getStepErrors, formValidationRules } from '@/utils/research/validateResearchForm';
 import { initializeStepsCompletion } from '@/utils/research/initializeStepsCompletion';
 import researchService from '@/api/researchService';
 
 import { initializeForm } from '@/utils/research/initializeResearchForm';
 import { getLocalStorageObject } from '@/utils/useLocalStorage';
 import { FORM_STORAGE_KEY, STEPS_STORAGE_KEY, numberOfSteps } from '@/constants/research';
+import { usePageColorScheme } from '@/hooks/usePageTheme';
 
 
 interface ResearchFormProps { }
 
 export const ResearchForm: React.FC<ResearchFormProps> = () => {
+    usePageColorScheme('light')
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const isFirstRender = useRef(true);
@@ -75,6 +77,16 @@ export const ResearchForm: React.FC<ResearchFormProps> = () => {
         localStorage.setItem(STEPS_STORAGE_KEY, JSON.stringify(stepsCompleted))
     }, [stepsCompleted])
 
+    // Update a parameter
+    const updateParam = (step: string) => {
+        const newParams = new URLSearchParams(searchParams);
+
+        newParams.set('step', step);
+
+        setSearchParams(newParams);
+        setCurrentStep(+step)
+    };
+
     const renderStep = () => {
         switch (currentStep) {
             case 1: return <Step1 form={form} />;
@@ -92,16 +104,26 @@ export const ResearchForm: React.FC<ResearchFormProps> = () => {
     };
 
     const nextStep = async () => {
-        if (validateCurrentStep(currentStep, form)) {
-            toast.error('Please fill up all the fields.')
+        const lastStep = currentStep === numberOfSteps[numberOfSteps.length - 1]
+        const { hasErrors, errors } = getStepErrors(currentStep, form);
+        if (hasErrors) {
+            form.setErrors(errors);
             setStepsCompleted(prev => ({ ...prev, [currentStep]: false }));
-            return;
+            return
         }
 
         setStepsCompleted(prev => ({ ...prev, [currentStep]: true }));
 
-        if (currentStep === numberOfSteps[numberOfSteps.length - 1]) {
+        if (lastStep) {
             try {
+                for (let i = 0; i < numberOfSteps.length; i++) {
+                    const { hasErrors } = getStepErrors(numberOfSteps[i], form)
+                    if (hasErrors) {
+                        setStepsCompleted(prev => ({ ...prev, [currentStep]: false }));
+                        toast.error("Not all required section fields are filled.")
+                        return
+                    }
+                }
                 const response = await researchService.addResearchForm(form.values);
                 if (response.status === 200) {
                     localStorage.removeItem(FORM_STORAGE_KEY);
@@ -139,7 +161,7 @@ export const ResearchForm: React.FC<ResearchFormProps> = () => {
                     <div className="flex h-full">
                         <div className="pr-16 text-gray-3">
                             <div className="text-xs font-normal mb-2">content</div>
-                            <Steps steps={ResearchSteps} currentStep={currentStep} stepsCompleted={stepsCompleted} />
+                            <Steps steps={ResearchSteps} currentStep={currentStep} stepsCompleted={stepsCompleted} updateParam={updateParam} />
                         </div>
 
                         <div className='relative flex-1'>

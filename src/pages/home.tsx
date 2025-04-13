@@ -12,13 +12,14 @@ import { AI } from "@/components/home/ai";
 import { Research } from "@/components/home/research";
 import { X } from "@/components/home/x";
 import { Footer } from "@/components/footer/footer";
+import { usePageColorScheme } from '@/hooks/usePageTheme';
 
 
 
 interface HomeProps { }
 
 export const Home: React.FC<HomeProps> = ({ }) => {
-
+    usePageColorScheme();
     const wishlistRef = useRef<HTMLDivElement>(null);
 
     const scrollToWishlist = () => {

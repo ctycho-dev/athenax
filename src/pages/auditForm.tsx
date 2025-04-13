@@ -5,7 +5,7 @@ import { useForm } from '@mantine/form';
 
 import { FormHeader } from '@/components/form/formHeader';
 import { FormNavigation } from '@/components/form/formNavigation';
-import { validateCurrentStep, formValidationRules } from '@/utils/audit/validateAuditForm';
+import { formValidationRules, getStepErrors } from '@/utils/audit/validateAuditForm';
 
 import { Steps } from '@/components/form/steps';
 import { Step1 } from '@/components/audit/step1';
@@ -14,23 +14,24 @@ import { Step3 } from '@/components/audit/step3';
 import { Step4 } from '@/components/audit/step4';
 
 import { AuditSteps } from "@/store/auditSteps";
-import { FormValues, StepsCompletion } from '@/types/audit';
+import { StepsCompletion } from '@/types';
+import { FormValues } from '@/types/audit';
 import auditService from '@/api/auditService';
 
 import { getLocalStorageObject } from '@/utils/useLocalStorage';
 import { initializeStepsCompletion } from '@/utils/audit/initializeStepsCompletion';
 import { initializeForm } from '@/utils/audit/initializeAuditForm';
 import { FORM_STORAGE_KEY, STEPS_STORAGE_KEY, numberOfSteps } from '@/constants/audit';
-
+import { usePageColorScheme } from '@/hooks/usePageTheme';
 
 interface AuditFormProps { }
 
 export const AuditForm: React.FC<AuditFormProps> = () => {
+    usePageColorScheme('light');
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const isFirstRender = useRef(true);
     const [stepsCompleted, setStepsCompleted] = useState<StepsCompletion>(initializeStepsCompletion);
-
 
     const form = useForm<FormValues>({
         initialValues: initializeForm(),
@@ -46,9 +47,7 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
     // Load saved steps completion status
     useEffect(() => {
         const savedSteps = getLocalStorageObject(STEPS_STORAGE_KEY);
-        if (savedSteps) {
-            setStepsCompleted(savedSteps);
-        }
+        if (savedSteps) setStepsCompleted(savedSteps);
     }, []);
 
     // Save form values when they change
@@ -65,6 +64,17 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
         setSearchParams({ step: currentStep.toString() });
     }, [currentStep, setSearchParams]);
 
+
+    // Update a parameter
+    const updateParam = (step: string) => {
+        const newParams = new URLSearchParams(searchParams);
+
+        newParams.set('step', step);
+
+        setSearchParams(newParams);
+        setCurrentStep(+step)
+    };
+
     useEffect(() => {
         localStorage.setItem(STEPS_STORAGE_KEY, JSON.stringify(stepsCompleted))
     }, [stepsCompleted])
@@ -80,16 +90,26 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
     };
 
     const nextStep = async () => {
-        if (validateCurrentStep(currentStep, form)) {
-            toast.error('Please fill up all the fields.')
+        const lastStep = currentStep === numberOfSteps[numberOfSteps.length - 1]
+        const { hasErrors, errors } = getStepErrors(currentStep, form);
+        if (hasErrors) {
+            form.setErrors(errors);
             setStepsCompleted(prev => ({ ...prev, [currentStep]: false }));
-            return;
+            return
         }
 
         setStepsCompleted(prev => ({ ...prev, [currentStep]: true }));
 
-        if (currentStep === numberOfSteps[numberOfSteps.length - 1]) {
+        if (lastStep) {
             try {
+                for (let i = 0; i < numberOfSteps.length; i++) {
+                    const { hasErrors } = getStepErrors(numberOfSteps[i], form)
+                    if (hasErrors) {
+                        setStepsCompleted(prev => ({ ...prev, [currentStep]: false }));
+                        toast.error("Not all required section fields are filled.")
+                        return
+                    }
+                }
                 const response = await auditService.addAuditForm(form.values);
                 if (response.status === 200) {
                     localStorage.removeItem(FORM_STORAGE_KEY);
@@ -113,7 +133,7 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
 
     return (
         <>
-            <main className="bg-gray-1 min-h-screen px-4 pt-[48px] text-white">
+            <main className="px-4">
                 <div className="max-w-5xl m-auto">
                     <FormHeader
                         title="Add Your Project Info"
@@ -127,14 +147,18 @@ export const AuditForm: React.FC<AuditFormProps> = () => {
                     <div className="flex h-full">
                         <div className="pr-16 text-gray-3">
                             <div className="text-xs font-normal mb-2">content</div>
-                            <Steps steps={AuditSteps} currentStep={currentStep} stepsCompleted={stepsCompleted} />
+                            <Steps
+                                steps={AuditSteps}
+                                currentStep={currentStep}
+                                stepsCompleted={stepsCompleted}
+                                updateParam={updateParam}
+                            />
                         </div>
 
                         <div className='relative flex-1'>
                             <div className="pl-16 border-l-[1px] border-gray-2">
                                 {renderStep()}
                             </div>
-
                             <FormNavigation
                                 currentStep={currentStep}
                                 onPrev={prevStep}
