@@ -1,47 +1,36 @@
-export type FormValues = {
-    one: {
-        name: string;
-        website: string;
-        contactName: string;
-        contactEmail: string;
-        telegram: string;
-        ecosystem: string;
-        blockchain: string;
-        description: string;
-    };
-    two: {
-        codebase: string;
-        gitLink: string;
-        gitHash: string;
-        gitBranch: string;
-        codebaseZip: string;
-        listOfSmartContracts: string;
-        contractUpgradeable: string;
-        contractUpgradeableDesc: string;
-        deployed: string;
-        deployedDesc: string;
-        thirdParty: string;
-    };
-    three: {
-        whitepaper: string;
-        whitepaperLink: string;
-        whitepaperZip: string;
-        techDocs: string;
-        techDocsLink: string;
-        techDocsZip: string;
-        tokenomics: string;
-        tokenomicsLink: string;
-        tokenomicsZip: string;
-        smartContract: string;
-        smartContractLink: string;
-        smartContractZip: string;
-    };
-    four: {
-        framework: string;
-        test: string;
-        testDesc: string;
-        testnet: string;
-        testnetLink: string;
-        thread: string;
-    };
-};
+import { AuditType } from "./audit";
+import { ResearchType } from "./research";
+
+export type CombinedItem = (AuditType | ResearchType) & { type: 'audit' | 'research' };
+
+export interface UploadResponse {
+    data: FileType
+}
+
+export interface BucketListResponse {
+    buckets: string[];
+}
+
+
+
+export type FileType = {
+    bucket: string
+    key: string
+    original_filename: string
+    content_type: string
+}
+
+
+export interface Step {
+    id: number;
+    label: string;
+}
+
+
+export type StepsCompletion = {
+    [key: number]: boolean;
+    // 1: boolean
+    // 2: boolean
+    // 3: boolean
+    // 4: boolean
+}

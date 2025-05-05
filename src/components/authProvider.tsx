@@ -1,0 +1,73 @@
+// Updated AuthProvider.tsx
+import { useEffect } from 'react';
+import { usePrivy } from '@privy-io/react-auth';
+import { useDispatch } from 'react-redux';
+import { setCredentials, clearCredentials } from '@/store/authSlice';
+import { clearUser, setUser } from '@/store/userSlice';
+import { useLazyGetMeQuery, useCreateUserMutation } from '@/services/userApi';
+
+
+export const AuthProvider = () => {
+   const { ready, authenticated, user, logout, getAccessToken } = usePrivy();
+   const dispatch = useDispatch();
+
+   const [fetchUser] = useLazyGetMeQuery();
+   const [createUser] = useCreateUserMutation();
+
+   useEffect(() => {
+      if (!ready) return;
+
+      const handleAuthFlow = async () => {
+         try {
+            if (authenticated) {
+               const token = await getAccessToken();
+               if (!token) throw new Error('No token received');
+               dispatch(setCredentials({ token }));
+
+               try {
+                  // First try to fetch the user
+                  const userResponse = await fetchUser(undefined, true).unwrap();
+                  dispatch(setUser(userResponse));
+               } catch (fetchError: any) {
+                  if (fetchError && 'status' in fetchError && fetchError.status === 404) {
+                     if (!user?.id) {
+                        console.error('Missing required user data');
+                        return;
+                     }
+                     console.log(user)
+
+                     try {
+                        const userData = {
+                           privy_id: user.id,
+                           linked_accounts: user.linkedAccounts,
+                           has_accepted_terms: user.hasAcceptedTerms,
+                           is_guest: user.isGuest
+                        };
+
+                        const newUser = await createUser(userData).unwrap();
+                        dispatch(setUser(newUser));
+                     } catch (creationError) {
+                        console.error('User creation failed:', creationError);
+                        // Consider additional error handling here
+                     }
+                  } else {
+                     throw fetchError;
+                  }
+               }
+            } else {
+               dispatch(clearCredentials());
+               dispatch(clearUser());
+            }
+         } catch (error) {
+            console.error('Auth flow error:', error);
+            dispatch(clearCredentials());
+            dispatch(clearUser());
+            logout()
+         }
+      };
+
+      handleAuthFlow();
+   }, [ready, authenticated, user]);
+
+   return null;
+};
