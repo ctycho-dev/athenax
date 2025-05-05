@@ -1,3 +1,16 @@
+import { AuditType } from "./audit";
+import { ResearchType } from "./research";
+
+export type CombinedItem = (AuditType | ResearchType) & { type: 'audit' | 'research' };
+
+export interface UploadResponse {
+    data: FileType
+}
+
+export interface BucketListResponse {
+    buckets: string[];
+}
+
 
 
 export type FileType = {

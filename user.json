@@ -1,0 +1,84 @@
+{
+    "id": "did:privy:cm9flvqn80183jo0mz0725d0y",
+    "createdAt": "2025-04-13T12:13:16.000Z",
+    "linkedAccounts": [
+        {
+            "subject": "1332968094141775893",
+            "username": "ctycho#0",
+            "email": "ctycho23@gmail.com",
+            "type": "discord_oauth",
+            "verifiedAt": "2025-04-13T12:13:16.000Z",
+            "firstVerifiedAt": "2025-04-13T12:13:16.000Z",
+            "latestVerifiedAt": "2025-04-15T21:12:14.000Z"
+        },
+        {
+            "subject": "115614841313059665956",
+            "email": "ctycho23@gmail.com",
+            "name": "Ilnur",
+            "type": "google_oauth",
+            "verifiedAt": "2025-04-13T12:09:49.000Z",
+            "firstVerifiedAt": "2025-04-13T12:09:49.000Z",
+            "latestVerifiedAt": "2025-04-15T21:24:47.000Z"
+        },
+        {
+            "address": "ctycho23@gmail.com",
+            "type": "email",
+            "verifiedAt": "2025-04-13T12:17:50.000Z",
+            "firstVerifiedAt": "2025-04-13T12:17:50.000Z",
+            "latestVerifiedAt": "2025-04-15T21:16:38.000Z"
+        },
+        {
+            "address": "ilnur_gumerov_1996@mail.ru",
+            "type": "email",
+            "verifiedAt": "2025-04-15T21:21:57.000Z",
+            "firstVerifiedAt": "2025-04-15T21:21:57.000Z",
+            "latestVerifiedAt": "2025-04-15T21:27:41.000Z"
+        }
+    ],
+    "discord": {
+        "subject": "1332968094141775893",
+        "username": "ctycho#0",
+        "email": "ctycho23@gmail.com"
+    },
+    "google": {
+        "subject": "115614841313059665956",
+        "email": "ctycho23@gmail.com",
+        "name": "Ilnur"
+    },
+    "email": {
+        "address": "ctycho23@gmail.com"
+    },
+    "delegatedWallets": [],
+    "mfaMethods": [],
+    "hasAcceptedTerms": false,
+    "isGuest": false
+}
+
+
+
+{
+    "id": "did:privy:cm9pixj19002hl60lpymixxlp",
+    "createdAt": "2025-04-20T10:48:22.000Z",
+    "linkedAccounts": [
+        {
+            "address": "W5hZGM44uGPh1ZuCZ4XYY585yQHjPUN8KxziNDEDKfV",
+            "type": "wallet",
+            "verifiedAt": "2025-04-20T10:48:22.000Z",
+            "firstVerifiedAt": "2025-04-20T10:48:22.000Z",
+            "latestVerifiedAt": "2025-04-20T10:48:22.000Z",
+            "chainType": "solana",
+            "walletClientType": "phantom",
+            "connectorType": "solana_adapter"
+        }
+    ],
+    "wallet": {
+        "address": "W5hZGM44uGPh1ZuCZ4XYY585yQHjPUN8KxziNDEDKfV",
+        "chainType": "solana",
+        "walletClientType": "phantom",
+        "connectorType": "solana_adapter"
+    },
+    "delegatedWallets": [],
+    "mfaMethods": [],
+    "hasAcceptedTerms": false,
+    "isGuest": false
+}

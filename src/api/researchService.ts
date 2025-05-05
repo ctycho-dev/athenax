@@ -1,5 +1,5 @@
 // src/api/wishlistService.js
-import apiClient from './axios';
+import apiClient from '@/api/axios'
 import { FormValues } from '@/types/research';
 import { FileType } from '@/types';
 

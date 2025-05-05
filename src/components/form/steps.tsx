@@ -8,6 +8,7 @@ interface CheckIconProps {
 }
 
 interface StepItemProps {
+  recordId: string | undefined
   step: number
   label: string;
   active: boolean;
@@ -17,6 +18,7 @@ interface StepItemProps {
 }
 
 interface StepsProps {
+  recordId: string | undefined
   steps: Step[]
   currentStep: number
   stepsCompleted: StepsCompletion | null
@@ -40,22 +42,23 @@ const CheckIcon: React.FC<CheckIconProps> = ({ active }) => (
   </svg>
 );
 
-const StepItem: React.FC<StepItemProps> = ({ step, label, active, isFirst, stepCompleted, updateParam }) => (
+const StepItem: React.FC<StepItemProps> = ({ recordId, step, label, active, isFirst, stepCompleted, updateParam }) => (
   <button
     onClick={() => { updateParam(step.toString()) }}
     className={`flex gap-x-2 items-center ${isFirst ? 'group' : ''} hover:cursor-pointer`}
     style={{ lineHeight: '40px' }}
   >
-    {stepCompleted && <CheckIcon active={active} />}
+    {(recordId || stepCompleted) && <CheckIcon active={active} />}
     <span className={active ? 'text-white font-semibold' : ''}>{label}</span>
   </button>
 );
 
-export const Steps: React.FC<StepsProps> = ({ steps, currentStep, stepsCompleted, updateParam }) => (
+export const Steps: React.FC<StepsProps> = ({ recordId, steps, currentStep, stepsCompleted, updateParam }) => (
   <div>
     {steps.map((step, index) => (
       <StepItem
         key={step.id}
+        recordId={recordId}
         step={step.id}
         label={step.label}
         active={currentStep === step.id}

@@ -1,4 +1,5 @@
 import { FileType } from ".";
+import { ReportState } from "@/enums";
 
 
 export type FileFields = {
@@ -57,7 +58,15 @@ export type FormValues = {
         testnetLink: string;
         thread: string;
     };
-    id?: string
-    created_at?: string
-    updated_at?: string
 };
+
+
+export type AuditType = {
+    steps: FormValues
+    id: string
+    state: ReportState
+    user_privy_id: string
+    admin_comment?: string
+    created_at: string
+    updated_at: string
+}

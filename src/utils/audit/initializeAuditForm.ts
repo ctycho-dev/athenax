@@ -4,10 +4,12 @@ import { getLocalStorageObject } from "../useLocalStorage";
 
 
 // Initialize form with either saved values or defaults
-export const initializeForm = (): FormValues => {
-    const savedData = getLocalStorageObject(FORM_STORAGE_KEY);
-    if (savedData) {
-        return savedData
+export const initializeForm = (auditId: string | undefined): FormValues => {
+    if (!auditId) {
+        const savedData = getLocalStorageObject(FORM_STORAGE_KEY);
+        if (savedData) {
+            return savedData
+        }
     }
     return {
         step1: {

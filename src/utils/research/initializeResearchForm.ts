@@ -4,13 +4,15 @@ import { FORM_STORAGE_KEY } from "@/constants/research";
 import { getLocalStorageObject } from "../useLocalStorage";
 
 // Initialize form with either saved values or defaults
-export const initializeForm = (): FormValues => {
-    const savedData = getLocalStorageObject(FORM_STORAGE_KEY);
-    if (savedData) {
-        if (savedData.step1 && savedData.step1.launchDate) {
-            savedData.step1.launchDate = new Date(savedData.step1.launchDate)
+export const initializeForm = (recId: string | undefined): FormValues => {
+    if (!recId) {
+        const savedData = getLocalStorageObject(FORM_STORAGE_KEY);
+        if (savedData) {
+            if (savedData.step1 && savedData.step1.launchDate) {
+                savedData.step1.launchDate = new Date(savedData.step1.launchDate)
+            }
+            return savedData
         }
-        return savedData
     }
     return {
         step1: {

@@ -1,14 +1,6 @@
 // src/api/wishlistService.js
 import apiClient from './axios';
-import { FileType } from '@/types';
-
-interface UploadResponse {
-  data: FileType
-}
-
-interface BucketListResponse {
-  buckets: string[];
-}
+import { UploadResponse, BucketListResponse } from '@/types';
 
 export default {
   async uploadToS3(bucket: string, file: File): Promise<UploadResponse> {
