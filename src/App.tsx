@@ -28,7 +28,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
-                {/* <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/" element={<AuthWrapper />}>
                     <Route path="/audit-form" element={<AuditForm />} />
                     <Route path="/audit-form/:id" element={<AuditForm />} />
@@ -42,7 +42,7 @@ function App() {
                 </Route>
                 <Route path="/" element={<UserLayout />}>
                     <Route path="/top-cryptos" element={<CryptoList />} />
-                </Route> */}
+                </Route>
             </Routes>
         </Router>
     )
