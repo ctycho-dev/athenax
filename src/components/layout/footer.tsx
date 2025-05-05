@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'
 import { useForm } from '@mantine/form';
-import { TextInput, Button, Box, Group } from '@mantine/core';
+import { TextInput, Button } from '@mantine/core';
 import { Toaster, toast } from 'sonner';
+import { useAddToWishlistMutation } from "@/services/wishlistApi";
 
 import CustomSection from "@/views/home/components/customSection";
 import Title from '@/views/home/components/title'
@@ -13,9 +13,6 @@ import {
 } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa6";
 // import { FaTelegram } from "react-icons/fa6";
-import wishlistService from '@/api/wishlistService';
-
-
 import checkIcon from '@/assets/home/check.svg';
 
 
@@ -27,6 +24,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ formRef }) => {
     const [isDisabled, setIsDisabled] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [addToWishlist] = useAddToWishlistMutation();
 
 
     const form = useForm({
@@ -46,12 +44,12 @@ export const Footer: React.FC<FooterProps> = ({ formRef }) => {
         setIsDisabled(true)
 
         try {
-            const response = await wishlistService.addToWishlist(form.values.email);
+            const response = await addToWishlist(form.values.email)
 
-            if (response.status !== 200) {
-                toast.error('Something went wrong. Try again in a few minutes.');
-            } else {
+            if (response && 'data' in response) {
                 setSubmitted(true);
+            } else {
+                toast.error('Something went wrong. Try again in a few minutes.');
             }
         } catch (error) {
             toast.error('Something went wrong. Try again in a few minutes.');
