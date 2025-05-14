@@ -8,6 +8,10 @@ export const auditApi = api.injectEndpoints({
             query: () => '/audit/',
         }),
 
+        getAuditByUser: builder.query<AuditType[], void>({
+            query: () => '/audit/user/',
+        }),
+
         getAudit: builder.query<AuditType, string>({
             query: (id: string) => `/audit/${id}`,
         }),
@@ -60,6 +64,7 @@ export const auditApi = api.injectEndpoints({
 
 export const {
     useGetAuditAllQuery,
+    useGetAuditByUserQuery,
     useGetAuditQuery,
     useUpdateAuditMutation,
     useAddAuditFormMutation,

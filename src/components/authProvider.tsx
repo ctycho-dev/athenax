@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useDispatch } from 'react-redux';
 import { setCredentials, clearCredentials } from '@/store/authSlice';
-import { clearUser, setUser } from '@/store/userSlice';
+import { clearUser, setUser, setLoading } from '@/store/userSlice';
 import { useLazyGetMeQuery, useCreateUserMutation } from '@/services/userApi';
 
 
@@ -19,6 +19,8 @@ export const AuthProvider = () => {
 
       const handleAuthFlow = async () => {
          try {
+            dispatch(setLoading());
+            
             if (authenticated) {
                const token = await getAccessToken();
                if (!token) throw new Error('No token received');
@@ -34,7 +36,6 @@ export const AuthProvider = () => {
                         console.error('Missing required user data');
                         return;
                      }
-                     console.log(user)
 
                      try {
                         const userData = {
