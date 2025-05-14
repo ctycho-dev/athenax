@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Input } from '@mantine/core';
 
 import { usePageColorScheme } from '@/hooks/usePageTheme';
-import { useGetAuditAllQuery } from "@/services/auditApi";
+import { useGetAuditByUserQuery } from "@/services/auditApi";
 import { useGetResearchAllQuery } from "@/services/researchApi";
 import { ReportState } from "@/enums";
 import RecentAudits from "./components/recentAudits";
@@ -22,7 +22,7 @@ export const Dashboard = () => {
     const { 
         data: audits, 
         isLoading: isAuditsLoading 
-    } = useGetAuditAllQuery(undefined, {
+    } = useGetAuditByUserQuery(undefined, {
         skip: !privyToken
     });
 

@@ -1,10 +1,11 @@
 // src/store/userSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserRole } from '@/types/user';
 
 interface User {
   id: string;
   privy_id: string;
-  role: string;
+  role: UserRole;
   created_at: string;
 }
 
@@ -16,7 +17,7 @@ interface UserState {
 
 const initialState: UserState = {
   data: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 

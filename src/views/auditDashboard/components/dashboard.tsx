@@ -4,10 +4,10 @@ import { useState } from "react"
 import auditService from '@/api/auditService';
 import { format } from 'date-fns';
 import { FileType } from "@/types";
-import { FormValues } from "@/types/audit";
+import { AuditType } from "@/types/audit";
 
 interface DashboardProps {
-    data: FormValues
+    data: AuditType
 }
 
 export function Dashboard({ data }: DashboardProps) {
@@ -173,7 +173,7 @@ export function Dashboard({ data }: DashboardProps) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                     )}
-                    <span className="text-xl font-semibold">{data.step1.name}</span>
+                    <span className="text-xl font-semibold">{data.steps.step1.name}</span>
                 </button>
                 <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 border">
                     Last updated: {getLastUpdated(data.updated_at ? data.updated_at : null)}
@@ -220,7 +220,7 @@ export function Dashboard({ data }: DashboardProps) {
                                 {expandedSteps[step] && (
                                     <div className="p-3 border-t">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
-                                            {Object.entries(data[step]).map(([key, value]) => (
+                                            {Object.entries(data.steps[step]).map(([key, value]) => (
                                                 <div key={key} className="py-1">
                                                     <dt className="text-sm font-medium text-gray-500 mb-1">
                                                         {key.replace(/([A-Z])/g, " $1").trim()}
