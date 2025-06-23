@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 
 
 export default defineConfig({
+  build: {
+    target: 'esnext',
+  },
   plugins: [react(), tailwindcss()],
   define: {
     'process.env': process.env
