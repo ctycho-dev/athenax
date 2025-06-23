@@ -1,6 +1,6 @@
 // src/store/userSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserRole } from '@/types/user';
+import { UserRole } from '@/enums';
 
 interface User {
   id: string;
