@@ -63,7 +63,9 @@ export const ResearchReview: React.FC<ResearchReviewProps> = ({ }) => {
                     id
                   </td>
                   <td className="px-4 py-4 text-sm font-medium">
-                    {item.admin_comment || 'No response yet'}
+                    {item.comments && item.comments.length > 0
+                      ? item.comments[item.comments.length - 1].content
+                      : 'No response yet'}
                   </td>
                   <td className="px-4 py-4 w-max">
                     {item.updated_at}

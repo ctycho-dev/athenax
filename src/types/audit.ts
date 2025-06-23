@@ -1,5 +1,5 @@
 import { FileType } from ".";
-import { ReportState } from "@/enums";
+import { ReportState, UserRole } from "@/enums";
 
 
 export type FileFields = {
@@ -61,12 +61,19 @@ export type FormValues = {
 };
 
 
+interface Comment {
+  id: string;
+  role: UserRole;
+  content: string;
+  created_at: Date;
+}
+
 export type AuditType = {
     steps: FormValues
     id: string
     state: ReportState
     user_privy_id: string
-    comments?: string
+    comments: Comment[]
     created_at: string
     updated_at: string
 }

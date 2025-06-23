@@ -12,10 +12,9 @@ import {
 
 interface CommentSectionProps {
     audit: AuditType
-    onUpdateAudit: (audit: AuditType) => void
 }
 
-export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateAudit }) => {
+export const CommentSection: React.FC<CommentSectionProps> = ({ audit }) => {
     const [comment, setComment] = useState("")
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -31,15 +30,6 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
 
         try {
             await addComment({ id: audit.id, comment: comment }).unwrap()
-            // await updateState({ id: audit.id, state: ReportState.UPDATE_INFO }).unwrap()
-
-            // const updatedAudit: AuditType = {
-            //     ...audit,
-            //     comments: comment,
-            //     state: ReportState.UPDATE_INFO,
-            // }
-
-            // onUpdateAudit(updatedAudit)
             setComment("")
         } catch (err: any) {
             console.error("Error submitting comment:", err)
@@ -58,12 +48,6 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
         try {
             await updateState({ id: audit.id, state: newState as ReportState }).unwrap()
 
-            const updatedAudit: AuditType = {
-                ...audit,
-                state: newState as ReportState,
-            }
-
-            onUpdateAudit(updatedAudit)
         } catch (err: any) {
             console.error("Error updating state:", err)
             setError("Failed to update status. Please try again.")
@@ -95,10 +79,10 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
                     className="max-w-md"
                 />
 
-                {audit.admin_comment && (
+                {audit.comments && (
                     <div className="space-y-2">
                         <h3 className="text-sm font-medium">Previous Comment</h3>
-                        <div className="rounded-md bg-muted p-3 text-sm">{audit.admin_comment}</div>
+                        <div className="rounded-md bg-muted p-3 text-sm">{audit.comments}</div>
                     </div>
                 )}
 

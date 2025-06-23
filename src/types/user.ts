@@ -1,4 +1,5 @@
 // src/types/index.ts
+import { UserRole } from "@/enums";
 
 export enum WalletChains {
     ETH = "eth",

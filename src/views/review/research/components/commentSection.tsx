@@ -1,10 +1,12 @@
-"use client"
-
 import { useState } from "react"
 import { Send } from "lucide-react"
 import { Textarea, Select } from "@mantine/core"
 import { ResearchType } from "@/types/research"
 import { ReportState } from "@/enums"
+import {
+    useAddResearchCommentMutation,
+    useUpdateResearchStateMutation
+} from "@/services/researchApi"
 
 interface CommentSectionProps {
     audit: ResearchType
@@ -14,40 +16,43 @@ interface CommentSectionProps {
 export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateAudit }) => {
     const [comment, setComment] = useState("")
     const [submitting, setSubmitting] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
-    const handleSubmitComment = async () => {
+    const [addComment] = useAddResearchCommentMutation()
+    const [updateState] = useUpdateResearchStateMutation()
+
+     const handleSubmitComment = async () => {
         if (!comment.trim()) return
 
         setSubmitting(true)
+        setError(null)
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 800))
-
-        const updatedAudit: ResearchType = {
-            ...audit,
-            admin_comment: comment,
-            state: ReportState.UPDATE_INFO,
+        try {
+            await addComment({ id: audit.id, comment: comment }).unwrap()
+            setComment("")
+        } catch (err: any) {
+            console.error("Error submitting comment:", err)
+            setError("Failed to submit comment. Please try again.")
+        } finally {
+            setSubmitting(false)
         }
-
-        onUpdateAudit(updatedAudit)
-        setComment("")
-        setSubmitting(false)
     }
 
     const handleStateChange = async (newState: string | null) => {
         if (!newState) return
 
         setSubmitting(true)
+        setError(null)
 
-        await new Promise((resolve) => setTimeout(resolve, 500))
+        try {
+            await updateState({ id: audit.id, state: newState as ReportState }).unwrap()
 
-        const updatedAudit: ResearchType = {
-            ...audit,
-            state: newState as ReportState,
+        } catch (err: any) {
+            console.error("Error updating state:", err)
+            setError("Failed to update status. Please try again.")
+        } finally {
+            setSubmitting(false)
         }
-
-        onUpdateAudit(updatedAudit)
-        setSubmitting(false)
     }
 
     // Convert enum to Mantine <Select> format
@@ -73,10 +78,10 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
                     className="max-w-md"
                 />
 
-                {audit.admin_comment && (
+                {audit.comments && (
                     <div className="space-y-2">
                         <h3 className="text-sm font-medium">Previous Comment</h3>
-                        <div className="rounded-md bg-muted p-3 text-sm">{audit.admin_comment}</div>
+                        <div className="rounded-md bg-muted p-3 text-sm">{audit.comments}</div>
                     </div>
                 )}
 
