@@ -128,7 +128,7 @@ export const ResearchReviewRecord: React.FC = () => {
           </div>
         ))}
 
-        <CommentSection audit={research} onUpdateAudit={() => { }} />
+        <CommentSection audit={research} />
       </main>
     </div>
   );

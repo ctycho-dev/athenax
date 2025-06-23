@@ -10,10 +10,9 @@ import {
 
 interface CommentSectionProps {
     audit: ResearchType
-    onUpdateAudit: (audit: ResearchType) => void
 }
 
-export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateAudit }) => {
+export const CommentSection: React.FC<CommentSectionProps> = ({ audit }) => {
     const [comment, setComment] = useState("")
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -21,7 +20,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
     const [addComment] = useAddResearchCommentMutation()
     const [updateState] = useUpdateResearchStateMutation()
 
-     const handleSubmitComment = async () => {
+    const handleSubmitComment = async () => {
         if (!comment.trim()) return
 
         setSubmitting(true)
@@ -66,6 +65,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
             <div className="mb-4">
                 <div className="text-xl">Comments & Status</div>
             </div>
+
             <div className="space-y-4">
                 <Select
                     label="Update Status"
@@ -78,16 +78,18 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
                     className="max-w-md"
                 />
 
-                {audit.comments && (
+                {audit.comments && audit.comments?.length > 0 && (
                     <div className="space-y-2">
                         <h3 className="text-sm font-medium">Previous Comment</h3>
-                        <div className="rounded-md bg-muted p-3 text-sm">{audit.comments}</div>
+                        <div className="rounded-md bg-muted p-3 text-sm">
+                            {audit.comments[audit.comments.length - 1].content}
+                        </div>
                     </div>
                 )}
 
                 <div className="space-y-2">
                     <Textarea
-                        label='Add Comment'
+                        label="Add Comment"
                         placeholder="Enter your comment here..."
                         className="min-h-[120px]"
                         value={comment}
@@ -98,8 +100,9 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit, onUpdateA
                         Adding a comment will automatically set the status to "Update Info"
                     </p>
                 </div>
-            </div>
-            <div>
+
+                {error && <p className="text-sm text-red-500">{error}</p>}
+
                 <button
                     className="flex items-center gap-2 mt-4 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
                     onClick={handleSubmitComment}

@@ -152,7 +152,6 @@ const extensions = [
         emptyEditorClass: 'is-editor-empty', // Optional: apply a class when empty
     }),
     Color.configure({ types: [TextStyle.name, ListItem.name] }),
-    TextStyle.configure({ types: [ListItem.name] }),
     StarterKit.configure({
         bulletList: {
             keepMarks: true,
@@ -165,7 +164,7 @@ const extensions = [
     }),
     Image.configure({
         inline: false,
-        allowBase64: true, // optional: allow simple paste/upload
+        allowBase64: true, 
     }),
 ]
 

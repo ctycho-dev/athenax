@@ -116,7 +116,7 @@ export const AuditReviewRecord: React.FC = () => {
           </div>
         ))}
 
-        <CommentSection audit={audit} onUpdateAudit={() => { }} />
+        <CommentSection audit={audit} />
       </main>
     </div>
   );

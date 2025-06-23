@@ -79,10 +79,12 @@ export const CommentSection: React.FC<CommentSectionProps> = ({ audit }) => {
                     className="max-w-md"
                 />
 
-                {audit.comments && (
+                {audit.comments && audit.comments?.length > 0 && (
                     <div className="space-y-2">
                         <h3 className="text-sm font-medium">Previous Comment</h3>
-                        <div className="rounded-md bg-muted p-3 text-sm">{audit.comments}</div>
+                        <div className="rounded-md bg-muted p-3 text-sm">
+                            {audit.comments[audit.comments.length - 1].content}
+                        </div>
                     </div>
                 )}
 
