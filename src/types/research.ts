@@ -105,7 +105,7 @@ export type ResearchType = {
     id: string
     state: ReportState
     user_privy_id: string
-    admin_comment?: string
+    comments?: string
     created_at: string
     updated_at: string
 }

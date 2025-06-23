@@ -7,7 +7,7 @@ import CardTitle from '@/views/home/components/cardTitle'
 import CardSubtitle from "@/views/home/components/cardSubtitle";
 import Card from "@/views/home/components/card";
 
-
+import { s3 } from "@/utils";
 import img1 from '@/assets/home/news/img_1.svg'
 import img2 from '@/assets/home/news/img_2.svg'
 import img3 from '@/assets/home/news/img_3.svg'
@@ -37,9 +37,33 @@ export const News: React.FC<NewsProps> = ({ }) => {
                     <div className="h-full flex flex-col justify-between">
                         <div className="mb-6">
                             <picture>
-                                <source srcSet="https://link.storjshare.io/raw/jxtfgdwv6l5qa4xoccju7y5gslza/athenax/news/news-2x.webp 2x, https://link.storjshare.io/raw/jwm5csk2omaaw62khyq36bf56z7q/athenax/news/news-3x.webp 3x" type="image/webp" />
-                                <source srcSet="https://link.storjshare.io/raw/jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png 2x, https://link.storjshare.io/raw/jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png 3x" type="image/png" />
-                                <img src="https://link.storjshare.io/raw/jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png" srcSet="https://link.storjshare.io/raw/jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png 2x, https://link.storjshare.io/raw/jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png 3x" alt="News" />
+                                <source
+                                    srcSet={`${s3(
+                                        'jxtfgdwv6l5qa4xoccju7y5gslza/athenax/news/news-2x.webp'
+                                    )} 2x, ${s3(
+                                        'jwm5csk2omaaw62khyq36bf56z7q/athenax/news/news-3x.webp'
+                                    )} 3x`}
+                                    type="image/webp"
+                                />
+                                <source
+                                    srcSet={`${s3(
+                                        'jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png'
+                                    )} 2x, ${s3(
+                                        'jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png'
+                                    )} 3x`}
+                                    type="image/png"
+                                />
+                                <img
+                                    src={s3(
+                                        'jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png'
+                                    )}
+                                    srcSet={`${s3(
+                                        'jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png'
+                                    )} 2x, ${s3(
+                                        'jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png'
+                                    )} 3x`}
+                                    alt="News"
+                                />
                             </picture>
                         </div>
                         <div className="mt-6">

@@ -56,7 +56,7 @@ export const Login: React.FC<LoginProps> = ({ }) => {
         // Default to dashboard if no previous path or if it was the login page
         const redirectTo = preLoginPath && !preLoginPath.startsWith('/login') 
           ? preLoginPath 
-          : '/dashboard';
+          : '/submit';
     
         navigate(redirectTo, { replace: true });
       }

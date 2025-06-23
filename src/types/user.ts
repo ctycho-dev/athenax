@@ -1,9 +1,4 @@
 // src/types/index.ts
-export enum UserRole {
-    ADMIN = 'admin',
-    BD = 'bd',
-    USER = 'user',
-}
 
 export enum WalletChains {
     ETH = "eth",

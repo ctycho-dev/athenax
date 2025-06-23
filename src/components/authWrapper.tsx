@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import Loading from '@/components/layout/loading';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
-import { UserRole } from '@/types/user';
+import { UserRole } from '@/enums';
 
 
 interface AuthWrapperProps {
@@ -16,7 +16,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ allowedRoles }) => {
    const { ready, authenticated } = usePrivy();
    const { data: user, loading: userLoading } = useSelector((state: RootState) => state.user);
 
-   console.log('userState', user, userLoading)
+   // console.log('userState', user, userLoading)
 
 
    if (!ready || userLoading) {

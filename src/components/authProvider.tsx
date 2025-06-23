@@ -20,17 +20,19 @@ export const AuthProvider = () => {
       const handleAuthFlow = async () => {
          try {
             dispatch(setLoading());
-            
+            console.log('authenticated', authenticated)
             if (authenticated) {
                const token = await getAccessToken();
                if (!token) throw new Error('No token received');
                dispatch(setCredentials({ token }));
+
 
                try {
                   // First try to fetch the user
                   const userResponse = await fetchUser(undefined, true).unwrap();
                   dispatch(setUser(userResponse));
                } catch (fetchError: any) {
+                  console.log(fetchError)
                   if (fetchError && 'status' in fetchError && fetchError.status === 404) {
                      if (!user?.id) {
                         console.error('Missing required user data');

@@ -1,6 +1,8 @@
 import { api } from './api';
 import { FileType } from '@/types';
 import { FormValues, ResearchType } from '@/types/research';
+import { ReportState } from '@/enums';
+
 
 export const researchApi = api.injectEndpoints({
    endpoints: (builder) => ({
@@ -8,8 +10,28 @@ export const researchApi = api.injectEndpoints({
          query: () => '/research/',
       }),
 
+      getResearchByState: builder.query<ResearchType[], string>({
+         query: (state: string) => `/research/state/${state}`,
+      }),
+
       getResearch: builder.query<ResearchType, string>({
          query: (id: string) => `/research/${id}`,
+      }),
+
+      addResearchComment: builder.mutation<void, { id: string; comment: string }>({
+         query: ({ id, comment }) => ({
+            url: `/research/${id}/comment`,
+            method: 'POST',
+            body: { comment: comment },
+         }),
+      }),
+
+      updateResearchState: builder.mutation<void, { id: string; state: ReportState }>({
+         query: ({ id, state }) => ({
+            url: `/research/${id}/state`,
+            method: 'PATCH',
+            body: { state },
+         }),
       }),
 
       updateResearch: builder.mutation<void, { id: string; data: Partial<FormValues> }>({
@@ -60,7 +82,10 @@ export const researchApi = api.injectEndpoints({
 
 export const {
    useGetResearchAllQuery,
+   useGetResearchByStateQuery,
    useGetResearchQuery,
+   useAddResearchCommentMutation,
+   useUpdateResearchStateMutation,
    useUpdateResearchMutation,
    useAddResearchFormMutation,
    useDownloadResearchFileMutation

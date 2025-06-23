@@ -32,3 +32,28 @@ export const {
     useCreateUserMutation,
     useUpdateUserMutation 
 } = userApi;
+
+
+
+// import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+// const rawBaseQuery = fetchBaseQuery({
+//   baseUrl: import.meta.env.VITE_API_BASE_URL,
+//   prepareHeaders: (headers, { extra }) => {
+//     if (extra?.token) {
+//       headers.set('Authorization', `Bearer ${extra.token}`);
+//     }
+//     return headers;
+//   },
+// });
+
+// export const fetchUserDirectly = async (token: string) => {
+//   const result = await rawBaseQuery(
+//     { url: '/users/me/', method: 'GET' },
+//     undefined,
+//     { token }
+//   );
+
+//   if (result.error) throw result.error;
+//   return result.data;
+// };

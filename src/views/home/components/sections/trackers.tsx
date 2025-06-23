@@ -1,17 +1,17 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import CustomSection from "@/views/home/components/customSection";
 import Button from "@/components/ui/button";
-import Title from '@/views/home/components/title'
-import Subtitle from '@/views/home/components/subtitle'
-import CardTitle from '@/views/home/components/cardTitle'
+import Title from '@/views/home/components/title';
+import Subtitle from '@/views/home/components/subtitle';
+import CardTitle from '@/views/home/components/cardTitle';
 import CardSubtitle from "@/views/home/components/cardSubtitle";
 import Card from "@/views/home/components/card";
 
+import { s3 } from "@/utils"; // your s3 helper
 
-interface TrackersProps { }
+interface TrackersProps {}
 
-export const Trackers: React.FC<TrackersProps> = ({ }) => {
-
+export const Trackers: React.FC<TrackersProps> = () => {
     return (
         <CustomSection>
             <div className="flex flex-col items-center justify-center">
@@ -25,20 +25,36 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
                 <Card className="relative col-span-12 pl-6 md:pl-10 py-6 md:py-10 flex flex-col-reverse md:flex-row justify-between md:items-end">
                     <div className="pt-6 min-w-[220px]">
                         <CardTitle className='mb-2'>Custom Watchlists</CardTitle>
-                        <CardSubtitle>Track your favorite tokens, protocols,<br className="hidden md:block" />and DeFi projects in one place</CardSubtitle>
+                        <CardSubtitle>
+                            Track your favorite tokens, protocols,<br className="hidden md:block" />and DeFi projects in one place
+                        </CardSubtitle>
                     </div>
                     <picture>
-                        <source srcSet="https://link.storjshare.io/raw/jujcl5faf3jlqephhuxtky7z23fa/athenax/trackers/watchlist-2x.webp 2x, https://link.storjshare.io/raw/jxzghtjfsdgc6ejrvasdd5i6nipa/athenax/trackers/watchlist-3x.webp 3x" type="image/webp" />
-                        <source srcSet="https://link.storjshare.io/raw/jux7m2m7tltel4cuitin6tntuaqa/athenax/trackers/watchlist-2x.png 2x, https://link.storjshare.io/raw/juornzmluxygphi74loha4jgqkia/athenax/trackers/watchlist-3x.png 3x" type="image/png" />
-                        <img src="https://link.storjshare.io/raw/juornzmluxygphi74loha4jgqkia/athenax/trackers/watchlist-3x.png" srcSet="https://link.storjshare.io/raw/jux7m2m7tltel4cuitin6tntuaqa/athenax/trackers/watchlist-2x.png 2x, https://link.storjshare.io/raw/juornzmluxygphi74loha4jgqkia/athenax/trackers/watchlist-3x.png 3x" alt="News" />
+                        <source 
+                            srcSet={`${s3("jujcl5faf3jlqephhuxtky7z23fa/athenax/trackers/watchlist-2x.webp")} 2x, ${s3("jxzghtjfsdgc6ejrvasdd5i6nipa/athenax/trackers/watchlist-3x.webp")} 3x`} 
+                            type="image/webp" 
+                        />
+                        <source 
+                            srcSet={`${s3("jux7m2m7tltel4cuitin6tntuaqa/athenax/trackers/watchlist-2x.png")} 2x, ${s3("juornzmluxygphi74loha4jgqkia/athenax/trackers/watchlist-3x.png")} 3x`} 
+                            type="image/png" 
+                        />
+                        <img 
+                            src={s3("juornzmluxygphi74loha4jgqkia/athenax/trackers/watchlist-3x.png")} 
+                            srcSet={`${s3("jux7m2m7tltel4cuitin6tntuaqa/athenax/trackers/watchlist-2x.png")} 2x, ${s3("juornzmluxygphi74loha4jgqkia/athenax/trackers/watchlist-3x.png")} 3x`} 
+                            alt="News" 
+                        />
                     </picture>
                 </Card>
                 <Card className="col-span-12 md:col-span-6 p-6 md:p-10">
                     <div className="flex justify-center">
                         <picture>
-                            <source srcSet="https://link.storjshare.io/raw/julcixio5bguwtgxcztz4ahzivra/athenax/trackers/notification.webp" type="image/webp" />
-                            <source srcSet="https://link.storjshare.io/raw/jwblqdfmu3h5w4tvxr2w2og6vapq/athenax/trackers/notification.png" type="image/png" />
-                            <img src="https://link.storjshare.io/raw/jwblqdfmu3h5w4tvxr2w2og6vapq/athenax/trackers/notification.png" srcSet="https://link.storjshare.io/raw/jwblqdfmu3h5w4tvxr2w2og6vapq/athenax/trackers/notification.png" alt="Notification" />
+                            <source srcSet={s3("julcixio5bguwtgxcztz4ahzivra/athenax/trackers/notification.webp")} type="image/webp" />
+                            <source srcSet={s3("jwblqdfmu3h5w4tvxr2w2og6vapq/athenax/trackers/notification.png")} type="image/png" />
+                            <img
+                                src={s3("jwblqdfmu3h5w4tvxr2w2og6vapq/athenax/trackers/notification.png")}
+                                srcSet={s3("jwblqdfmu3h5w4tvxr2w2og6vapq/athenax/trackers/notification.png")}
+                                alt="Notification"
+                            />
                         </picture>
                     </div>
                     <div className="pt-6">
@@ -48,9 +64,13 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
                 </Card>
                 <Card className="card-bg relative col-span-12 md:col-span-6 pl-6 md:pl-10 py-6 md:py-10 -z-10 flex flex-col justify-between">
                     <picture>
-                        <source srcSet="https://link.storjshare.io/raw/jvdwm2lbjmixr2zywytu3poniobq/athenax/trackers/trends.webp" type="image/webp" />
-                        <source srcSet="https://link.storjshare.io/raw/jvebd65vhsadwhmnhtqgzfejyhyq/athenax/trackers/trends.png" type="image/png" />
-                        <img src="https://link.storjshare.io/raw/jvebd65vhsadwhmnhtqgzfejyhyq/athenax/trackers/trends.png" srcSet="https://link.storjshare.io/raw/jvebd65vhsadwhmnhtqgzfejyhyq/athenax/trackers/trends.png" alt="Notification" />
+                        <source srcSet={s3("jvdwm2lbjmixr2zywytu3poniobq/athenax/trackers/trends.webp")} type="image/webp" />
+                        <source srcSet={s3("jvebd65vhsadwhmnhtqgzfejyhyq/athenax/trackers/trends.png")} type="image/png" />
+                        <img
+                            src={s3("jvebd65vhsadwhmnhtqgzfejyhyq/athenax/trackers/trends.png")}
+                            srcSet={s3("jvebd65vhsadwhmnhtqgzfejyhyq/athenax/trackers/trends.png")}
+                            alt="Notification"
+                        />
                     </picture>
                     <div className="pt-6">
                         <CardTitle className='mb-2'>Actionable Market Trends</CardTitle>
@@ -59,5 +79,5 @@ export const Trackers: React.FC<TrackersProps> = ({ }) => {
                 </Card>
             </div>
         </CustomSection>
-    )
-} 
+    );
+};

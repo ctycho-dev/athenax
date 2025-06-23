@@ -1,4 +1,10 @@
 
+export enum UserRole {
+    ADMIN = 'admin',
+    BD = 'bd',
+    USER = 'user',
+}
+
 export enum ReportState {
     SUBMITTED = 'Submitted',
     CHECKING = 'Checking',
@@ -6,4 +12,10 @@ export enum ReportState {
     UPDATE_INFO = 'Update Info',
     COMPLETED = 'Completed',
     REJECTED = 'Rejected'
+}
+
+export enum ArticleState {
+    DRAFT = 'Draft',
+    PUBLISHED = 'Published',
+    ARCHIVED = "Archived"
 }

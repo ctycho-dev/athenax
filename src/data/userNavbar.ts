@@ -1,3 +1,5 @@
+import { UserRole } from "@/enums";
+
 export const navbar = [
     {
         id: 'search',
@@ -16,7 +18,8 @@ export const navbar = [
                     </clipPath>
                 </defs>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'dashboard',
@@ -27,7 +30,8 @@ export const navbar = [
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.72565 3.17575L4.05898 3.69635C3.04788 4.48591 2.54232 4.88069 2.27116 5.43733C2 5.99397 2 6.63701 2 7.92306V9.31779C2 11.842 2 13.1041 2.78105 13.8883C3.40977 14.5195 4.34695 14.6427 6 14.6667V12.0038C6 11.3825 6 11.0719 6.10149 10.8269C6.23682 10.5001 6.49639 10.2406 6.82307 10.1053C7.06813 10.0038 7.37873 10.0038 8 10.0038C8.62127 10.0038 8.93187 10.0038 9.17693 10.1053C9.5036 10.2406 9.7632 10.5001 9.89853 10.8269C10 11.0719 10 11.3825 10 12.0038V14.6667C11.6531 14.6427 12.5902 14.5195 13.2189 13.8883C14 13.1041 14 11.842 14 9.31779V7.92306C14 6.63701 14 5.99397 13.7289 5.43733C13.4577 4.88069 12.9521 4.48591 11.941 3.69635L11.2743 3.17575C9.7014 1.94747 8.91493 1.33333 8 1.33333C7.08507 1.33333 6.29858 1.94747 4.72565 3.17575Z" stroke="#949FA8" strokeLinejoin="round"/>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'news_feed',
@@ -42,7 +46,8 @@ export const navbar = [
                 <path d="M4 10.6667H6.66667" stroke="#949FA8" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M12 5.33333H12.6667C13.6095 5.33333 14.0809 5.33333 14.3738 5.62622C14.6667 5.91911 14.6667 6.39052 14.6667 7.33333V12.6667C14.6667 13.4031 14.0697 14 13.3333 14C12.5969 14 12 13.4031 12 12.6667V5.33333Z" stroke="#949FA8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'top_cryptos',
@@ -66,7 +71,8 @@ export const navbar = [
                     </clipPath>
                 </defs>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'market_insights',
@@ -85,7 +91,8 @@ export const navbar = [
                 <path d="M3.33333 12V10.6667" stroke="#949FA8" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M3.33333 6.66668V5.33334" stroke="#949FA8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'trends',
@@ -97,7 +104,8 @@ export const navbar = [
                 <path d="M6 12.6667L12.1197 6.6628C12.6184 6.1735 12.8677 5.92885 13.0829 6.01812C13.2979 6.10739 13.3017 6.45711 13.3093 7.15653L13.3333 9.36393" stroke="#949FA8" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M10 3.33334L3.88037 9.33721C3.38163 9.82654 3.13226 10.0711 2.91715 9.98188C2.70204 9.89261 2.69824 9.54288 2.69065 8.84348L2.66667 6.6361" stroke="#949FA8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'researches',
@@ -110,7 +118,8 @@ export const navbar = [
             <path d="M9.3335 9.33301H20.0002M9.3335 14.6663H14.6668" stroke="#949FA8" stroke-linecap="round"/>
             <path d="M20.3767 25.3389C20.298 24.154 20.1573 22.8874 19.5756 21.4553C19.0793 20.2338 19.2176 17.3604 22 17.3604C24.7824 17.3604 24.8885 20.2338 24.3923 21.4553C23.8104 22.8874 23.702 24.154 23.6233 25.3389M28 29.333H16V27.6721C16 27.0768 16.3552 26.5536 16.8704 26.3901L19.8768 25.4357C20.0912 25.3676 20.3131 25.333 20.5361 25.333H23.4639C23.6869 25.333 23.9088 25.3676 24.1232 25.4357L27.1296 26.3901C27.6448 26.5536 28 27.0768 28 27.6721V29.333Z" stroke="#949FA8" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'audits',
@@ -125,7 +134,8 @@ export const navbar = [
             <path d="M9.30762 17.3545H14.6409" stroke="#949FA8" stroke-linecap="round"/>
             <path d="M9.30762 22.6875H19.9742" stroke="#949FA8" stroke-linecap="round"/>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
     },
     {
         id: 'x',
@@ -136,6 +146,19 @@ export const navbar = [
             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.0201 2H14.1566L9.48996 7.57083L15 15.125H10.6707L7.29719 10.5458L3.41767 15.125H1.28112L6.28514 9.175L1 2H5.44177L8.50602 6.2L12.0201 2ZM11.261 13.7833H12.4418L4.79518 3.25417H3.50201L11.261 13.7833Z" fill="#949FA8"/>
             </svg>
-        `
+        `,
+        role: [UserRole.USER, UserRole.BD]
+    },
+    {
+        id: 'audit-bd',
+        display: true,
+        name: 'Twitter Score',
+        path: '/audit-dashboard',
+        icon: `
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.0201 2H14.1566L9.48996 7.57083L15 15.125H10.6707L7.29719 10.5458L3.41767 15.125H1.28112L6.28514 9.175L1 2H5.44177L8.50602 6.2L12.0201 2ZM11.261 13.7833H12.4418L4.79518 3.25417H3.50201L11.261 13.7833Z" fill="#949FA8"/>
+            </svg>
+        `,
+        role: [UserRole.USER, UserRole.BD]
     }
 ];
