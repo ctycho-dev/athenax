@@ -7,7 +7,7 @@ import { usePageColorScheme } from '@/hooks/usePageTheme';
 import { Menu } from '@mantine/core';
 
 import { useGetAuditByUserQuery } from "@/services/auditApi";
-import { useGetResearchAllQuery } from "@/services/researchApi";
+import { useGetResearchByUserQuery } from "@/services/researchApi";
 import { ReportState } from "@/enums";
 import RecentAudits from "./components/recentAudits";
 import RecentResearches from "./components/recentResearches";
@@ -32,7 +32,7 @@ export const SumbitMaterials = () => {
     const {
         data: researches,
         isLoading: isResearchesLoading
-    } = useGetResearchAllQuery(undefined, {
+    } = useGetResearchByUserQuery(undefined, {
         skip: !privyToken
     });
 
@@ -77,11 +77,11 @@ export const SumbitMaterials = () => {
                                 border: 0
                             }
                         }}>
-                            <Menu.Item color="white">
+                            {/* <Menu.Item color="white">
                                 <Link to='/submit/audit'>
                                     Create Audit Report
                                 </Link>
-                            </Menu.Item>
+                            </Menu.Item> */}
                             <Menu.Item color="white">
                                 <Link to='/submit/research'>
                                     Create Research Report

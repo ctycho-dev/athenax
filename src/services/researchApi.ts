@@ -8,6 +8,11 @@ export const researchApi = api.injectEndpoints({
    endpoints: (builder) => ({
       getResearchAll: builder.query<ResearchType[], void>({
          query: () => '/research/',
+         providesTags: ['Research'],
+      }),
+
+      getResearchByUser: builder.query<ResearchType[], void>({
+         query: () => '/research/user/',
       }),
 
       getResearchByState: builder.query<ResearchType[], string>({
@@ -40,6 +45,7 @@ export const researchApi = api.injectEndpoints({
             method: 'PATCH',
             body: { steps: data },
          }),
+         invalidatesTags: ['Research'],
       }),
 
       addResearchForm: builder.mutation<any, FormValues>({ // Replace 'any' with your actual response type
@@ -48,6 +54,7 @@ export const researchApi = api.injectEndpoints({
             method: 'POST',
             body: { steps: form },
          }),
+         invalidatesTags: ['Research'],
       }),
 
       downloadResearchFile: builder.mutation<boolean, FileType>({
@@ -82,6 +89,7 @@ export const researchApi = api.injectEndpoints({
 
 export const {
    useGetResearchAllQuery,
+   useGetResearchByUserQuery,
    useGetResearchByStateQuery,
    useGetResearchQuery,
    useAddResearchCommentMutation,

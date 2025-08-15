@@ -5,9 +5,11 @@ export const userApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getMe: builder.query({
             query: () => '/users/me/',
+            providesTags: ['User'] as const,
         }),
         getUsers: builder.query({
             query: () => '/users/',
+            providesTags: ['User'] as const,
         }),
         createUser: builder.mutation({
             query: (userData) => ({
@@ -15,6 +17,7 @@ export const userApi = api.injectEndpoints({
                 method: 'POST',
                 body: userData,
             }),
+            invalidatesTags: ['User'] as const,
         }),
         updateUser: builder.mutation({
             query: (data) => ({
@@ -22,6 +25,7 @@ export const userApi = api.injectEndpoints({
                 method: 'PATCH',
                 body: data,
             }),
+            invalidatesTags: ['User'] as const,
         }),
     }),
 });
@@ -32,28 +36,3 @@ export const {
     useCreateUserMutation,
     useUpdateUserMutation 
 } = userApi;
-
-
-
-// import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-// const rawBaseQuery = fetchBaseQuery({
-//   baseUrl: import.meta.env.VITE_API_BASE_URL,
-//   prepareHeaders: (headers, { extra }) => {
-//     if (extra?.token) {
-//       headers.set('Authorization', `Bearer ${extra.token}`);
-//     }
-//     return headers;
-//   },
-// });
-
-// export const fetchUserDirectly = async (token: string) => {
-//   const result = await rawBaseQuery(
-//     { url: '/users/me/', method: 'GET' },
-//     undefined,
-//     { token }
-//   );
-
-//   if (result.error) throw result.error;
-//   return result.data;
-// };

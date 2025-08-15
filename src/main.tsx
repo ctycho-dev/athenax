@@ -17,17 +17,15 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 
 
-
-
 createRoot(document.getElementById('root')!).render(
    <StrictMode>
       <PrivyProvider
          appId={import.meta.env.VITE_PRIVY_APP_ID}
          config={{
             loginMethods: ['email', 'google', 'discord', 'twitter', 'wallet'],
-            externalWallets: {
-               solana: { connectors: toSolanaWalletConnectors() }
-            },
+            // externalWallets: {
+            //    solana: { connectors: toSolanaWalletConnectors() }
+            // },
             appearance: { theme: 'dark' }
          }}
       >

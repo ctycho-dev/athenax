@@ -9,9 +9,12 @@ export default defineConfig({
     target: 'esnext',
   },
   plugins: [react(), tailwindcss()],
-  define: {
-    'process.env': process.env
-  },
+  // define: {
+  //   'process.env': process.env
+  // },
+  // optimizeDeps: {
+  //   include: ['buffer', 'process', 'stream-browserify', 'util'],
+  // },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

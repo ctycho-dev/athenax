@@ -70,34 +70,34 @@ export const navbar = [
                 `,
                 role: []
             },
-            {
-                id: 'audit_reports',
-                display: true,
-                name: 'Audits',
-                path: '/audit',
-                icon: `
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.98682 5.17676C9.98682 5.17676 10.3201 5.51009 10.6535 6.17676C10.6535 6.17676 11.7123 4.51009 12.6535 4.17676" stroke="#949FA8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.6634 1.8476C4.99775 1.77708 3.71091 1.96896 3.71091 1.96896C2.89834 2.02706 1.34114 2.48261 1.34115 5.14307C1.34116 7.78091 1.32392 11.0329 1.34115 12.3293C1.34115 13.1214 1.83156 14.9689 3.529 15.0679C5.59223 15.1883 9.30866 15.2139 11.0138 15.0679C11.4703 15.0422 12.9899 14.6838 13.1823 13.0304C13.3815 11.3176 13.3419 10.1272 13.3419 9.84384" stroke="#949FA8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M14.6667 5.17708C14.6667 7.01803 13.1729 8.51044 11.3302 8.51044C9.48745 8.51044 7.99365 7.01803 7.99365 5.17708C7.99365 3.33614 9.48745 1.84375 11.3302 1.84375C13.1729 1.84375 14.6667 3.33614 14.6667 5.17708Z" stroke="#949FA8" stroke-linecap="round"/>
-                    <path d="M4.65381 9.17676H7.32046" stroke="#949FA8" stroke-linecap="round"/>
-                    <path d="M4.65381 11.8438H9.98712" stroke="#949FA8" stroke-linecap="round"/>
-                    </svg>
-                `,
-                role: []
-            },
-            {
-                id: 'audit-bd',
-                display: true,
-                name: 'BD Audits',
-                path: '/review/audit',
-                icon: `
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.0201 2H14.1566L9.48996 7.57083L15 15.125H10.6707L7.29719 10.5458L3.41767 15.125H1.28112L6.28514 9.175L1 2H5.44177L8.50602 6.2L12.0201 2ZM11.261 13.7833H12.4418L4.79518 3.25417H3.50201L11.261 13.7833Z" fill="#949FA8"/>
-                    </svg>
-                `,
-                role: [UserRole.BD]
-            },
+            // {
+            //     id: 'audit_reports',
+            //     display: true,
+            //     name: 'Audits',
+            //     path: '/audit',
+            //     icon: `
+            //         <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //         <path d="M9.98682 5.17676C9.98682 5.17676 10.3201 5.51009 10.6535 6.17676C10.6535 6.17676 11.7123 4.51009 12.6535 4.17676" stroke="#949FA8" stroke-linecap="round" stroke-linejoin="round"/>
+            //         <path d="M6.6634 1.8476C4.99775 1.77708 3.71091 1.96896 3.71091 1.96896C2.89834 2.02706 1.34114 2.48261 1.34115 5.14307C1.34116 7.78091 1.32392 11.0329 1.34115 12.3293C1.34115 13.1214 1.83156 14.9689 3.529 15.0679C5.59223 15.1883 9.30866 15.2139 11.0138 15.0679C11.4703 15.0422 12.9899 14.6838 13.1823 13.0304C13.3815 11.3176 13.3419 10.1272 13.3419 9.84384" stroke="#949FA8" stroke-linecap="round" stroke-linejoin="round"/>
+            //         <path d="M14.6667 5.17708C14.6667 7.01803 13.1729 8.51044 11.3302 8.51044C9.48745 8.51044 7.99365 7.01803 7.99365 5.17708C7.99365 3.33614 9.48745 1.84375 11.3302 1.84375C13.1729 1.84375 14.6667 3.33614 14.6667 5.17708Z" stroke="#949FA8" stroke-linecap="round"/>
+            //         <path d="M4.65381 9.17676H7.32046" stroke="#949FA8" stroke-linecap="round"/>
+            //         <path d="M4.65381 11.8438H9.98712" stroke="#949FA8" stroke-linecap="round"/>
+            //         </svg>
+            //     `,
+            //     role: []
+            // },
+            // {
+            //     id: 'audit-bd',
+            //     display: true,
+            //     name: 'BD Audits',
+            //     path: '/review/audit',
+            //     icon: `
+            //         <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //             <path d="M12.0201 2H14.1566L9.48996 7.57083L15 15.125H10.6707L7.29719 10.5458L3.41767 15.125H1.28112L6.28514 9.175L1 2H5.44177L8.50602 6.2L12.0201 2ZM11.261 13.7833H12.4418L4.79518 3.25417H3.50201L11.261 13.7833Z" fill="#949FA8"/>
+            //         </svg>
+            //     `,
+            //     role: [UserRole.BD]
+            // },
             {
                 id: 'research-bd',
                 display: true,

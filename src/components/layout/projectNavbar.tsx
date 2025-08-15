@@ -62,11 +62,11 @@ export const Navbar: React.FC<NavbarProps> = ({ }) => {
             </div>
          </div>
          <div className="border-t border-gray-2 p-6 text-sm font-normal text-gray-3">
-            {ready && user &&
-               <div className="grid grid-cols-[16px_1fr] items-center gap-x-[8px] mb-sm">
+            <div>
+               <Link to={'/profile'} className="grid grid-cols-[16px_1fr] items-center gap-x-[8px] mb-sm">
                   <img src={userIcon} alt="" /><span>My Account</span>
-               </div>
-            }
+               </Link>
+            </div>
             <div className="grid grid-cols-[16px_1fr] items-center gap-x-[8px] mb-sm">
                <img src={whats_new} alt="" /><span>What’s New</span>
             </div>

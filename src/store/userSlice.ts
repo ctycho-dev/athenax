@@ -1,16 +1,10 @@
 // src/store/userSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserRole } from '@/enums';
+import { IUser } from '@/types/user'
 
-interface User {
-  id: string;
-  privy_id: string;
-  role: UserRole;
-  created_at: string;
-}
 
 interface UserState {
-  data: User | null;
+  data: IUser | null;
   loading: boolean;
   error: string | null;
 }
@@ -25,7 +19,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
+    setUser: (state, action: PayloadAction<IUser>) => {
       state.data = action.payload;
       state.loading = false;
       state.error = null;

@@ -53,11 +53,11 @@ const SubmittedMaterials: React.FC<SubmittedMaterialsProps> = ({ data, isLoading
                                         border: 0
                                     }
                                 }}>
-                                    <Menu.Item color="white">
+                                    {/* <Menu.Item color="white">
                                         <Link to='/submit/audit'>
                                             Create Audit Report
                                         </Link>
-                                    </Menu.Item>
+                                    </Menu.Item> */}
                                     <Menu.Item color="white">
                                         <Link to='/submit/research'>
                                             Create Research Report

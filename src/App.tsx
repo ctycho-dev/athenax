@@ -5,6 +5,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import { Home } from '@/views/home/home';
 import { Login } from '@/views/login/login';
 import { SumbitMaterials } from '@/views/submitMaterials';
+import { Profile } from '@/views/profile';
 // Submit
 import { AuditForm } from '@/views/submit/audit/audit';
 import { ResearchForm } from '@/views/submit/research/research'
@@ -45,21 +46,22 @@ function App() {
                 </Route> */}
 
                 {/* Private Routes */}
-                <Route path="/" element={<AuthWrapper allowedRoles={[UserRole.ADMIN, UserRole.BD]} />}>
-                    {/* <Route path="/" element={<AuthWrapper allowedRoles={[]} />}> */}
+                {/* <Route path="/" element={<AuthWrapper allowedRoles={[UserRole.ADMIN, UserRole.BD]} />}> */}
+                <Route path="/" element={<AuthWrapper allowedRoles={[]} />}>
                     <Route path="/" element={<Layout />}>
                         <Route path="/article/write" element={<WriteArticle />} />
+                        <Route path="/profile" element={<Profile />} />
                     </Route>
-                    <Route path="/submit/audit" element={<AuditForm />} />
-                    <Route path="/submit/audit/:id" element={<AuditForm />} />
+                    {/* <Route path="/submit/audit" element={<AuditForm />} />
+                    <Route path="/submit/audit/:id" element={<AuditForm />} /> */}
                     <Route path="/submit/research" element={<ResearchForm />} />
                     <Route path="/submit/research/:id" element={<ResearchForm />} />
                     <Route path="/submited" element={<Submited />} />
                 </Route>
                 <Route path='/' element={<AuthWrapper allowedRoles={[UserRole.BD, UserRole.ADMIN]} />}>
                     <Route path="/" element={<Layout />}>
-                        <Route path="/review/audit" element={<AuditReview />} />
-                        <Route path="/review/audit/:id" element={<AuditReviewRecord />} />
+                        {/* <Route path="/review/audit" element={<AuditReview />} />
+                        <Route path="/review/audit/:id" element={<AuditReviewRecord />} /> */}
                         <Route path="/review/research" element={<ResearchReview />} />
                         <Route path="/review/research/:id" element={<ResearchReviewRecord />} />
                     </Route>

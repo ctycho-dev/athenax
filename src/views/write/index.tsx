@@ -22,7 +22,8 @@ import '@/assets/styles/editor.scss'
 
 const WriteArticle: React.FC = () => {
    usePageColorScheme('light')
-   const [articleType, setArticleType] = useState<'audit' | 'research' | null>(null);
+   const [articleType, setArticleType] = useState<'audit' | 'research' | null>('research');
+   // const [articleType, setArticleType] = useState<'audit' | 'research' | null>(null);
    const [selectedRelated, setSelectedRelated] = useState<string[]>([]);
    const [resetEditor, setResetEditor] = useState(false);
    const [related, setRelated] = useState<string[]>([]);
@@ -119,7 +120,8 @@ const WriteArticle: React.FC = () => {
                </button>
                <button
                   onClick={handleSubmit}
-                  disabled={!articleType || !htmlContent || isLoading}
+                  disabled={!htmlContent || isLoading}
+                  // disabled={!articleType || !htmlContent || isLoading}
                   className="px-4 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 hover:cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
                >
                   {isLoading ? 'Submitting...' : 'Submit Article'}
@@ -127,7 +129,7 @@ const WriteArticle: React.FC = () => {
             </div>
          </PageHeader>
          <div className='max-w-3xl m-auto p-6'>
-            <div className="mb-4 grid grid-cols-2 gap-2">
+            {/* <div className="mb-4 grid grid-cols-2 gap-2">
                <Select
                   label='Article type'
                   placeholder='Select type'
@@ -159,7 +161,7 @@ const WriteArticle: React.FC = () => {
                   clearable
                   disabled={!articleType || isLoadingRelated}
                />
-            </div>
+            </div> */}
             <ArticleEditor onContentChange={setHtmlContent} resetSignal={resetEditor} />
          </div>
          <Toaster richColors />

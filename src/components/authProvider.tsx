@@ -42,6 +42,7 @@ export const AuthProvider = () => {
                      try {
                         const userData = {
                            privy_id: user.id,
+                           email: null,
                            linked_accounts: user.linkedAccounts,
                            has_accepted_terms: user.hasAcceptedTerms,
                            is_guest: user.isGuest
