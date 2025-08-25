@@ -2,45 +2,46 @@ import { UserRole } from "@/enums";
 
 
 export const navbar = [
+    // {
+    //     section: 'ATHENA X ACCELERATOR',
+    //     items: [
+    //         {
+    //             id: 'dashboard',
+    //             display: true,
+    //             name: 'Web Analytics',
+    //             path: '/analytics',
+    //             icon: `
+    //             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //                 <path d="M4.72565 3.17575L4.05898 3.69635C3.04788 4.48591 2.54232 4.88069 2.27116 5.43733C2 5.99397 2 6.63701 2 7.92306V9.31779C2 11.842 2 13.1041 2.78105 13.8883C3.40977 14.5195 4.34695 14.6427 6 14.6667V12.0038C6 11.3825 6 11.0719 6.10149 10.8269C6.23682 10.5001 6.49639 10.2406 6.82307 10.1053C7.06813 10.0038 7.37873 10.0038 8 10.0038C8.62127 10.0038 8.93187 10.0038 9.17693 10.1053C9.5036 10.2406 9.7632 10.5001 9.89853 10.8269C10 11.0719 10 11.3825 10 12.0038V14.6667C11.6531 14.6427 12.5902 14.5195 13.2189 13.8883C14 13.1041 14 11.842 14 9.31779V7.92306C14 6.63701 14 5.99397 13.7289 5.43733C13.4577 4.88069 12.9521 4.48591 11.941 3.69635L11.2743 3.17575C9.7014 1.94747 8.91493 1.33333 8 1.33333C7.08507 1.33333 6.29858 1.94747 4.72565 3.17575Z" stroke="#949FA8" strokeLinejoin="round"/>
+    //             </svg>
+    //             `,
+    //             role: []
+    //         },
+    //         {
+    //             id: 'search',
+    //             display: false,
+    //             name: 'Search',
+    //             path: '/search',
+    //             icon: `
+    //                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //                     <g clipPath="url(#clip0_7_37)">
+    //                         <path d="M11.6667 12.1667L14.6667 15.1667" stroke="#949FA8" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+    //                         <path d="M13.3333 7.83334C13.3333 4.51963 10.6471 1.83334 7.33333 1.83334C4.01963 1.83334 1.33333 4.51963 1.33333 7.83334C1.33333 11.1471 4.01963 13.8333 7.33333 13.8333C10.6471 13.8333 13.3333 11.1471 13.3333 7.83334Z" stroke="#949FA8" strokeWidth="1.75" strokeLinejoin="round"/>
+    //                     </g>
+    //                     <defs>
+    //                         <clipPath id="clip0_7_37">
+    //                             <rect width="16" height="16" fill="white" transform="translate(0 0.5)"/>
+    //                         </clipPath>
+    //                     </defs>
+    //                 </svg>
+    //             `,
+    //             role: []
+    //         },
+    //     ]
+    // },
     {
         section: 'ATHENA X ACCELERATOR',
-        items: [
-            {
-                id: 'dashboard',
-                display: true,
-                name: 'Web Analytics',
-                path: '/analytics',
-                icon: `
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.72565 3.17575L4.05898 3.69635C3.04788 4.48591 2.54232 4.88069 2.27116 5.43733C2 5.99397 2 6.63701 2 7.92306V9.31779C2 11.842 2 13.1041 2.78105 13.8883C3.40977 14.5195 4.34695 14.6427 6 14.6667V12.0038C6 11.3825 6 11.0719 6.10149 10.8269C6.23682 10.5001 6.49639 10.2406 6.82307 10.1053C7.06813 10.0038 7.37873 10.0038 8 10.0038C8.62127 10.0038 8.93187 10.0038 9.17693 10.1053C9.5036 10.2406 9.7632 10.5001 9.89853 10.8269C10 11.0719 10 11.3825 10 12.0038V14.6667C11.6531 14.6427 12.5902 14.5195 13.2189 13.8883C14 13.1041 14 11.842 14 9.31779V7.92306C14 6.63701 14 5.99397 13.7289 5.43733C13.4577 4.88069 12.9521 4.48591 11.941 3.69635L11.2743 3.17575C9.7014 1.94747 8.91493 1.33333 8 1.33333C7.08507 1.33333 6.29858 1.94747 4.72565 3.17575Z" stroke="#949FA8" strokeLinejoin="round"/>
-                </svg>
-                `,
-                role: []
-            },
-            {
-                id: 'search',
-                display: false,
-                name: 'Search',
-                path: '/search',
-                icon: `
-                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clipPath="url(#clip0_7_37)">
-                            <path d="M11.6667 12.1667L14.6667 15.1667" stroke="#949FA8" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M13.3333 7.83334C13.3333 4.51963 10.6471 1.83334 7.33333 1.83334C4.01963 1.83334 1.33333 4.51963 1.33333 7.83334C1.33333 11.1471 4.01963 13.8333 7.33333 13.8333C10.6471 13.8333 13.3333 11.1471 13.3333 7.83334Z" stroke="#949FA8" strokeWidth="1.75" strokeLinejoin="round"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_7_37">
-                                <rect width="16" height="16" fill="white" transform="translate(0 0.5)"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                `,
-                role: []
-            },
-        ]
-    },
-    {
-        section: 'ATHENA X AUDITS & RESEARCHES',
+        // section: 'ATHENA X AUDITS & RESEARCHES',
         items: [
             {
                 id: 'submit_work',

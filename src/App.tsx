@@ -4,6 +4,7 @@ import { usePrivy } from '@privy-io/react-auth';
 
 import { Home } from '@/views/home/home';
 import { Login } from '@/views/login/login';
+import { Welcome } from '@/views/welcome/welcome';
 import { SumbitMaterials } from '@/views/submitMaterials';
 import { Profile } from '@/views/profile';
 // Submit
@@ -19,7 +20,9 @@ import { CryptoList } from '@/views/cryptoList/cryptoList';
 import WriteArticle from '@/views/write';
 import Layout from '@/components/layout/projectLayout';
 import UserLayout from '@/components/layout/userLayout';
+import PathTracker from '@/components/PathTracker';
 import AuthWrapper from '@/components/authWrapper';
+import AuthOnlyWrapper from '@/components/AuthOnlyWrapper';
 import Loading from '@/components/layout/loading';
 import { UserRole } from './enums';
 
@@ -34,16 +37,21 @@ function App() {
     return (
 
         <Router>
+            <PathTracker />
             <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/" element={<Layout />}>
+                {/* <Route path="/" element={<Layout />}>
                     <Route path="/submit_materials" element={<SumbitMaterials />} />
-                </Route>
+                </Route> */}
                 {/* <Route path="/" element={<UserLayout />}>
                     <Route path="/top-cryptos" element={<CryptoList />} />
                 </Route> */}
+
+                <Route element={<AuthOnlyWrapper />}>
+                    <Route path="/welcome" element={<Welcome />} />
+                </Route>
 
                 {/* Private Routes */}
                 {/* <Route path="/" element={<AuthWrapper allowedRoles={[UserRole.ADMIN, UserRole.BD]} />}> */}
@@ -51,6 +59,7 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route path="/article/write" element={<WriteArticle />} />
                         <Route path="/profile" element={<Profile />} />
+                        <Route path="/submit_materials" element={<SumbitMaterials />} />
                     </Route>
                     {/* <Route path="/submit/audit" element={<AuditForm />} />
                     <Route path="/submit/audit/:id" element={<AuditForm />} /> */}

@@ -1,35 +1,34 @@
 import React, { useState } from "react";
-import { setUser } from '@/store/userSlice';
-import { useDispatch } from 'react-redux';
-import { useUpdateUserMutation } from "@/services/userApi";
+import { useUpdateProfileMutation } from "@/services/profileApi";
 import { Button, Textarea, Group, Stack, Notification } from "@mantine/core";
 import { FiEdit2, FiSave, FiX } from "react-icons/fi";
 import { IUser } from "@/types/user";
+import { ProfileOut, ProfileUpdate } from "@/types/profile";
+import { profileOutToUpdate } from "@/utils/profileHelper";
 
 interface ProfileAboutProps {
-  user: IUser;
+  profile: ProfileOut
 }
 
 export const ProfileAbout: React.FC<ProfileAboutProps> = ({
-  user,
+  profile,
 }) => {
-  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [editBio, setEditBio] = useState(user.bio);
+  const [editBio, setEditBio] = useState(profile.bio);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
-  const [updateUser] = useUpdateUserMutation();
+  const [updateProfile] = useUpdateProfileMutation();
 
   // Start editing
   const handleEdit = () => {
-    setEditBio(user.bio);
+    setEditBio(profile.bio);
     setIsEditing(true);
     setStatus("idle");
   };
 
   // Cancel
   const handleCancel = () => {
-    setEditBio(user.bio);
+    setEditBio(profile.bio);
     setIsEditing(false);
     setStatus("idle");
   };
@@ -39,8 +38,10 @@ export const ProfileAbout: React.FC<ProfileAboutProps> = ({
     setStatus("saving");
     try {
       // Example fake API delay:
-      const upd = await updateUser({ bio: editBio }).unwrap();
-      dispatch(setUser(upd));
+      
+      const payload: ProfileUpdate = profileOutToUpdate(profile)
+      payload.bio = editBio
+      await updateProfile({ id: profile.id, data: payload}).unwrap();
 
       setStatus("saved");
       setIsEditing(false);
@@ -100,10 +101,10 @@ export const ProfileAbout: React.FC<ProfileAboutProps> = ({
       )}
 
       {!isEditing ? (
-        <p className="text-gray-300 leading-relaxed">{user.bio}</p>
+        <p className="text-gray-300 leading-relaxed">{profile.bio}</p>
       ) : (
         <Textarea
-          value={editBio}
+          value={editBio || ''}
           onChange={(e) => setEditBio(e.currentTarget.value)}
           className="bg-transparent border-gray-600 text-white"
           placeholder="Tell us about yourself..."

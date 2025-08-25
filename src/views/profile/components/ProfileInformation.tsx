@@ -1,39 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { setUser } from '@/store/userSlice';
-import { useDispatch } from 'react-redux';
-import { useUpdateUserMutation } from "@/services/userApi";
+import { useUpdateProfileMutation } from "@/services/profileApi";
 import { Button, TextInput, Group, Stack, Notification } from "@mantine/core";
 import { FiEdit2, FiSave, FiX, FiMapPin, FiCalendar, FiMail } from "react-icons/fi";
 import { ProfileAvatar } from "./ProfileAvatar";
 import { IUser } from "@/types/user";
+import { ProfileOut, ProfileUpdate } from "@/types/profile";
 import { format, parseISO } from "date-fns";
+import { profileOutToUpdate } from "@/utils/profileHelper";
 
 
 interface ProfileInformationProps {
+  profile: ProfileOut
   user: IUser
 }
 
 
 export const ProfileInformation: React.FC<ProfileInformationProps> = ({
-  user,
+  profile, user
 }) => {
-  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [editData, setEditData] = useState(user);
+  const [editData, setEditData] = useState(profile);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
-  const [updateUser] = useUpdateUserMutation();
+  const [updateProfile] = useUpdateProfileMutation();
 
   // If user changes from parent, update local editData (needed when switching users etc)
   useEffect(() => {
     if (!isEditing) {
-      setEditData(user);
+      setEditData(profile);
     }
-  }, [user, isEditing]);
+  }, [profile, isEditing]);
 
-  useEffect(() => {
-    console.log(editData)
-  }, [editData])
 
   // Start editing, load data
   const handleEdit = () => {
@@ -53,8 +50,8 @@ export const ProfileInformation: React.FC<ProfileInformationProps> = ({
     setStatus("saving");
     try {
       // Call backend mutation
-      const upd = await updateUser(editData).unwrap();
-      dispatch(setUser(upd));
+      const payload: ProfileUpdate = profileOutToUpdate(editData)
+      await updateProfile({ id: profile.id, data: payload}).unwrap();
       setIsEditing(false);
       setStatus("saved");
     } catch (e) {
@@ -124,24 +121,24 @@ export const ProfileInformation: React.FC<ProfileInformationProps> = ({
 
       <div className="flex flex-col md:flex-row gap-8">
         <ProfileAvatar
-          src={isEditing ? editData.profileImage : user.profileImage}
-          name={isEditing ? editData.name : user.name}
+          src={isEditing ? editData.profile_image : profile.profile_image}
+          name={isEditing ? editData.name : profile.name}
           onUpload={handleAvatarUpload}
         />
         <div className="flex-1 space-y-4">
           {!isEditing ? (
             <>
               <div>
-                <h3 className="text-2xl font-bold text-white">{user.name}</h3>
-                <p className="text-gray-400">{user.username}</p>
-                <p className="text-blue-400 font-medium">{user.role}</p>
+                <h3 className="text-2xl font-bold text-white">{profile.name}</h3>
+                <p className="text-gray-400">{profile.username}</p>
+                <p className="text-blue-400 font-medium">{profile.display_role}</p>
               </div>
               <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-                {user.location &&
-                  <div className="flex items-center"><FiMapPin className="mr-2" />{user.location}</div>
+                {profile.location &&
+                  <div className="flex items-center"><FiMapPin className="mr-2" />{profile.location}</div>
                 }
-                <div className="flex items-center"><FiCalendar className="mr-2" />Joined {user.created_at ? format(parseISO(user.created_at), "MMMM yyyy") : ""}</div>
-                <div className="flex items-center"><FiMail className="mr-2" />{user.email}</div>
+                <div className="flex items-center"><FiCalendar className="mr-2" />Joined {profile.created_at ? format(parseISO(profile.created_at), "MMMM yyyy") : ""}</div>
+                {user.email && <div className="flex items-center"><FiMail className="mr-2" />{user.email}</div>}
               </div>
             </>
           ) : (
@@ -150,39 +147,38 @@ export const ProfileInformation: React.FC<ProfileInformationProps> = ({
                 <TextInput
                   label="Full Name"
                   placeholder="Enter your name"
-                  value={editData.name}
-                  onChange={e => setEditData({ ...editData, name: e.currentTarget.value })}
+                  value={editData.name || ''}
+                  onChange={e => setEditData({ ...editData, name: e.currentTarget.value || null })}
                 />
                 <TextInput
                   label="Username"
                   placeholder="Enter your username"
-                  value={editData.username}
-                  onChange={e => setEditData({ ...editData, username: e.currentTarget.value })}
+                  value={editData.username || ''}
+                  onChange={e => setEditData({ ...editData, username: e.currentTarget.value || null })}
                 />
               </div>
-              <TextInput
-                label="Role"
-                placeholder="What is your role?"
-                value={editData.role}
-                disabled
-              // onChange={e => setEditData({ ...editData, role: e.currentTarget.value })}
-              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <TextInput
-                  label="Location"
-                  placeholder="Enter your location"
-                  value={editData.location}
-                  onChange={e => setEditData({ ...editData, location: e.currentTarget.value })}
+                  label="Role"
+                  placeholder="What is your role?"
+                  value={editData.display_role}
+                  disabled
+                // onChange={e => setEditData({ ...editData, role: e.currentTarget.value })}
                 />
                 <TextInput
                   label="Email"
                   type="email"
                   disabled
                   placeholder="Enter your email"
-                  value={editData.email}
-                  onChange={e => setEditData({ ...editData, email: e.currentTarget.value })}
+                  value={user.email}
                 />
               </div>
+              <TextInput
+                label="Location"
+                placeholder="Enter your location"
+                value={editData.location || ''}
+                onChange={e => setEditData({ ...editData, location: e.currentTarget.value || null })}
+              />
             </Stack>
           )}
         </div>

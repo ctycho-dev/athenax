@@ -16,15 +16,16 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ allowedRoles }) => {
    const { ready, authenticated } = usePrivy();
    const { data: user, loading: userLoading } = useSelector((state: RootState) => state.user);
 
-   // console.log('userState', user, userLoading)
-
-
    if (!ready || userLoading) {
       return <Loading />
    }
 
    if (!authenticated || !user) {
       return <Navigate to="/login" replace />;
+   }
+
+   if (!user.has_profile) {
+      return <Navigate to="/welcome" replace />;
    }
 
    if (allowedRoles.length && user.role && !allowedRoles.includes(user.role)) {

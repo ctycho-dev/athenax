@@ -35,7 +35,8 @@ export const Navbar: React.FC<NavbarProps> = ({ }) => {
          <div className="flex-1 flex flex-col">
             <div className="px-6 pt-6 flex gap-1.5 items-center">
                <img src={athenxLogo} alt="" className="w-[48px]" />
-               <span className="font-normal text-[10px] text-gray-3 leading-3">researches<br /> & audits</span>
+               <span className="font-normal text-[10px] text-gray-3 leading-3">ScholarX</span>
+               {/* <span className="font-normal text-[10px] text-gray-3 leading-3">researches<br /> & audits</span> */}
             </div>
             <div className="flex-1 flex flex-col">
                <div className="flex-1">
@@ -52,12 +53,11 @@ export const Navbar: React.FC<NavbarProps> = ({ }) => {
                   </div>}
                {ready && !authenticated &&
                   <div className="p-6">
-                     <button
-                        type="button"
-                        onClick={login}
+                     <Link
+                        to={'/login'}
                         className="bg-light-blue-3 hover:bg-light-blue-2 transition-all duration-150 rounded-[6px] h-[33px] w-full flex justify-center items-center font-medium text-sm text-white hover:cursor-pointer"
 
-                     >Log In</button>
+                     >Log In</Link>
                   </div>}
             </div>
          </div>

@@ -38,8 +38,8 @@ async function getCroppedImg(
 }
 
 interface ProfileAvatarProps {
-    src: string;
-    name: string;
+    src: string | null;
+    name: string | null;
     onUpload: (dataUrl: string) => void; // cropped base64 string
 }
 

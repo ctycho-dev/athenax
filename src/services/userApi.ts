@@ -1,5 +1,6 @@
 // src/services/userApi.ts
 import { api } from './api';
+import { IUser, IUserUpdate } from '@/types/user';
 
 export const userApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -19,7 +20,7 @@ export const userApi = api.injectEndpoints({
             }),
             invalidatesTags: ['User'] as const,
         }),
-        updateUser: builder.mutation({
+        updateUser: builder.mutation<IUser, IUserUpdate>({
             query: (data) => ({
                 url: '/users/',
                 method: 'PATCH',

@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import { PrivyProvider } from '@privy-io/react-auth';
+import { PrivyProvider, Captcha } from '@privy-io/react-auth';
 import { MantineProvider } from '@mantine/core';
 import { AuthProvider } from '@/components/authProvider.tsx';
 import { theme } from './theme.ts';
@@ -36,5 +36,6 @@ createRoot(document.getElementById('root')!).render(
             </MantineProvider>
          </Provider>
       </PrivyProvider>
+      <Captcha />
    </StrictMode>,
 )

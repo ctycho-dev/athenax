@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { setUser } from '@/store/userSlice';
-import { useDispatch } from 'react-redux';
 import { Button, TextInput, Group, Notification } from "@mantine/core";
 import { FiEdit2, FiSave, FiX } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaInstagram, FaDiscord } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import { useUpdateUserMutation } from "@/services/userApi";
-import { IUser, IUserUpdate } from "@/types/user";
+import { useUpdateProfileMutation } from "@/services/profileApi";
+import { ProfileOut, ProfileUpdate } from "@/types/profile";
+import { IUser } from "@/types/user";
 
 // Define social platforms config
 const SOCIALS = [
@@ -19,30 +18,34 @@ const SOCIALS = [
 
 type SocialKey = (typeof SOCIALS)[number]["key"];
 
-export const ProfileSocialAccounts: React.FC<{ user: IUser }> = ({ user }) => {
-  const dispatch = useDispatch();
+interface ProfileSocialAccountsProps {
+  profile: ProfileOut
+  user: IUser
+}
+
+export const ProfileSocialAccounts: React.FC<ProfileSocialAccountsProps> = ({ profile, user }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editAccounts, setEditAccounts] = useState<Record<SocialKey, string>>(() =>
     SOCIALS.reduce((acc, { key }) => {
-      acc[key] = (user[key] as string) || "";
+      acc[key] = (profile[key] as string) || "";
       return acc;
     }, {} as Record<SocialKey, string>)
   );
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
-  const [updateUser] = useUpdateUserMutation();
+  const [updateProfile] = useUpdateProfileMutation();
 
   // Reset edit state when exiting or entering edit mode
   useEffect(() => {
     if (!isEditing) {
       setEditAccounts(
         SOCIALS.reduce((acc, { key }) => {
-          acc[key] = (user[key] as string) || "";
+          acc[key] = (profile[key] as string) || "";
           return acc;
         }, {} as Record<SocialKey, string>)
       );
     }
-  }, [isEditing, user]);
+  }, [isEditing, profile]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -55,29 +58,28 @@ export const ProfileSocialAccounts: React.FC<{ user: IUser }> = ({ user }) => {
   };
 
   const handleSave = async () => {
-  setStatus("saving");
-  try {
-    const updatedUser: Partial<IUserUpdate> = {};
+    setStatus("saving");
+    try {
+      const updatedProfile: Partial<ProfileUpdate> = {};
 
-    SOCIALS.forEach(({ key }) => {
-      const value = editAccounts[key];
-      updatedUser[key] = value || null; // now safe, since type is string | null
-    });
+      SOCIALS.forEach(({ key }) => {
+        const value = editAccounts[key];
+        updatedProfile[key] = value || null; // now safe, since type is string | null
+      });
 
-    // ✅ Call the mutation
-    const upd = await updateUser(updatedUser).unwrap();
-    dispatch(setUser(upd));
+      // ✅ Call the mutation
+      await updateProfile({ id: profile.id, data: updatedProfile }).unwrap();
 
-    // 🟡 Option 1: Trust the backend & optimistic UI — just exit edit mode
-    setIsEditing(false);
-    setStatus("saved");
+      // 🟡 Option 1: Trust the backend & optimistic UI — just exit edit mode
+      setIsEditing(false);
+      setStatus("saved");
 
-    // 🔁 No need to refetch — if you use `providesTags`/`invalidatesTags`, RTK will auto-refresh user elsewhere
-  } catch (err) {
-    setStatus("error");
-    console.error("Failed to update user:", err);
-  }
-};
+      // 🔁 No need to refetch — if you use `providesTags`/`invalidatesTags`, RTK will auto-refresh user elsewhere
+    } catch (err) {
+      setStatus("error");
+      console.error("Failed to update user:", err);
+    }
+  };
 
   const handleChange = (key: SocialKey, value: string) => {
     setEditAccounts((prev) => ({ ...prev, [key]: value }));
@@ -132,7 +134,7 @@ export const ProfileSocialAccounts: React.FC<{ user: IUser }> = ({ user }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {SOCIALS.map(({ key, label, icon: IconComponent, color, domain }) => {
-          const username = isEditing ? editAccounts[key] : user[key];
+          const username = isEditing ? editAccounts[key] : profile[key];
           const hasUsername = !!username;
 
           return (
