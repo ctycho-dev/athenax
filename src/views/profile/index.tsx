@@ -27,7 +27,7 @@ export const Profile: React.FC = () => {
             <div className="space-y-12">
               <ProfileInformation profile={profile} user={user} />
               <ProfileAbout profile={profile} />
-              <ProfileSocialAccounts profile={profile} />
+              <ProfileSocialAccounts profile={profile} user={user} />
             </div>
           }
         </div>
