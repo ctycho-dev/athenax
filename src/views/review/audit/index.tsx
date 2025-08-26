@@ -1,0 +1,85 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
+import { RootState } from "@/store/store";
+import { useSelector } from 'react-redux';
+import { useGetAuditAllQuery } from "@/services/auditApi";
+import auditService from "@/api/auditService";
+import { FormValues } from "@/types/audit";
+import { Dashboard } from "@/views/review/audit/components/dashboard";
+import State from "../../submitMaterials/components/state";
+import { ReportState } from "@/enums";
+import PageTitle from "@/components/ui/pageTitle";
+
+
+interface AuditReviewProps { }
+
+
+export const AuditReview: React.FC<AuditReviewProps> = ({ }) => {
+  // const [audits, setAudits] = useState<FormValues[] | null>(null)
+  const navigate = useNavigate()
+  const privyToken = useSelector((state: RootState) => state.auth.privyToken);
+
+  const {
+    data: audits,
+    isLoading: isAuditsLoading
+  } = useGetAuditAllQuery(undefined, {
+    skip: !privyToken
+  });
+
+
+  useEffect(() => {
+    console.log(audits)
+  }, [audits])
+
+
+  return (
+    <div className="text-white">
+      <div className="border-b border-gray-2 px-6 py-3.5 flex justify-between items-center">
+        <PageTitle>Audit Review</PageTitle>
+      </div>
+      <main className="container mx-auto py-8 px-6 ">
+        <div className="grid gap-4">
+          <table className="bg-console-card w-full overflow-scroll rounded-medium">
+            <thead>
+              <tr className="border-b border-gray-2">
+                <th className="px-4 py-4 text-gray-3 font-normal text-sm text-start">Project Name</th>
+                <th className="px-4 py-4 text-gray-3 font-normal text-sm text-start">Status</th>
+                <th className="px-4 py-4 text-gray-3 font-normal text-sm text-start">Code</th>
+                <th className="px-4 py-4 text-gray-3 font-normal text-sm text-start">Researcher Response</th>
+                <th className="px-4 py-4 text-gray-3 font-normal text-sm text-start">Updated At</th>
+                <th className="px-4 py-4 text-gray-3 font-normal text-sm text-start">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {audits && audits.map((item) => (
+                <tr key={item.id} className="[&:not(:last-child)]:border-b border-gray-2" onClick={() => navigate(`/review/audit/${item.id}`)}>
+                  <td className="px-4 py-4 text-sm font-medium">
+                    {item.steps.step1.name}
+                  </td>
+                  <td className="px-4 py-4">
+                    <State state={item.state} />
+                  </td>
+                  <td className="px-4 py-4">
+                    id
+                  </td>
+                  <td className="px-4 py-4 text-sm font-medium">
+                    {item.comments && item.comments.length > 0
+                      ? item.comments[item.comments.length - 1].content
+                      : 'No response yet'}
+                  </td>
+                  <td className="px-4 py-4 w-max">
+                    {format(new Date(item.updated_at), 'PPpp')}
+                  </td>
+                  <td className="px-4 py-4 w-max">
+                    {format(new Date(item.created_at), 'PPpp')}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  )
+}

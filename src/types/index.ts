@@ -18,6 +18,7 @@ export type FileType = {
     key: string
     original_filename: string
     content_type: string
+    url?: string
 }
 
 

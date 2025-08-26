@@ -22,7 +22,7 @@ export const Submited: React.FC<SubmitedProps> = ({ }) => {
                         a page with your researches and we’ll notify<br /> you as soon as it’s done
                     </div>
                     <button
-                        onClick={() => { navigate('/') }}
+                        onClick={() => { navigate('/submit_materials') }}
                         className="w-full px-5 py-4 rounded-[8px] bg-light-blue-3 hover:bg-light-blue-2 duration-150 transition-all hover:cursor-pointer">
                         <span className="text-white text-lg font-semibold">Go to Main Page</span>
                     </button>

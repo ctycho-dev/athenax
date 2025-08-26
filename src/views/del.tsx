@@ -25,7 +25,7 @@ export const Audit: React.FC<AuditProps> = ({ }) => {
                             and provide transparency to the Web3 community. Help investors and users make informed decisions with verified data.
                         </h3>
                         <Link
-                            to={'/audit-form'}
+                            to={'submit/audit'}
                             className="bg-light-blue-3 hover:bg-light-blue-2 transition-all duration-150 py-4 px-5 rounded-[8px] text-[18px] text-white"
                             style={{ fontWeight: 600 }}
                         >Add Documents About The Project</Link>

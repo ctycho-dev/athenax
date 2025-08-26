@@ -1,9 +1,5 @@
 // src/types/index.ts
-export enum UserRole {
-    ADMIN = 'admin',
-    BD = 'bd',
-    USER = 'user',
-}
+import { UserRole } from "@/enums";
 
 export enum WalletChains {
     ETH = "eth",
@@ -29,14 +25,26 @@ export interface OAuthAccount {
     verified: boolean;
 }
 
-export interface User {
+export interface IUserUpdate {
+    account_type: string | null
+    has_profile: boolean
+    has_accepted_terms: boolean
+    is_guest: boolean
+}
+
+export interface IUser {
     privy_id: string;
     email?: string;
-    name?: string;
-    profile_image?: string;
+
     wallets?: Wallet[];
     oauth_accounts?: OAuthAccount[];
     metadata?: Record<string, any>;
     role: UserRole;
+
+    has_accepted_terms: boolean
+    is_guest: boolean
+
+    account_type: string
+    has_profile: boolean
     created_at: string;
 }

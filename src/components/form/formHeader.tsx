@@ -15,7 +15,7 @@ export const FormHeader: React.FC<FormHeaderProps> = ({ title, description }) =>
     return (
         <header className="pt-[48px] grid gap-12 pb-12">
             <div>
-                <Link to={'/dashboard'} className="group flex gap-x-2 items-center hover:cursor-pointer">
+                <Link to={'/submit_materials'} className="group flex gap-x-2 items-center hover:cursor-pointer">
                 {/* <button onClick={() => navigate(-1)} className="group flex gap-x-2 items-center hover:cursor-pointer"> */}
                     <img src={arrowLeft} alt="" className="group-hover:stroke-[#fff]" />
                     <span className="text-sm font-normal">Exit Editing</span>

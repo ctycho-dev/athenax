@@ -1,6 +1,7 @@
 import { api } from './api';
 import { FileType } from '@/types';
 import { AuditType, FormValues } from '@/types/audit';
+import { ReportState } from '@/enums';
 
 export const auditApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -12,8 +13,28 @@ export const auditApi = api.injectEndpoints({
             query: () => '/audit/user/',
         }),
 
+        getAuditByState: builder.query<AuditType[], string>({
+            query: (state: string) => `/audit/state/${state}`,
+        }),
+
         getAudit: builder.query<AuditType, string>({
             query: (id: string) => `/audit/${id}`,
+        }),
+
+        addAuditComment: builder.mutation<void, { id: string; comment: string }>({
+            query: ({ id, comment }) => ({
+                url: `/audit/${id}/comment`,
+                method: 'POST',
+                body: { comment: comment },
+            }),
+        }),
+
+        updateAuditState: builder.mutation<void, { id: string; state: ReportState }>({
+            query: ({ id, state }) => ({
+                url: `/audit/${id}/state`,
+                method: 'PATCH',
+                body: { state },
+            }),
         }),
 
         updateAudit: builder.mutation<void, { id: string; data: Partial<FormValues> }>({
@@ -65,8 +86,11 @@ export const auditApi = api.injectEndpoints({
 export const {
     useGetAuditAllQuery,
     useGetAuditByUserQuery,
+    useGetAuditByStateQuery,
     useGetAuditQuery,
     useUpdateAuditMutation,
     useAddAuditFormMutation,
-    useDownloadFileMutation
+    useDownloadFileMutation,
+    useAddAuditCommentMutation,
+    useUpdateAuditStateMutation
 } = auditApi;

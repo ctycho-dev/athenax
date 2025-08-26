@@ -5,10 +5,16 @@ import react from '@vitejs/plugin-react'
 
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  define: {
-    'process.env': process.env
+  build: {
+    target: 'esnext',
   },
+  plugins: [react(), tailwindcss()],
+  // define: {
+  //   'process.env': process.env
+  // },
+  // optimizeDeps: {
+  //   include: ['buffer', 'process', 'stream-browserify', 'util'],
+  // },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

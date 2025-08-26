@@ -1,0 +1,1 @@
+export const ARTICLE_STORAGE_KEY = 'editor-content-article';

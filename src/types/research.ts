@@ -1,5 +1,5 @@
 import { FileType } from ".";
-import { ReportState } from "@/enums";
+import { ReportState, UserRole } from "@/enums";
 
 export type FileFields = {
     'step9.brandZip': FileType | null;
@@ -99,13 +99,19 @@ export type StepsCompletionResearch = {
     10: boolean
 }
 
+interface Comment {
+  id: string;
+  role: UserRole;
+  content: string;
+  created_at: Date;
+}
 
 export type ResearchType = {
     steps: FormValues
     id: string
     state: ReportState
     user_privy_id: string
-    admin_comment?: string
+    comments?: Comment[]
     created_at: string
     updated_at: string
 }

@@ -20,14 +20,13 @@ export const AuthProvider = () => {
       const handleAuthFlow = async () => {
          try {
             dispatch(setLoading());
-            
             if (authenticated) {
                const token = await getAccessToken();
                if (!token) throw new Error('No token received');
                dispatch(setCredentials({ token }));
 
+
                try {
-                  // First try to fetch the user
                   const userResponse = await fetchUser(undefined, true).unwrap();
                   dispatch(setUser(userResponse));
                } catch (fetchError: any) {
@@ -40,6 +39,7 @@ export const AuthProvider = () => {
                      try {
                         const userData = {
                            privy_id: user.id,
+                           email: null,
                            linked_accounts: user.linkedAccounts,
                            has_accepted_terms: user.hasAcceptedTerms,
                            is_guest: user.isGuest
