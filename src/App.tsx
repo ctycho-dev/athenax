@@ -35,53 +35,53 @@ function App() {
     // }
 
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Home />} />
-            </Routes>
-        </Router>
-
         // <Router>
-        //     <PathTracker />
         //     <Routes>
-        //         {/* Public Routes */}
         //         <Route path="/" element={<Home />} />
-        //         <Route path="/login" element={<Login />} />
-        //         {/* <Route path="/" element={<Layout />}>
-        //             <Route path="/submit_materials" element={<SumbitMaterials />} />
-        //         </Route> */}
-        //         {/* <Route path="/" element={<UserLayout />}>
-        //             <Route path="/top-cryptos" element={<CryptoList />} />
-        //         </Route> */}
-
-        //         <Route element={<AuthOnlyWrapper />}>
-        //             <Route path="/welcome" element={<Welcome />} />
-        //         </Route>
-
-        //         {/* Private Routes */}
-        //         {/* <Route path="/" element={<AuthWrapper allowedRoles={[UserRole.ADMIN, UserRole.BD]} />}> */}
-        //         <Route path="/" element={<AuthWrapper allowedRoles={[]} />}>
-        //             <Route path="/" element={<Layout />}>
-        //                 <Route path="/article/write" element={<WriteArticle />} />
-        //                 <Route path="/profile" element={<Profile />} />
-        //                 <Route path="/submit_materials" element={<SumbitMaterials />} />
-        //             </Route>
-        //             {/* <Route path="/submit/audit" element={<AuditForm />} />
-        //             <Route path="/submit/audit/:id" element={<AuditForm />} /> */}
-        //             <Route path="/submit/research" element={<ResearchForm />} />
-        //             <Route path="/submit/research/:id" element={<ResearchForm />} />
-        //             <Route path="/submited" element={<Submited />} />
-        //         </Route>
-        //         <Route path='/' element={<AuthWrapper allowedRoles={[UserRole.BD, UserRole.ADMIN]} />}>
-        //             <Route path="/" element={<Layout />}>
-        //                 {/* <Route path="/review/audit" element={<AuditReview />} />
-        //                 <Route path="/review/audit/:id" element={<AuditReviewRecord />} /> */}
-        //                 <Route path="/review/research" element={<ResearchReview />} />
-        //                 <Route path="/review/research/:id" element={<ResearchReviewRecord />} />
-        //             </Route>
-        //         </Route>
         //     </Routes>
         // </Router>
+
+        <Router>
+            <PathTracker />
+            <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                {/* <Route path="/" element={<Layout />}>
+                    <Route path="/submit_materials" element={<SumbitMaterials />} />
+                </Route> */}
+                {/* <Route path="/" element={<UserLayout />}>
+                    <Route path="/top-cryptos" element={<CryptoList />} />
+                </Route> */}
+
+                <Route element={<AuthOnlyWrapper />}>
+                    <Route path="/welcome" element={<Welcome />} />
+                </Route>
+
+                {/* Private Routes */}
+                {/* <Route path="/" element={<AuthWrapper allowedRoles={[UserRole.ADMIN, UserRole.BD]} />}> */}
+                <Route path="/" element={<AuthWrapper allowedRoles={[]} />}>
+                    <Route path="/" element={<Layout />}>
+                        <Route path="/article/write" element={<WriteArticle />} />
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/submit_materials" element={<SumbitMaterials />} />
+                    </Route>
+                    {/* <Route path="/submit/audit" element={<AuditForm />} />
+                    <Route path="/submit/audit/:id" element={<AuditForm />} /> */}
+                    <Route path="/submit/research" element={<ResearchForm />} />
+                    <Route path="/submit/research/:id" element={<ResearchForm />} />
+                    <Route path="/submited" element={<Submited />} />
+                </Route>
+                <Route path='/' element={<AuthWrapper allowedRoles={[UserRole.BD, UserRole.ADMIN]} />}>
+                    <Route path="/" element={<Layout />}>
+                        {/* <Route path="/review/audit" element={<AuditReview />} />
+                        <Route path="/review/audit/:id" element={<AuditReviewRecord />} /> */}
+                        <Route path="/review/research" element={<ResearchReview />} />
+                        <Route path="/review/research/:id" element={<ResearchReviewRecord />} />
+                    </Route>
+                </Route>
+            </Routes>
+        </Router>
     )
 }
 
