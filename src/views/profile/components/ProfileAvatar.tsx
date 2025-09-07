@@ -1,64 +1,66 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { Avatar, FileInput, Stack, Modal, Button, Slider, Group } from "@mantine/core";
-import Cropper from "react-easy-crop";
-import { FiUpload } from "react-icons/fi";
-
-function createImage(url: string): Promise<HTMLImageElement> {
-    return new Promise((resolve, reject) => {
-        const image = new window.Image();
-        image.onload = () => resolve(image);
-        image.onerror = (error) => reject(error);
-        image.setAttribute("crossOrigin", "anonymous");
-        image.src = url;
-    });
-}
-
-async function getCroppedImg(
-    imageSrc: string,
-    pixelCrop: { x: number; y: number; width: number; height: number }
-): Promise<string | null> {
-    const image = await createImage(imageSrc);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return null;
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
-    ctx.drawImage(
-        image,
-        pixelCrop.x,
-        pixelCrop.y,
-        pixelCrop.width,
-        pixelCrop.height,
-        0,
-        0,
-        pixelCrop.width,
-        pixelCrop.height
-    );
-    return canvas.toDataURL("image/jpeg");
-}
+// ProfileAvatar.tsx
+import React, { useState, useRef } from "react";
+import {
+    Avatar,
+    Stack,
+    Center,
+} from "@mantine/core";
+import { FiCamera } from "react-icons/fi";
+import { toast } from "sonner";
+import { useUploadImageFileMutation } from "@/services/imageApi";
+import { useUpdateProfileMutation } from "@/services/profileApi";
+import { ProfileOut, ProfileUpdate } from "@/types/profile";
+import { profileOutToUpdate } from "@/utils/profileHelper";
+import { isValidImageFile } from "@/utils/imageUtils";
+import { getCroppedImg } from "@/utils/imageUtils";
+import { ImageCropperModal } from "./ImageCropperModal";
+import { Toaster } from "sonner";
 
 interface ProfileAvatarProps {
     src: string | null;
     name: string | null;
-    onUpload: (dataUrl: string) => void; // cropped base64 string
+    profile: ProfileOut;
+    onUpload: (publicUrl: string) => void;
 }
 
 export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
     src,
     name,
+    profile,
     onUpload,
 }) => {
     const [open, setOpen] = useState(false);
     const [imageSrc, setImageSrc] = useState<string | null>(null);
-    const [imgSrc, setImgSrc] = useState<string | null>(null);
-    const [crop, setCrop] = useState({ x: 0, y: 0 });
-    const [zoom, setZoom] = useState(1);
-    const [croppedAreaPixels, setCroppedAreaPixels] = useState<{ x: number; y: number; width: number; height: number } | null>(null);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState<{
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    } | null>(null);
+    const [isSaving, setIsSaving] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+
     const displayName = name && name.trim() ? name : "Anonymous";
 
-    // When the user selects a file
-    const onFileChange = (file: File | null) => {
+    // RTK Mutations
+    const [uploadImage] = useUploadImageFileMutation();
+    const [updateProfile] = useUpdateProfileMutation();
+
+    // Hidden file input ref
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // Handle file selection
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const file = e.target.files?.[0];
+        console.log("Selected file:", file);
         if (!file) return;
+
+        if (!isValidImageFile(file, 5)) {
+            e.target.value = "";
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = () => {
             setImageSrc(reader.result as string);
@@ -67,104 +69,105 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
         reader.readAsDataURL(file);
     };
 
-    useEffect(() => {
-        console.log('src', src)
-        setImgSrc(src)
-    }, [src])
-
-    const onCropComplete = useCallback((_: any, croppedAreaPixels: any) => {
-        setCroppedAreaPixels(croppedAreaPixels);
-    }, []);
-
-    // When user clicks Save after cropping
     const handleSave = async () => {
-        if (imageSrc && croppedAreaPixels) {
-            const croppedImg = await getCroppedImg(imageSrc, croppedAreaPixels);
-            if (croppedImg) {
-                onUpload(croppedImg);
-                setImgSrc(croppedImg)
-            }
-            setImageSrc(null);
-            setOpen(false);
+        if (!imageSrc || !croppedAreaPixels) return;
+        setIsSaving(true);
+
+        try {
+            const croppedFile = await getCroppedImg(imageSrc, croppedAreaPixels);
+
+            const uploadResult = await uploadImage({
+                imageType: "profile",
+                bucket: "scholarx-profile",
+                file: croppedFile,
+            }).unwrap();
+
+            const payload: ProfileUpdate = profileOutToUpdate(profile);
+            payload.profile_image = uploadResult.publicUrl;
+
+            await updateProfile({
+                id: profile.id,
+                data: payload,
+            }).unwrap();
+
+            // onUpload(uploadResult.publicUrl);
+            toast.success("Profile photo updated!");
+        } catch (error: any) {
+            console.error("Upload failed:", error);
+            toast.error("Upload failed", { description: error.data?.detail || error.message });
+        } finally {
+            setIsSaving(false);
+            handleClose();
         }
     };
 
-    // Reset cropping when modal closes
     const handleClose = () => {
         setOpen(false);
         setImageSrc(null);
-        setCrop({ x: 0, y: 0 });
-        setZoom(1);
         setCroppedAreaPixels(null);
+    };
+
+    const handleAvatarClick = () => {
+        fileInputRef.current?.click();
     };
 
     return (
         <Stack align="center" gap={8}>
-            <Avatar
-                key={imgSrc}
-                src={imgSrc}
-                size={128}
-                radius={64}
-                style={{ cursor: "pointer" }}
-                onClick={() => setOpen(true)}
-            >
-                {displayName
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-            </Avatar>
-            <FileInput
-                accept="image/*"
-                onChange={onFileChange}
-                leftSection={<FiUpload />}
-                placeholder="Change Photo"
-                styles={{
-                    input: {
-                        background: 'transparent',
-                        // border: '1px solid oklch(0.7 0.0182 242.54 / 80%)',
-                        // borderRadius: '10px'
-                    }
+            <div
+                style={{
+                    position: "relative",
+                    display: "inline-block",
+                    cursor: "pointer",
                 }}
-            />
-            <Modal
-                opened={open}
-                onClose={handleClose}
-                title="Adjust your avatar"
-                centered
-                size="lg"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={handleAvatarClick}
             >
-                {imageSrc && (
-                    <>
-                        <div style={{ position: "relative", width: "100%", height: 300, background: "#111" }}>
-                            <Cropper
-                                image={imageSrc}
-                                crop={crop}
-                                zoom={zoom}
-                                aspect={1}
-                                cropShape="round"
-                                showGrid={false}
-                                onCropChange={setCrop}
-                                onZoomChange={setZoom}
-                                onCropComplete={onCropComplete}
-                            />
-                        </div>
-                        <Group mt="md">
-                            <span>Zoom:</span>
-                            <Slider
-                                min={1}
-                                max={3}
-                                step={0.01}
-                                value={zoom}
-                                onChange={setZoom}
-                                style={{ flex: 1, maxWidth: 200 }}
-                            />
-                        </Group>
-                        <Button fullWidth mt="lg" onClick={handleSave}>
-                            Save
-                        </Button>
-                    </>
+                <Avatar
+                    src={src}
+                    size={128}
+                    radius={64}
+                    alt={`Profile picture of ${displayName}`}
+                    aria-label={`Change profile picture of ${displayName}`}
+                >
+                    {displayName.charAt(0).toUpperCase()}
+                </Avatar>
+
+                {isHovered && (
+                    <Center
+                        style={{
+                            position: "absolute",
+                            inset: 0,
+                            borderRadius: "50%",
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            transition: "opacity 0.2s ease",
+                            opacity: 1,
+                        }}
+                    >
+                        <FiCamera color="white" size={24} />
+                    </Center>
                 )}
-            </Modal>
+            </div>
+
+            {/* Native hidden file input */}
+            <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+            />
+
+            {/* Cropper Modal */}
+            <ImageCropperModal
+                opened={open}
+                imageSrc={imageSrc || ""}
+                onClose={handleClose}
+                onCropComplete={setCroppedAreaPixels}
+                onSave={handleSave}
+                isLoading={isSaving}
+            />
+            <Toaster richColors />
         </Stack>
     );
 };

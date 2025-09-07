@@ -5,10 +5,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import logoWithName from '@/assets/logo-with-name.svg';
 import { usePageColorScheme } from '@/hooks/usePageTheme';
-import { useCreateProfileMutation, useGetMyProfileQuery } from '@/services/profileApi';
-import { useUpdateUserMutation } from '@/services/userApi';
+import { useCreateProfileMutation } from '@/services/profileApi';
 import { ProfileCreate, AccountType, ACCOUNT_TYPE_OPTIONS } from '@/types/profile';
-import { IUserUpdate } from '@/types/user';
 import { getDefaultProfileValues } from '@/utils/profileHelper';
 import { getLastPath, clearLastPath } from '@/utils/storage';
 import { useDispatch } from 'react-redux';
@@ -30,60 +28,15 @@ export const Welcome: React.FC = () => {
   const [accountTypeLabel, setAccountTypeLabel] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [createProfile] = useCreateProfileMutation();
-  const { data: profile, isLoading: profileLoading } = useGetMyProfileQuery()
-  const [updateUser] = useUpdateUserMutation()
   const { data: user } = useSelector((s: RootState) => s.user);
   const dispatch = useDispatch();
 
-  const syncedRef = useRef(false);
 
   useEffect(() => {
-    const run = async () => {
-      if (syncedRef.current) return;
-
-      if (user && user.has_profile) {
-        redirect()
-      }
-
-      if (!profileLoading) {
-        syncedRef.current = true
-      }
-
-      if (profile && user) {
-        setRole(profile.display_role || null);
-
-        const option = ACCOUNT_TYPE_OPTIONS.find(opt => opt.value === profile.account_type);
-        if (option) {
-          setAccountTypeLabel(option.label);
-        }
-
-        if (!user.has_profile || user.account_type !== profile.account_type) {
-          try {
-            const userUpdateData: IUserUpdate = {
-              has_profile: true,
-              account_type: profile.account_type,
-              has_accepted_terms: user.has_accepted_terms || false,
-              is_guest: user.is_guest || false
-            };
-
-            const updated_user = await updateUser(userUpdateData).unwrap();
-            if (user) {
-              dispatch(setUser(updated_user));
-            }
-
-            redirect()
-
-          } catch (error) {
-            console.error('Failed to update user:', error);
-            toast.error('Failed to sync user data. Please try again.');
-          }
-        } else {
-          redirect()
-        }
-      }
+    if (user?.has_profile) {
+      redirect();
     }
-    run();
-  }, [profile, profileLoading])
+  }, [user?.has_profile]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,7 +62,6 @@ export const Welcome: React.FC = () => {
         dispatch(setUser({
           ...user,
           has_profile: true,
-          account_type: accountType
         }));
       }
 
@@ -128,6 +80,10 @@ export const Welcome: React.FC = () => {
     const lastPath = getLastPath();
     clearLastPath();
     navigate(lastPath, { replace: true });
+  }
+
+  if (user?.has_profile) {
+    return null; // Will redirect via useEffect
   }
 
   return (

@@ -123,6 +123,7 @@ export const ProfileInformation: React.FC<ProfileInformationProps> = ({
         <ProfileAvatar
           src={isEditing ? editData.profile_image : profile.profile_image}
           name={isEditing ? editData.name : profile.name}
+          profile={profile}
           onUpload={handleAvatarUpload}
         />
         <div className="flex-1 space-y-4">

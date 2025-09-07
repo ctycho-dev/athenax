@@ -7,7 +7,7 @@ import { MantineProvider } from '@mantine/core';
 import { AuthProvider } from '@/components/authProvider.tsx';
 import { theme } from './theme.ts';
 
-import { toSolanaWalletConnectors } from "@privy-io/react-auth/solana";
+// import { toSolanaWalletConnectors } from "@privy-io/react-auth/solana";
 
 import App from './App.tsx'
 

@@ -58,8 +58,8 @@ export interface ProfileUpdate extends Partial<ProfileBase> {
 }
 
 export interface ProfileOut extends ProfileBase {
-  id: string;
-  user_id: string;
+  id: number
+  user_id: number;
   account_type: AccountType;
   website_url: string | null;
   created_at: string;

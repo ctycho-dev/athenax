@@ -104,7 +104,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="metamask"
                   label="Metamask"
-                  icon={<img src="https://mypinx.store/metamask_logo.svg" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/metamask_logo.svg" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}
@@ -112,7 +112,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="coinbase_wallet"
                   label="Coinbase"
-                  icon={<img src="https://mypinx.store/coinbase_icon.svg" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/coinbase_icon.svg" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}
@@ -120,7 +120,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="wallet_connect"
                   label="Wallet Connect"
-                  icon={<img src="https://mypinx.store/walletconnect-seeklogo.png" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/walletconnect-seeklogo.png" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}
@@ -128,7 +128,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="phantom"
                   label="Phantom"
-                  icon={<img src="https://mypinx.store/phantom-icon.svg" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/phantom-icon.svg" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}

@@ -47,9 +47,6 @@ function App() {
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                {/* <Route path="/" element={<Layout />}>
-                    <Route path="/submit_materials" element={<SumbitMaterials />} />
-                </Route> */}
                 {/* <Route path="/" element={<UserLayout />}>
                     <Route path="/top-cryptos" element={<CryptoList />} />
                 </Route> */}

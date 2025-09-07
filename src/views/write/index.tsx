@@ -1,172 +1,321 @@
-
-
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react';
 import { usePageColorScheme } from '@/hooks/usePageTheme';
 import { Toaster, toast } from 'sonner';
-import { RootState } from "@/store/store";
+import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
-import { ReportState } from '@/enums';
-import { useGetAuditByStateQuery } from '@/services/auditApi';
-import { useGetResearchByStateQuery } from '@/services/researchApi';
-import { useAddArticleMutation } from '@/services/articleApi'
+import { useAddArticleMutation, useGetDraftsQuery, useUpdateArticleMutation } from '@/services/articleApi';
+import { useUploadImageFileMutation } from '@/services/imageApi';
 import ArticleEditor from './components/articleEditor';
+import PageHeader from '@/components/ui/header';
+import { useFileUploader } from '@/hooks/useFileUploader';
 
-import PageHeader from '@/components/ui/header'
-import { MultiSelect, Select } from '@mantine/core'
-import { ecosystemCategory, blochainList } from "@/data/index";
-import { ARTICLE_STORAGE_KEY } from '@/constants/article'
-
-
-import '@/assets/styles/editor.scss'
-
+import '@/assets/styles/editor.scss';
 
 const WriteArticle: React.FC = () => {
-   usePageColorScheme('light')
-   const [articleType, setArticleType] = useState<'audit' | 'research' | null>('research');
-   // const [articleType, setArticleType] = useState<'audit' | 'research' | null>(null);
-   const [selectedRelated, setSelectedRelated] = useState<string[]>([]);
-   const [resetEditor, setResetEditor] = useState(false);
-   const [related, setRelated] = useState<string[]>([]);
-   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-   const privyToken = useSelector((state: RootState) => state.auth.privyToken);
-   const [htmlContent, setHtmlContent] = useState<string>('');
+  usePageColorScheme('light');
 
-   const { data: audits = [], isLoading: auditsLoading } = useGetAuditByStateQuery(ReportState.COMPLETED, {
-      skip: articleType !== 'audit' || !privyToken,
-   });
-   const { data: research = [], isLoading: researchLoading } = useGetResearchByStateQuery(ReportState.COMPLETED, {
-      skip: articleType !== 'research' || !privyToken,
-   });
+  const privyToken = useSelector((state: RootState) => state.auth.privyToken);
+  const [htmlContent, setHtmlContent] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [coverImage, setCoverImage] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [resetEditor, setResetEditor] = useState(false);
 
-   const isLoadingRelated = auditsLoading || researchLoading;
+  // Draft state
+  const [draftId, setDraftId] = useState<string | null>(null);
 
-   const [createArticle, { isLoading }] = useAddArticleMutation();
+  // API
+  const [createArticle] = useAddArticleMutation();
+  const [updateArticle] = useUpdateArticleMutation();
+  const { data: drafts = [] } = useGetDraftsQuery(undefined, { skip: !privyToken });
 
-   const relatedOptions = useMemo(() => {
-      const list = articleType === 'audit' ? audits : articleType === 'research' ? research : [];
-      return list.map((item: any) => ({
-         value: item.id,
-         label: `${item.steps?.step1?.name || 'Untitled'} (${item.steps?.step1?.blockchain || 'N/A'})`,
-      }));
-   }, [audits, research, articleType]);
+  // Auto-save timer
+  const [saveTimer, setSaveTimer] = useState<NodeJS.Timeout | null>(null);
 
+  // Constants
+  const DRAFT_KEY = 'article_draft_v1';
 
-   const tagOptions = useMemo(() => [
-      ...blochainList,
-      ...ecosystemCategory,
-   ].map(name => ({
-      value: name.toLowerCase().replace(/\s+/g, '-'),
-      label: name,
-   })), []);
+  // --- Auto-Save Logic ---
+  const saveDraft = async () => {
+    if (!htmlContent.trim() || !privyToken) return;
 
-   const articleTypeOptions = [
-      { value: 'audit', label: 'Audit' },
-      { value: 'research', label: 'Research' }
-   ];
+    setIsSaving(true);
 
-   const handleSubmit = async () => {
-      if (!articleType) {
-         toast.error('Need to choose article type.')
-         return
+    // Extract title from H1
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    const h1 = doc.querySelector('h1');
+    const extractedTitle = h1?.textContent?.trim() || 'Untitled';
+
+    // Generate slug
+    const slug = extractedTitle
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      || 'untitled';
+
+    // ✅ Use camelCase payload to match frontend types
+    const payload = {
+      title: extractedTitle,
+      slug,
+      htmlContent,
+      coverImage,
+      type: 'research' as const,
+      relatedAuditIds: [],
+      relatedResearchIds: [],
+      state: 'draft' as const,
+    };
+
+    try {
+      let result;
+      if (draftId) {
+        result = await updateArticle({ id: draftId, ...payload }).unwrap();
+        toast.success('Draft updated');
+      } else {
+        result = await createArticle(payload).unwrap();
+        setDraftId(result.id);
+        toast.success('Draft saved');
       }
 
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlContent, 'text/html');
-      const h1 = doc.querySelector('h1');
+      // Save to localStorage
+      localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({
+          id: result?.id || draftId,
+          content: htmlContent,
+          title: extractedTitle,
+          coverImage,
+          updatedAt: Date.now(),
+        })
+      );
+    } catch (err) {
+      console.error('Save draft error:', err);
+      toast.error('Failed to save draft');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
-      if (!h1 || !h1.textContent?.trim()) {
-         toast.warning('Please add an <h1> heading to set the article title.');
-         return;
+  // Debounced auto-save
+  const debouncedSave = () => {
+    if (saveTimer) clearTimeout(saveTimer);
+    const timer = setTimeout(() => {
+      saveDraft();
+    }, 5000);
+    setSaveTimer(timer);
+  };
+
+  // Cleanup timer
+  useEffect(() => {
+    return () => {
+      if (saveTimer) clearTimeout(saveTimer);
+    };
+  }, [saveTimer]);
+
+  // --- Load Draft on Mount ---
+  useEffect(() => {
+    if (!privyToken) return;
+
+    const loadDraft = () => {
+      // 1. Try localStorage
+      const local = localStorage.getItem(DRAFT_KEY);
+      if (local) {
+        const parsed = JSON.parse(local);
+        setHtmlContent(parsed.content || '');
+        setTitle(parsed.title || '');
+        setCoverImage(parsed.coverImage || null);
+        setDraftId(parsed.id || null);
+        return;
       }
 
-      const rawTitle = h1.textContent.trim();
-      const slug = rawTitle
-         .toLowerCase()
-         .replace(/[^\w\s-]/g, '') // Remove special characters
-         .replace(/\s+/g, '-')      // Replace whitespace with hyphens
-         .replace(/-+/g, '-');      // Avoid duplicate hyphens
+      // 2. Try backend drafts
+      if (drafts.length > 0) {
+        // Sort by updated_at (newest first)
+        const latest = drafts
+          .slice()
+          .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())[0];
 
-      const payload = {
-         title: rawTitle,
-         slug,
-         html_content: htmlContent,
-         type: articleType,
-         related_audit_ids: articleType === 'audit' ? selectedRelated : [],
-         related_research_ids: articleType === 'research' ? selectedRelated : [],
-      };
+        setHtmlContent(latest.htmlContent || '');
+        setTitle(latest.title || 'Untitled');
+        setCoverImage(latest.coverImage || null);
+        setDraftId(latest.id);
 
-      try {
-         await createArticle(payload).unwrap();
-         toast.success('Article created successfully!');
-         // Reset everything
-         setHtmlContent('');
-         setResetEditor(true);
-         setSelectedRelated([]);
-         setSelectedTags([]);
-         setArticleType(null);
-      } catch (err) {
-         console.error('Create error:', err);
-         toast.error('Failed to create article.');
+        // Cache in localStorage
+        localStorage.setItem(
+          DRAFT_KEY,
+          JSON.stringify({
+            id: latest.id,
+            content: latest.htmlContent,
+            title: latest.title,
+            coverImage: latest.coverImage,
+            updatedAt: Date.now(),
+          })
+        );
       }
-   };
+    };
 
+    loadDraft();
+  }, [privyToken, drafts]);
 
-   return (
-      <>
-         <PageHeader title='Write Article'>
-            <div className='flex gap-3'>
-               <button className='px-4 py-1.5 border border-white text-white rounded hover:cursor-pointer'>
-                  Preview
-               </button>
-               <button
-                  onClick={handleSubmit}
-                  disabled={!htmlContent || isLoading}
-                  // disabled={!articleType || !htmlContent || isLoading}
-                  className="px-4 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 hover:cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
-               >
-                  {isLoading ? 'Submitting...' : 'Submit Article'}
-               </button>
-            </div>
-         </PageHeader>
-         <div className='max-w-3xl m-auto p-6'>
-            {/* <div className="mb-4 grid grid-cols-2 gap-2">
-               <Select
-                  label='Article type'
-                  placeholder='Select type'
-                  data={articleTypeOptions}
-                  value={articleType}
-                  onChange={(value) => {
-                     setArticleType(value as 'audit' | 'research' | null);
-                     setSelectedRelated([]);
-                  }}
-               />
-               <MultiSelect
-                  label="Tags"
-                  placeholder="Select tags"
-                  data={tagOptions}
-                  value={selectedTags}
-                  onChange={setSelectedTags}
-                  searchable
-                  clearable
-               />
-            </div>
-            <div className="mb-6">
-               <MultiSelect
-                  label={`Related ${articleType === 'audit' ? 'Audits' : articleType === 'research' ? 'Research' : 'Items'}`}
-                  placeholder={`Select related ${articleType}`}
-                  data={relatedOptions}
-                  value={selectedRelated}
-                  onChange={setSelectedRelated}
-                  searchable
-                  clearable
-                  disabled={!articleType || isLoadingRelated}
-               />
-            </div> */}
-            <ArticleEditor onContentChange={setHtmlContent} resetSignal={resetEditor} />
-         </div>
-         <Toaster richColors />
-      </>
-   );
+  // --- Trigger auto-save ---
+  useEffect(() => {
+    debouncedSave();
+  }, [htmlContent, coverImage]);
+
+  // Save on tab switch
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        saveDraft();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  // --- Handle Publish ---
+  const handleSubmit = async () => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    const h1 = doc.querySelector('h1');
+
+    if (!h1 || !h1.textContent?.trim()) {
+      toast.warning('Please add an <h1> heading to set the article title.');
+      return;
+    }
+
+    const rawTitle = h1.textContent.trim();
+    const slug = rawTitle
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+
+    const payload = {
+      title: rawTitle,
+      slug,
+      htmlContent,
+      coverImage,
+      type: 'research' as const,
+      relatedAuditIds: [],
+      relatedResearchIds: [],
+      state: 'published' as const,
+    };
+
+    try {
+      if (draftId) {
+        await updateArticle({ id: draftId, ...payload }).unwrap();
+      } else {
+        await createArticle(payload).unwrap();
+      }
+      toast.success('Article published successfully!');
+      localStorage.removeItem(DRAFT_KEY);
+      setHtmlContent('');
+      setCoverImage(null);
+      setResetEditor(true);
+    } catch (err) {
+      console.error('Publish error:', err);
+      toast.error('Failed to publish article.');
+    }
+  };
+
+  return (
+    <>
+      <PageHeader title="Write Article">
+        <div className="flex gap-3">
+          <button className="px-4 py-1.5 border border-white text-white rounded hover:cursor-pointer">
+            Preview
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={!htmlContent || isSaving}
+            className="px-4 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 hover:cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+          >
+            {isSaving ? 'Saving...' : 'Publish Article'}
+          </button>
+        </div>
+      </PageHeader>
+
+      <div className="max-w-3xl m-auto p-6">
+        {/* Cover Image Upload */}
+        <div className="mb-6">
+          <label className="block text-sm font-medium mb-2">Cover Image</label>
+          <CoverImageUploader onUpload={setCoverImage} currentImage={coverImage} />
+        </div>
+
+        {/* Editor */}
+        <ArticleEditor onContentChange={setHtmlContent} resetSignal={resetEditor} />
+
+        {/* Saving Indicator */}
+        {isSaving && <p className="text-sm text-gray-500 mt-4">Auto-saving...</p>}
+      </div>
+
+      <Toaster richColors />
+    </>
+  );
 };
 
-export default WriteArticle
+// --- Cover Image Uploader ---
+const CoverImageUploader: React.FC<{
+  onUpload: (url: string | null) => void;
+  currentImage: string | null;
+}> = ({ onUpload, currentImage }) => {
+  // const { upload } = useFileUploader(); // ✅ Now works — hook imported
+  const [uploadImage] = useUploadImageFileMutation();
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const uploadResult = await uploadImage({
+        imageType: "article",
+        bucket: "scholarx-article",
+        file: file,
+      }).unwrap();
+      toast.success('Cover image uploaded');
+    } catch (err) {
+    toast.error('Upload failed');
+  }
+};
+
+const handleRemove = () => {
+  onUpload(null);
+  toast.info('Cover image removed');
+};
+
+return (
+  <div>
+    {currentImage ? (
+      <div className="relative inline-block">
+        <img src={currentImage} alt="Cover" className="h-32 object-cover rounded" />
+        <button
+          onClick={handleRemove}
+          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm"
+        >
+          ×
+        </button>
+      </div>
+    ) : (
+      <>
+        <input
+          type="file"
+          accept="image/*"
+          id="cover-upload"
+          style={{ display: 'none' }}
+          onChange={handleUpload}
+        />
+        <button
+          onClick={() => document.getElementById('cover-upload')?.click()}
+          className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded text-sm"
+        >
+          Upload Cover Image
+        </button>
+      </>
+    )}
+  </div>
+);
+};
+
+export default WriteArticle;
