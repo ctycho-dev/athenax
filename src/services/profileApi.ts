@@ -16,13 +16,36 @@ export const profileApi = api.injectEndpoints({
             }),
             invalidatesTags: ['Profile']
         }),
-        updateProfile: builder.mutation<ProfileOut, { id: string; data: ProfileUpdate }>({
+        updateProfile: builder.mutation<ProfileOut, { id: number; data: ProfileUpdate }>({
             query: ({ id, data }) => ({
                 url: `/profiles/${id}/`,
                 method: 'PATCH',
                 body: data,
             }),
-            invalidatesTags: ['Profile']
+            onQueryStarted: async ({ id, data }, { dispatch, queryFulfilled }) => {
+                // Optimistically update the cache immediately
+                const patchResult = dispatch(
+                    profileApi.util.updateQueryData('getMyProfile', undefined, (draft) => {
+                        Object.assign(draft, data);
+                    })
+                );
+                
+                try {
+                    // Wait for the mutation to complete
+                    const { data: updatedProfile } = await queryFulfilled;
+                    
+                    // Update cache with the actual server response
+                    dispatch(
+                        profileApi.util.updateQueryData('getMyProfile', undefined, (draft) => {
+                            Object.assign(draft, updatedProfile);
+                        })
+                    );
+                } catch {
+                    // Rollback the optimistic update on failure
+                    patchResult.undo();
+                }
+            },
+            // invalidatesTags: ['Profile']
         }),
     }),
 });

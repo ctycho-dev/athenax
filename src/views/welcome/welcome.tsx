@@ -33,10 +33,10 @@ export const Welcome: React.FC = () => {
 
 
   useEffect(() => {
-    if (user?.has_profile) {
+    if (user?.hasProfile) {
       redirect();
     }
-  }, [user?.has_profile]);
+  }, [user?.hasProfile]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ export const Welcome: React.FC = () => {
       if (user) {
         dispatch(setUser({
           ...user,
-          has_profile: true,
+          hasProfile: true,
         }));
       }
 
@@ -82,7 +82,7 @@ export const Welcome: React.FC = () => {
     navigate(lastPath, { replace: true });
   }
 
-  if (user?.has_profile) {
+  if (user?.hasProfile) {
     return null; // Will redirect via useEffect
   }
 

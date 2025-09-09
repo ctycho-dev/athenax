@@ -29,7 +29,7 @@ export interface IUserUpdate {
     account_type: string | null
     has_accepted_terms: boolean
     is_guest: boolean
-    has_profile: boolean
+    hasProfile: boolean
 }
 
 export interface IUser {
@@ -44,6 +44,6 @@ export interface IUser {
     has_accepted_terms: boolean
     is_guest: boolean
 
-    has_profile: boolean
+    hasProfile: boolean
     created_at: string;
 }

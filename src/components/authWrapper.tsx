@@ -24,7 +24,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ allowedRoles }) => {
       return <Navigate to="/login" replace />;
    }
 
-   if (!user.has_profile) {
+   if (!user.hasProfile) {
       return <Navigate to="/welcome" replace />;
    }
 

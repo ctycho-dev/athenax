@@ -1,34 +1,35 @@
 // src/types/article.ts
-
 import { ArticleState } from '@/enums';
 
-/**
- * Response model for an article (camelCase, from backend via Pydantic)
- */
 export interface ArticleResponse {
-  id: string;
+  id: number;
   title: string;
-  slug: string;
-  htmlContent: string;
-  coverImage: string | null;
-  type: 'audit' | 'research';
+  content: string;
+  summary?: string;
+  slug?: string;
+  coverImage?: string | null;
+  tags?: string[];
   state: ArticleState;
-  createdBy: string;
-  createdAt: string; // ISO date string
-  updatedAt: string; // ISO date string
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
-/**
- * Payload for creating or updating an article (camelCase)
- * All fields optional to support partial updates (e.g. auto-save)
- */
 export interface ArticleCreatePayload {
+  title: string;
+  content: string;
+  summary?: string;
+  tags?: string[];
+}
+
+export interface ArticleUpdatePayload {
   title?: string;
-  slug?: string;
-  htmlContent?: string;
-  coverImage?: string | null;
-  type?: 'audit' | 'research';
+  content?: string;
+  summary?: string;
+  tags?: string[];
   state?: ArticleState;
-  relatedAuditIds?: string[];
-  relatedResearchIds?: string[];
+}
+
+export interface CreateDraftRequest {
+  title: string;
 }
