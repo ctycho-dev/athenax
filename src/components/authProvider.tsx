@@ -15,12 +15,15 @@ export const AuthProvider = () => {
    const [createUser] = useCreateUserMutation();
 
    useEffect(() => {
+      console.log('🔄 AuthProvider useEffect triggered:', { ready, authenticated, userId: user?.id });
+
       if (!ready) return;
 
       const handleAuthFlow = async () => {
          try {
             dispatch(setLoading());
             if (authenticated) {
+               console.log('✅ AuthProvider: User is authenticated, getting token');
                const token = await getAccessToken();
                if (!token) throw new Error('No token received');
                dispatch(setCredentials({ token }));
@@ -28,6 +31,11 @@ export const AuthProvider = () => {
 
                try {
                   const userResponse = await fetchUser(undefined, true).unwrap();
+                  console.log('📊 AuthProvider: User data received:', {
+                     id: userResponse.id,
+                     hasProfile: userResponse.hasProfile,
+                     role: userResponse.role
+                  });
                   dispatch(setUser(userResponse));
                } catch (fetchError: any) {
                   if (fetchError && 'status' in fetchError && fetchError.status === 404) {

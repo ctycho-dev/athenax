@@ -14,7 +14,7 @@ export const profileApi = api.injectEndpoints({
                 method: 'POST',
                 body: data,
             }),
-            invalidatesTags: ['Profile']
+            invalidatesTags: ['Profile', 'User']
         }),
         updateProfile: builder.mutation<ProfileOut, { id: number; data: ProfileUpdate }>({
             query: ({ id, data }) => ({
