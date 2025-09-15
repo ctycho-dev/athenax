@@ -3,16 +3,16 @@ import { ProfileCreate } from '@/types/profile';
 import { ProfileOut, ProfileUpdate } from '@/types/profile';
 
 export const getDefaultProfileValues = (): ProfileCreate => ({
-  user_id: null,
-  account_type: null,
+  userId: null,           // ✅ Changed from user_id
+  accountType: null,      // ✅ Changed from account_type
   username: null,
 
   // public display
   name: null,
   location: null,
   bio: null,
-  profile_image: null,
-  display_role: '',
+  profileImage: null,     // ✅ Changed from profile_image
+  displayRole: '',        // ✅ Changed from display_role
 
   // socials
   github: null,
@@ -20,56 +20,63 @@ export const getDefaultProfileValues = (): ProfileCreate => ({
   linkedin: null,
   instagram: null,
   discord: null,
-  google_scholar: null,
+  googleScholar: null,    // ✅ Changed from google_scholar
   orcid: null,
   researchgate: null,
   website: null,
-  cmc_cg: null,
+  cmcCg: null,           // ✅ Changed from cmc_cg
 
   // publisher
-  organization_name: null,
-  institution_name: null,
-  verification_status: false,
+  organizationName: null,        // ✅ Changed from organization_name
+  institutionName: null,         // ✅ Changed from institution_name
+  verificationStatus: false,     // ✅ Changed from verification_status
 
   // project
-  organization_type: null,
+  organizationType: null,        // ✅ Changed from organization_type
   mission: null,
-  team_size: null,
-  founded_year: null,
+  teamSize: null,               // ✅ Changed from team_size
+  foundedYear: null,            // ✅ Changed from founded_year
 
   // personal
-  current_affiliation: null,
+  currentAffiliation: null,     // ✅ Changed from current_affiliation
   interests: [],
 });
 
 export const profileOutToUpdate = (profile: ProfileOut): ProfileUpdate => {
   return {
-    account_type: profile.account_type,
+    accountType: profile.accountType,           // ✅ Changed from account_type
     username: profile.username,
     name: profile.name,
     location: profile.location,
     bio: profile.bio,
-    profile_image: profile.profile_image,
-    website_url: profile.website_url,
-    display_role: profile.display_role,
+    profileImage: profile.profileImage,         // ✅ Changed from profile_image
+    displayRole: profile.displayRole,           // ✅ Changed from display_role
+    
+    // socials
     github: profile.github,
     twitter: profile.twitter,
     linkedin: profile.linkedin,
     instagram: profile.instagram,
     discord: profile.discord,
-    google_scholar: profile.google_scholar,
+    googleScholar: profile.googleScholar,       // ✅ Changed from google_scholar
     orcid: profile.orcid,
     researchgate: profile.researchgate,
     website: profile.website,
-    cmc_cg: profile.cmc_cg,
-    organization_name: profile.organization_name,
-    institution_name: profile.institution_name,
-    verification_status: profile.verification_status,
-    organization_type: profile.organization_type,
+    cmcCg: profile.cmcCg,                      // ✅ Changed from cmc_cg
+    
+    // publisher
+    organizationName: profile.organizationName,         // ✅ Changed from organization_name
+    institutionName: profile.institutionName,           // ✅ Changed from institution_name
+    verificationStatus: profile.verificationStatus,     // ✅ Changed from verification_status
+    
+    // project
+    organizationType: profile.organizationType,         // ✅ Changed from organization_type
     mission: profile.mission,
-    team_size: profile.team_size,
-    founded_year: profile.founded_year,
-    current_affiliation: profile.current_affiliation,
+    teamSize: profile.teamSize,                         // ✅ Changed from team_size
+    foundedYear: profile.foundedYear,                   // ✅ Changed from founded_year
+    
+    // personal
+    currentAffiliation: profile.currentAffiliation,     // ✅ Changed from current_affiliation
     interests: profile.interests,
   };
 };
