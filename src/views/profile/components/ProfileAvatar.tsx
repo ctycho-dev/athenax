@@ -83,8 +83,8 @@ export const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
             }).unwrap();
 
             const payload: ProfileUpdate = profileOutToUpdate(profile);
-            payload.profile_image = uploadResult.publicUrl;
-
+            payload.profileImage = uploadResult.publicUrl;
+            console.log("Updating profile with:", payload);
             await updateProfile({
                 id: profile.id,
                 data: payload,

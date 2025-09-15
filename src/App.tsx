@@ -46,13 +46,7 @@ function App() {
             <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={
-                    <>
-                        {console.log('🔗 Accessing /login route')}
-                        <Login />
-                    </>
-                } />
-                {/* <Route path="/login" element={<Login />} /> */}
+                <Route path="/login" element={<Login />} />
                 {/* <Route path="/" element={<UserLayout />}>
                     <Route path="/top-cryptos" element={<CryptoList />} />
                 </Route> */}

@@ -19,7 +19,6 @@ export const imageApi = api.injectEndpoints({
                     body: formData,
                 };
             },
-            // invalidatesTags: ['Image'],
         }),
     }),
 });

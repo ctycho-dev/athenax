@@ -59,8 +59,8 @@ export const Welcome: React.FC = () => {
 
       const payload: ProfileCreate = {
         ...getDefaultProfileValues(),
-        display_role: role,
-        account_type: accountType,
+        displayRole: role,
+        accountType: accountType,
       };
 
       await createProfile(payload).unwrap();
