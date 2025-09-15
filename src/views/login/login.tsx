@@ -31,12 +31,15 @@ export const Login: React.FC = () => {
 
 
    useEffect(() => {
-      if (ready && authenticated) {
-         const lastPath = getLastPath();
-         clearLastPath();
-         navigate(lastPath || DEFAULT_REDIRECT, { replace: true });
-      }
-   }, [ready, authenticated])
+   console.log('🔑 Login useEffect:', { ready, authenticated, path: window.location.pathname });
+   
+   if (ready && authenticated) {
+      const lastPath = getLastPath();
+      clearLastPath();
+      console.log('🔄 Login: Redirecting to:', lastPath || DEFAULT_REDIRECT);
+      navigate(lastPath || DEFAULT_REDIRECT, { replace: true });
+   }
+}, [ready, authenticated, navigate]) // Add proper dependencies
 
    const onAuthComplete = (isNewUser: boolean) => {
       const lastPath = getLastPath();

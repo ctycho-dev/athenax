@@ -33,7 +33,13 @@ export const Welcome: React.FC = () => {
 
 
   useEffect(() => {
+    console.log('👋 Welcome useEffect:', {
+      hasProfile: user?.hasProfile,
+      path: window.location.pathname
+    });
+
     if (user?.hasProfile) {
+      console.log('📝 Welcome: User has profile, redirecting');
       redirect();
     }
   }, [user?.hasProfile]);
