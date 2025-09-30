@@ -1,0 +1,62 @@
+// Add to your medium-editor.scss or create title-input.scss
+.title-input-wrapper {
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.title-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  
+  // Typography - Medium style
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  
+  // Placeholder styling
+  &::placeholder {
+    color: #6b7280;
+    opacity: 1;
+  }
+  
+  // Focus state
+  &:focus {
+    outline: none;
+  }
+  
+  // Selection styling
+  &::selection {
+    background: rgba(79, 70, 229, 0.3);
+  }
+  
+  // Responsive sizing
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 28px;
+  }
+}
+
+.title-counter {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  font-size: 12px;
+  
+  .text-red-400 {
+    color: #f87171;
+  }
+  
+  .text-gray-500 {
+    color: #6b7280;
+  }
+}

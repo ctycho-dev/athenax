@@ -19,3 +19,5 @@ export enum ArticleState {
     PUBLISHED = 'published',
     ARCHIVED = 'archived',
 }
+
+export type SaveStatus = 'saved' | 'saving' | 'unsaved' | 'error';

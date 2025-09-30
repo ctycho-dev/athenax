@@ -17,7 +17,8 @@ import { AuditReviewRecord } from '@/views/review/audit/[id]';
 import { ResearchReviewRecord } from '@/views/review/research/[id]';
 import { Submited } from '@/views/submited/submited';
 import { CryptoList } from '@/views/cryptoList/cryptoList';
-// import WriteArticle from '@/views/write';
+import WriteArticle from '@/views/write';
+import MyArticles from '@/views/myArticles';
 import Layout from '@/components/layout/projectLayout';
 import UserLayout from '@/components/layout/userLayout';
 import PathTracker from '@/components/PathTracker';
@@ -47,6 +48,7 @@ function App() {
                 {/* Public Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
+                {/* <Route path="/article/:slug" element={<WriteArticle />} /> */}
                 {/* <Route path="/" element={<UserLayout />}>
                     <Route path="/top-cryptos" element={<CryptoList />} />
                 </Route> */}
@@ -59,7 +61,9 @@ function App() {
                 {/* <Route path="/" element={<AuthWrapper allowedRoles={[UserRole.ADMIN, UserRole.BD]} />}> */}
                 <Route path="/" element={<AuthWrapper allowedRoles={[]} />}>
                     <Route path="/" element={<Layout />}>
-                        {/* <Route path="/article/write" element={<WriteArticle />} /> */}
+                        <Route path="/article/new" element={<WriteArticle key="write-new" />}  />
+                        <Route path="/article/:id/edit" element={<WriteArticle key="edit" />} />
+                        <Route path="/article/me" element={<MyArticles />} />
                         <Route path="/profile" element={<Profile />} />
                         <Route path="/submit_materials" element={<SumbitMaterials />} />
                     </Route>

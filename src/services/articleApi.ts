@@ -18,21 +18,13 @@ export const articleApi = api.injectEndpoints({
     }),
 
     // GET /articles/user/ - Get current user's articles
-    getArticleByUser: builder.query<ArticleResponse[], void>({
-      query: () => '/articles/user/',
+    getArticleByUser: builder.query<ArticleResponse[], { state?: ArticleState }>({
+      query: (params = {}) => {
+        const searchParams = new URLSearchParams();
+        if (params.state) searchParams.append('state', params.state);
+        return `/articles/user/?${searchParams}`;
+      },
       providesTags: ['UserArticle'],
-    }),
-
-    // GET /articles/user/drafts - Get current user's drafts
-    getDrafts: builder.query<ArticleResponse[], void>({
-      query: () => '/articles/user/drafts',
-      providesTags: ['UserDraft'],
-    }),
-
-    // GET /articles/state/{state} - Get articles by state (admin)
-    getArticleByState: builder.query<ArticleResponse[], ArticleState>({
-      query: (state) => `/articles/state/${state}`,
-      providesTags: ['Article'],
     }),
 
     // GET /articles/{id} - Get single article
@@ -42,7 +34,7 @@ export const articleApi = api.injectEndpoints({
     }),
 
     // POST /articles/ - Create new article
-    addArticle: builder.mutation<ArticleResponse, ArticleCreatePayload>({
+    createArticle: builder.mutation<ArticleResponse, ArticleCreatePayload>({
       query: (payload) => ({
         url: '/articles/',
         method: 'POST',
@@ -110,10 +102,8 @@ export const {
   useGetArticleAllQuery,
   useSearchArticlesQuery,
   useGetArticleByUserQuery,
-  useGetDraftsQuery,
-  useGetArticleByStateQuery,
   useGetArticleQuery,
-  useAddArticleMutation,
+  useCreateArticleMutation,
   useUpdateArticleMutation,
   usePublishArticleMutation,
   useUnpublishArticleMutation,

@@ -4,7 +4,7 @@ import { ArticleState } from '@/enums';
 export interface ArticleResponse {
   id: number;
   title: string;
-  content: string;
+  htmlContent: string;
   summary?: string;
   slug?: string;
   coverImage?: string | null;
@@ -17,14 +17,15 @@ export interface ArticleResponse {
 
 export interface ArticleCreatePayload {
   title: string;
-  content: string;
+  htmlContent: string;
   summary?: string;
   tags?: string[];
 }
 
 export interface ArticleUpdatePayload {
   title?: string;
-  content?: string;
+  htmlContent?: string;
+  coverImage: string | null
   summary?: string;
   tags?: string[];
   state?: ArticleState;
