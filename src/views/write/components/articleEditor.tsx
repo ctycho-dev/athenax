@@ -183,6 +183,7 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
 
     // ✅ Handle divider insertion
     const handleDividerInsert = () => {
+        if (!editor) return;
         editor
             .chain()
             .focus()
