@@ -13,6 +13,7 @@ export const researchApi = api.injectEndpoints({
 
       getResearchByUser: builder.query<ResearchType[], void>({
          query: () => '/research/user/',
+         providesTags: ['Research'],
       }),
 
       getResearchByState: builder.query<ResearchType[], string>({

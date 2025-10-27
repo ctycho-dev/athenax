@@ -12,7 +12,7 @@ export const Header: React.FC<HeaderProps> = ({ }) => {
         <header className="flex flex-col justify-center py-12">
             <div className="flex justify-center">
                 {/* <img src={logoWhite} alt="" className="w-[165px] md:w-[206px]" /> */}
-                <img src="https://mypinx.store/Logo%20Blue%2BWhite.png" className="h-28" alt="" />
+                <img src="https://scholarx.mypinx.store/Logo%20Blue%2BWhite.png" className="h-28" alt="" />
             </div>
         </header>
     )

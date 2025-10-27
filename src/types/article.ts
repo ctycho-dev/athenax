@@ -1,23 +1,36 @@
-// types/article.ts
+// src/types/article.ts
+import { ArticleState } from '@/enums';
 
 export interface ArticleResponse {
-    id: string;
-    title: string;
-    slug: string;
-    html_content: string;
-    type: 'audit' | 'research';
-    state: string;
-    created_by: string;
-    created_at: string;
-    updated_at: string;
+  id: number;
+  title: string;
+  htmlContent: string;
+  summary?: string;
+  slug?: string;
+  coverImage?: string | null;
+  tags?: string[];
+  state: ArticleState;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ArticleCreatePayload {
-    title: string;
-    slug: string;
-    html_content: string;
-    type: 'audit' | 'research';
-    state?: string;
-    related_audit_ids?: string[];
-    related_research_ids?: string[];
+  title: string;
+  htmlContent: string;
+  summary?: string;
+  tags?: string[];
+}
+
+export interface ArticleUpdatePayload {
+  title?: string;
+  htmlContent?: string;
+  coverImage: string | null
+  summary?: string;
+  tags?: string[];
+  state?: ArticleState;
+}
+
+export interface CreateDraftRequest {
+  title: string;
 }

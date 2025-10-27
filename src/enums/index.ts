@@ -15,7 +15,9 @@ export enum ReportState {
 }
 
 export enum ArticleState {
-    DRAFT = 'Draft',
-    PUBLISHED = 'Published',
-    ARCHIVED = "Archived"
+    DRAFT = 'draft',
+    PUBLISHED = 'published',
+    ARCHIVED = 'archived',
 }
+
+export type SaveStatus = 'saved' | 'saving' | 'unsaved' | 'error';

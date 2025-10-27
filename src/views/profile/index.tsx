@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { usePageColorScheme } from '@/hooks/usePageTheme';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -10,13 +11,11 @@ import { useGetMyProfileQuery } from "@/services/profileApi";
 
 export const Profile: React.FC = () => {
   usePageColorScheme('light');
-
+  // const navigate = useNavigate();
+  
   const { data: user, loading: userLoading } = useSelector((state: RootState) => state.user);
   const { data: profile, isLoading: profileLoading } = useGetMyProfileQuery()
 
-  useEffect(() => {
-    console.log(profile)
-  }, [profile])
 
   return (
     <main className="min-h-screen flex text-white">

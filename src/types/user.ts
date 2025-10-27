@@ -27,24 +27,23 @@ export interface OAuthAccount {
 
 export interface IUserUpdate {
     account_type: string | null
-    has_profile: boolean
     has_accepted_terms: boolean
     is_guest: boolean
+    hasProfile: boolean
 }
 
 export interface IUser {
+    id: number
     privy_id: string;
     email?: string;
 
     wallets?: Wallet[];
-    oauth_accounts?: OAuthAccount[];
     metadata?: Record<string, any>;
     role: UserRole;
 
     has_accepted_terms: boolean
     is_guest: boolean
 
-    account_type: string
-    has_profile: boolean
+    hasProfile: boolean
     created_at: string;
 }

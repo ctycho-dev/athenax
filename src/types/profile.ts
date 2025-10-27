@@ -1,4 +1,4 @@
-// Enums/union types that match your backend literals
+// Updated frontend types to match backend camelCase output
 export type AccountType = 'Publisher' | 'Project' | 'Personal use';
 export type OrganizationType = 'Startup' | 'Lab' | 'Corporate';
 
@@ -8,59 +8,52 @@ export const ACCOUNT_TYPE_OPTIONS = [
   { label: "Personal use (Individual researcher writing for themselves)", value: "Personal use" as AccountType }
 ];
 
-
 interface ProfileBase {
-  // public display
   username: string | null;
   name: string | null;
   location: string | null;
   bio: string | null;
-  profile_image: string | null;
-  display_role: string;
+  profileImage: string | null;
+  displayRole: string;
 
-  // socials
   github: string | null;
   twitter: string | null;
   linkedin: string | null;
   instagram: string | null;
   discord: string | null;
-  google_scholar: string | null;
+  googleScholar: string | null;
   orcid: string | null;
   researchgate: string | null;
   website: string | null;
-  cmc_cg: string | null;
+  cmcCg: string | null;
 
-  // publisher
-  organization_name: string | null;
-  institution_name: string | null;
-  verification_status: boolean;
+  organizationName: string | null;
+  institutionName: string | null;
+  verificationStatus: boolean;
 
-  // project
-  organization_type: OrganizationType | null;
+  // project - NOW ALL CAMELCASE ✅
+  organizationType: OrganizationType | null;
   mission: string | null;
-  team_size: number | null;
-  founded_year: number | null;
-
-  // personal
-  current_affiliation: string | null;
+  teamSize: number | null;
+  foundedYear: number | null;
+  currentAffiliation: string | null;
   interests: string[];
 }
 
-// Extend for specific use cases
 export interface ProfileCreate extends ProfileBase {
-  user_id: string | null;
-  account_type: AccountType | null;
+  userId: string | null;
+  accountType: AccountType | null;
 }
 
 export interface ProfileUpdate extends Partial<ProfileBase> {
-  account_type?: AccountType | null;
-  website_url?: string | null;
+  accountType?: AccountType | null;
+  websiteUrl?: string | null;
 }
 
 export interface ProfileOut extends ProfileBase {
-  id: string;
-  user_id: string;
-  account_type: AccountType;
-  website_url: string | null;
-  created_at: string;
+  id: number
+  userId: number; 
+  accountType: AccountType;
+  websiteUrl: string | null;
+  createdAt: string;
 }

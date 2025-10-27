@@ -168,6 +168,7 @@ export const ResearchForm: React.FC<ResearchFormProps> = () => {
                     });
                 }
                 else {
+                    console.log(form.values)
                     const response = await addResearchForm(form.values).unwrap();
     
                     if (response && response.success) {

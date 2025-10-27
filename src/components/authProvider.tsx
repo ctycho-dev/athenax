@@ -49,7 +49,6 @@ export const AuthProvider = () => {
                         dispatch(setUser(newUser));
                      } catch (creationError) {
                         console.error('User creation failed:', creationError);
-                        // Consider additional error handling here
                      }
                   } else {
                      throw fetchError;

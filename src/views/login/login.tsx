@@ -31,12 +31,15 @@ export const Login: React.FC = () => {
 
 
    useEffect(() => {
-      if (ready && authenticated) {
-         const lastPath = getLastPath();
-         clearLastPath();
-         navigate(lastPath || DEFAULT_REDIRECT, { replace: true });
-      }
-   }, [ready, authenticated])
+   console.log('🔑 Login useEffect:', { ready, authenticated, path: window.location.pathname });
+   
+   if (ready && authenticated) {
+      const lastPath = getLastPath();
+      clearLastPath();
+      console.log('🔄 Login: Redirecting to:', lastPath || DEFAULT_REDIRECT);
+      navigate(lastPath || DEFAULT_REDIRECT, { replace: true });
+   }
+}, [ready, authenticated, navigate]) // Add proper dependencies
 
    const onAuthComplete = (isNewUser: boolean) => {
       const lastPath = getLastPath();
@@ -104,7 +107,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="metamask"
                   label="Metamask"
-                  icon={<img src="https://mypinx.store/metamask_logo.svg" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/metamask_logo.svg" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}
@@ -112,7 +115,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="coinbase_wallet"
                   label="Coinbase"
-                  icon={<img src="https://mypinx.store/coinbase_icon.svg" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/coinbase_icon.svg" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}
@@ -120,7 +123,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="wallet_connect"
                   label="Wallet Connect"
-                  icon={<img src="https://mypinx.store/walletconnect-seeklogo.png" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/walletconnect-seeklogo.png" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}
@@ -128,7 +131,7 @@ export const Login: React.FC = () => {
                <WalletConnectButton
                   walletId="phantom"
                   label="Phantom"
-                  icon={<img src="https://mypinx.store/phantom-icon.svg" className="h-5 w-5" />}
+                  icon={<img src="https://scholarx.mypinx.store/phantom-icon.svg" className="h-5 w-5" />}
                   ensurePreloginStored={ensureStored}
                   onAuthComplete={(/* isNew */) => navigate(resolve(DEFAULT_REDIRECT), { replace: true })}
                   disabled={disableLogin}

@@ -70,15 +70,15 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
         },
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
-            setTimeout(() => updatePlusButtonPosition(), 10);
+            updatePlusButtonPosition();
         },
         onSelectionUpdate: ({ editor }) => {
             updateToolbarPosition();
-            setTimeout(() => updatePlusButtonPosition(), 10);
+            updatePlusButtonPosition();
         },
         onFocus: () => {
             updateToolbarPosition();
-            setTimeout(() => updatePlusButtonPosition(), 10);
+            updatePlusButtonPosition();
         },
         onBlur: ({ event }) => {
             const relatedTarget = event.relatedTarget as Element;
@@ -115,14 +115,15 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
         setShowToolbar(true);
     };
 
-    // ✅ Update plus button position - only show on empty paragraphs
-    const updatePlusButtonPosition = () => {
+    // Update plus button position to be beside current paragraph
+      const updatePlusButtonPosition = () => {
         if (!editor || !editor.view.hasFocus()) {
-            setCurrentParagraph(null);
-            return;
+          setCurrentParagraph(null);
+          return;
         }
 
         const { from } = editor.view.state.selection;
+        const pos = editor.view.coordsAtPos(from);
 
         // Find the current paragraph element
         const domAtPos = editor.view.domAtPos(from);
@@ -130,32 +131,23 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
 
         // Navigate up to find the paragraph element
         while (paragraph && paragraph.tagName !== 'P' && paragraph.parentElement) {
-            paragraph = paragraph.parentElement;
+          paragraph = paragraph.parentElement;
         }
 
-        // ✅ Only show plus button if paragraph is empty
         if (paragraph && paragraph.tagName === 'P') {
-            const isEmpty = paragraph.textContent?.trim() === '' || paragraph.innerHTML === '<br>';
+          const rect = paragraph.getBoundingClientRect();
+          const editorRect = editor.view.dom.getBoundingClientRect();
 
-            if (isEmpty) {
-                const rect = paragraph.getBoundingClientRect();
-                const editorRect = editor.view.dom.getBoundingClientRect();
+          setPlusPosition({
+            top: rect.top + rect.height / 2,
+            left: editorRect.left - 60, // Position to the left of content
+          });
 
-                setPlusPosition({
-                    top: rect.top + rect.height / 2,
-                    left: editorRect.left - 60, // Position to the left of content
-                });
-
-                setCurrentParagraph(paragraph);
-            } else {
-                setCurrentParagraph(null);
-            }
-        } else {
-            setCurrentParagraph(null);
+          setCurrentParagraph(paragraph);
         }
-    };
+      };
 
-    // ✅ Simplified image upload that always works
+    // Handle image upload
     const handleImageUpload = async (file: File) => {
         try {
             const result = await uploadImage({
@@ -165,31 +157,12 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
             }).unwrap();
 
             if (editor && result.publicUrl) {
-                // Insert image and immediately add paragraph after it
-                editor
-                    .chain()
-                    .focus()
-                    .setImage({ src: result.publicUrl })
-                    .insertContent('<p class="medium-paragraph"><br></p>') // Add empty paragraph
-                    .run();
-
+                editor.chain().focus().setImage({ src: result.publicUrl }).run();
                 toast.success('Image uploaded successfully');
             }
         } catch (error) {
             toast.error('Failed to upload image');
         }
-        setShowPlusMenu(false);
-    };
-
-    // ✅ Handle divider insertion
-    const handleDividerInsert = () => {
-        if (!editor) return;
-        editor
-            .chain()
-            .focus()
-            .setHorizontalRule()
-            .insertContent('<p class="medium-paragraph"><br></p>') // Add empty paragraph after divider
-            .run();
         setShowPlusMenu(false);
     };
 
@@ -213,7 +186,7 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
     if (!editor) return null;
 
     return (
-        <div>
+        <div className="medium-editor-wrapper">
             {/* Floating Toolbar - appears above selection */}
             {showToolbar && (
                 <div
@@ -225,11 +198,11 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
                         transform: 'translateX(-50%)',
                     }}
                 >
-                    <FloatingToolbar editor={editor} />
+                    <FloatingToolbar editor={editor} onImageUpload={handleImageUpload} />
                 </div>
             )}
 
-            {/* Plus Button - only on empty paragraphs */}
+            {/* Plus Button - beside current paragraph */}
             {currentParagraph && (
                 <div
                     className="plus-button-container"
@@ -249,60 +222,49 @@ const MediumEditor: React.FC<MediumEditorProps> = ({
 
                     {showPlusMenu && (
                         <div className="plus-menu">
-                            <div className="menu-row">
-                                <button
-                                    onClick={() => {
-                                        const input = document.createElement('input');
-                                        input.type = 'file';
-                                        input.accept = 'image/*';
-                                        input.onchange = (e) => {
-                                            const file = (e.target as HTMLInputElement).files?.[0];
-                                            if (file) handleImageUpload(file);
-                                        };
-                                        input.click();
-                                    }}
-                                    className="menu-item-icon"
-                                    title="Upload Image"
-                                >
-                                    <ImageIcon />
-                                </button>
-
-                                <button
-                                    onClick={handleDividerInsert}
-                                    className="menu-item-icon"
-                                    title="Insert Divider"
-                                >
-                                    <DividerIcon />
-                                </button>
-
-                                <button
-                                    onClick={() => {
-                                        editor.chain().focus().toggleCodeBlock().run();
-                                        setShowPlusMenu(false);
-                                    }}
-                                    className="menu-item-icon"
-                                    title="Code Block"
-                                >
-                                    <CodeIcon />
-                                </button>
-                            </div>
+                            <button
+                                onClick={() => {
+                                    const input = document.createElement('input');
+                                    input.type = 'file';
+                                    input.accept = 'image/*';
+                                    input.onchange = (e) => {
+                                        const file = (e.target as HTMLInputElement).files?.[0];
+                                        if (file) handleImageUpload(file);
+                                    };
+                                    input.click();
+                                }}
+                                className="menu-item"
+                            >
+                                <ImageIcon /> Photo
+                            </button>
+                            <button
+                                onClick={() => {
+                                    editor.chain().focus().setHorizontalRule().run();
+                                    setShowPlusMenu(false);
+                                }}
+                                className="menu-item"
+                            >
+                                <DividerIcon /> Divider
+                            </button>
                         </div>
                     )}
                 </div>
-            )
-            }
+            )}
 
             {/* Editor Content */}
             <EditorContent
                 editor={editor}
                 className="medium-editor"
             />
-        </div >
+        </div>
     );
 };
 
 // Floating Toolbar Component (simplified)
-const FloatingToolbar: React.FC<{ editor: Editor }> = ({ editor }) => {
+const FloatingToolbar: React.FC<{
+    editor: Editor;
+    onImageUpload: (file: File) => void;
+}> = ({ editor }) => {
     return (
         <div className="toolbar-content">
             <button
@@ -393,12 +355,5 @@ const DividerIcon = () => (
         <path d="M2 8h12v1H2V8z" />
     </svg>
 );
-
-const CodeIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z" />
-    </svg>
-);
-
 
 export default MediumEditor;

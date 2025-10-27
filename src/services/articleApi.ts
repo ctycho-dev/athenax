@@ -1,44 +1,111 @@
+// src/services/articleApi.ts
 import { api } from './api';
-import { ArticleResponse, ArticleCreatePayload } from '@/types/article';
+import { ArticleResponse, ArticleCreatePayload, ArticleUpdatePayload } from '@/types/article';
 import { ArticleState } from '@/enums';
 
 export const articleApi = api.injectEndpoints({
-    endpoints: (builder) => ({
-        // GET /article/
-        getArticleAll: builder.query<ArticleResponse[], void>({
-            query: () => '/article/',
-        }),
-
-        // GET /article/user/
-        getArticleByUser: builder.query<ArticleResponse[], void>({
-            query: () => '/article/user/',
-        }),
-
-        // GET /article/state/{state}
-        getArticleByState: builder.query<ArticleResponse[], ArticleState>({
-            query: (state) => `/article/state/${state}`,
-        }),
-
-        // GET /article/{id}
-        getArticle: builder.query<ArticleResponse, string>({
-            query: (id) => `/article/${id}`,
-        }),
-
-        // POST /article/
-        addArticle: builder.mutation<any, ArticleCreatePayload>({
-            query: (form) => ({
-                url: '/article/',
-                method: 'POST',
-                body: form,
-            }),
-        }),
+  endpoints: (builder) => ({
+    // GET /articles/ - Get all published articles (public)
+    getArticleAll: builder.query<ArticleResponse[], void>({
+      query: () => '/articles/',
+      providesTags: ['Article'],
     }),
+
+    // GET /articles/search?q=term
+    searchArticles: builder.query<ArticleResponse[], string>({
+      query: (searchTerm) => `/articles/search?q=${encodeURIComponent(searchTerm)}`,
+      providesTags: ['Article'],
+    }),
+
+    // GET /articles/user/ - Get current user's articles
+    getArticleByUser: builder.query<ArticleResponse[], { state?: ArticleState }>({
+      query: (params = {}) => {
+        const searchParams = new URLSearchParams();
+        if (params.state) searchParams.append('state', params.state);
+        return `/articles/user/?${searchParams}`;
+      },
+      providesTags: ['UserArticle'],
+    }),
+
+    // GET /articles/{id} - Get single article
+    getArticle: builder.query<ArticleResponse, number>({
+      query: (id) => `/articles/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Article', id }],
+    }),
+
+    // POST /articles/ - Create new article
+    createArticle: builder.mutation<ArticleResponse, ArticleCreatePayload>({
+      query: (payload) => ({
+        url: '/articles/',
+        method: 'POST',
+        body: payload,
+      }),
+      invalidatesTags: ['UserArticle', 'UserDraft'],
+    }),
+
+    // PUT /articles/{id} - Update article
+    updateArticle: builder.mutation<ArticleResponse, { id: number } & ArticleUpdatePayload>({
+      query: ({ id, ...body }) => ({
+        url: `/articles/${id}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (result, error, { id }) => [
+        { type: 'Article', id },
+        'UserArticle',
+        'UserDraft',
+      ],
+    }),
+
+    // PATCH /articles/{id}/publish - Publish article
+    publishArticle: builder.mutation<ArticleResponse, number>({
+      query: (id) => ({
+        url: `/articles/${id}/publish`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: (result, error, id) => [
+        { type: 'Article', id },
+        'UserArticle',
+        'UserDraft',
+      ],
+    }),
+
+    // PATCH /articles/{id}/unpublish - Unpublish article
+    unpublishArticle: builder.mutation<ArticleResponse, number>({
+      query: (id) => ({
+        url: `/articles/${id}/unpublish`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: (result, error, id) => [
+        { type: 'Article', id },
+        'UserArticle',
+        'UserDraft',
+      ],
+    }),
+
+    // DELETE /articles/{id} - Delete article
+    deleteArticle: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `/articles/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, id) => [
+        { type: 'Article', id },
+        'UserArticle',
+        'UserDraft',
+      ],
+    }),
+  }),
 });
 
 export const {
-    useGetArticleAllQuery,
-    useGetArticleByUserQuery,
-    useGetArticleByStateQuery,
-    useGetArticleQuery,
-    useAddArticleMutation,
+  useGetArticleAllQuery,
+  useSearchArticlesQuery,
+  useGetArticleByUserQuery,
+  useGetArticleQuery,
+  useCreateArticleMutation,
+  useUpdateArticleMutation,
+  usePublishArticleMutation,
+  useUnpublishArticleMutation,
+  useDeleteArticleMutation,
 } = articleApi;

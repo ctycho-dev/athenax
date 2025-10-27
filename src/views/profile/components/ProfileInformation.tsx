@@ -121,8 +121,9 @@ export const ProfileInformation: React.FC<ProfileInformationProps> = ({
 
       <div className="flex flex-col md:flex-row gap-8">
         <ProfileAvatar
-          src={isEditing ? editData.profile_image : profile.profile_image}
+          src={isEditing ? editData.profileImage : profile.profileImage}
           name={isEditing ? editData.name : profile.name}
+          profile={profile}
           onUpload={handleAvatarUpload}
         />
         <div className="flex-1 space-y-4">
@@ -131,13 +132,13 @@ export const ProfileInformation: React.FC<ProfileInformationProps> = ({
               <div>
                 <h3 className="text-2xl font-bold text-white">{profile.name}</h3>
                 <p className="text-gray-400">{profile.username}</p>
-                <p className="text-blue-400 font-medium">{profile.display_role}</p>
+                <p className="text-blue-400 font-medium">{profile.displayRole}</p>
               </div>
               <div className="flex flex-wrap gap-4 text-sm text-gray-400">
                 {profile.location &&
                   <div className="flex items-center"><FiMapPin className="mr-2" />{profile.location}</div>
                 }
-                <div className="flex items-center"><FiCalendar className="mr-2" />Joined {profile.created_at ? format(parseISO(profile.created_at), "MMMM yyyy") : ""}</div>
+                <div className="flex items-center"><FiCalendar className="mr-2" />Joined {profile.createdAt ? format(parseISO(profile.createdAt), "MMMM yyyy") : ""}</div>
                 {user.email && <div className="flex items-center"><FiMail className="mr-2" />{user.email}</div>}
               </div>
             </>
@@ -161,7 +162,7 @@ export const ProfileInformation: React.FC<ProfileInformationProps> = ({
                 <TextInput
                   label="Role"
                   placeholder="What is your role?"
-                  value={editData.display_role}
+                  value={editData.displayRole}
                   disabled
                 // onChange={e => setEditData({ ...editData, role: e.currentTarget.value })}
                 />
