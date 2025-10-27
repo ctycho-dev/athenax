@@ -95,7 +95,7 @@ export const Footer: React.FC<FooterProps> = ({ formRef }) => {
                     <Link to={'https://x.com/athenax_co?s=21'} target="_blank">
                         <BsTwitterX className="text-2xl text-dark-2 hover:text-gray-600" />
                     </Link>
-                    <Link to={'https://x.com/athenax_co?s=21'} target="_blank">
+                    <Link to={'https://www.linkedin.com/company/athenaxco/'} target="_blank">
                         <FaLinkedin className="text-2xl text-dark-2 hover:text-gray-600" />
                     </Link>
                     {/* <BsDiscord className="text-2xl text-dark-2 hover:text-gray-600" /> */}
