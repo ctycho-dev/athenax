@@ -47,32 +47,118 @@ export const Main: React.FC<MainProps> = memo(({ scrollToWishlist }) => {
                 </CustomButton>
             </div>
             <div className="relative md:static w-full flex justify-center">
-                {/* Desktop Dashboard */}
-                <picture className="hidden md:block">
-                    <source srcSet={`${s3('jxcu7h6ekk5nnbvuozrdvlagpn5q/athenax/main/dashboard-2x.webp')} 2x, ${s3('jvf3wrr444zuojs5ropfpgjcxsdq/athenax/main/dashboard-4x.webp')} 3x`} type="image/webp" />
-                    <source srcSet={`${s3('jv6pwbryumbrh4exwx62mmofzyva/athenax/main/dashboard-2x.png')} 2x, ${s3('juqgij4hyhdqpz2vyg5iwzpgiq5a/athenax/main/dashboard-4x.png')} 3x`} type="image/png" />
-                    <img src={s3('juid2k5cvcmqgxiom2mrazlnokwq/athenax/dashboard-4x.png')} srcSet={`${s3('jv6pwbryumbrh4exwx62mmofzyva/athenax/main/dashboard-2x.png')} 2x, ${s3('juqgij4hyhdqpz2vyg5iwzpgiq5a/athenax/main/dashboard-4x.png')} 3x`} alt="Dashboard" />
+                <picture>
+                    {/* Desktop Dashboard - only loads on desktop */}
+                    <source
+                        srcSet={`${s3('home/main/dashboard-2x.webp')} 2x, ${s3('home/main/dashboard-4x.webp')} 3x`}
+                        type="image/webp"
+                        media="(min-width: 768px)"
+                    />
+                    <source
+                        srcSet={`${s3('home/main/dashboard-2x.png')} 2x, ${s3('home/main/dashboard-4x.png')} 3x`}
+                        type="image/png"
+                        media="(min-width: 768px)"
+                    />
+
+                    {/* Mobile Dashboard - only loads on mobile */}
+                    <source
+                        srcSet={`${s3('home/main/mdash-2x.webp')} 2x, ${s3('home/main/mdash-4x.webp')} 3x`}
+                        type="image/webp"
+                    />
+                    <source
+                        srcSet={`${s3('home/main/mdash-2x.png')} 2x, ${s3('home/main/mdash-4x.png')} 3x`}
+                        type="image/png"
+                    />
+
+                    {/* Fallback */}
+                    <img
+                        src={s3('home/main/mdash-4x.png')}
+                        alt="Dashboard"
+                        fetchPriority="high"
+                        loading="eager"
+                        className="w-full"
+                    />
                 </picture>
+                {/* Desktop Dashboard */}
+                {/* <picture className="hidden md:block">
+                    <source
+                        srcSet={`${s3('home/main/dashboard-2x.webp')} 2x, ${s3('home/main/dashboard-4x.webp')} 3x`}
+                        type="image/webp"
+                        media="(min-width: 768px)"
+                    />
+                    <source
+                        srcSet={`${s3('home/main/dashboard-2x.png')} 2x, ${s3('home/main/dashboard-4x.png')} 3x`}
+                        type="image/png"
+                        media="(min-width: 768px)"
+                    />
+                    <img
+                        src={s3('home/main/dashboard-4x.png')}
+                        srcSet={`${s3('home/main/dashboard-2x.png')} 2x, ${s3('home/main/dashboard-4x.png')} 3x`}
+                        alt="Dashboard"
+                        fetchPriority="high"
+                        loading="eager"
+                    />
+                </picture> */}
 
                 {/* Mobile Dashboard */}
-                <picture className="md:hidden w-full">
-                    <source srcSet={`${s3('jxuf3w4gbitvjmy4d73yvzn6v7fa/athenax/main/mdash-2x.webp')} 2x, ${s3('juylot4hmsoa7eluckw6e34lbfoq/athenax/main/mdash-4x.webp')} 3x`} type="image/webp" />
-                    <source srcSet={`${s3('jwcgimkwfgcly6sikoa3an4trrga/athenax/main/mdash-2x.png')} 2x, ${s3('jwdep2aj5s6k5kogrwxcok5bppwa/athenax/main/mdash-4x.png')} 3x`} type="image/png" />
-                    <img src={s3('jwdep2aj5s6k5kogrwxcok5bppwa/athenax/main/mdash-4x.png')} srcSet={`${s3('jwcgimkwfgcly6sikoa3an4trrga/athenax/main/mdash-2x.png')} 2x, ${s3('jwdep2aj5s6k5kogrwxcok5bppwa/athenax/main/mdash-4x.png')} 3x`} alt="Dashboard" />
-                </picture>
+                {/* <picture className="md:hidden w-full">
+                    <source
+                        srcSet={`${s3('home/main/mdash-2x.webp')} 2x, ${s3('home/main/mdash-4x.webp')} 3x`}
+                        type="image/webp"
+                        media="(max-width: 767px)"
+                    />
+                    <source
+                        srcSet={`${s3('home/main/mdash-2x.png')} 2x, ${s3('home/main/mdash-4x.png')} 3x`}
+                        type="image/png"
+                        media="(max-width: 767px)"
+                    />
+                    <img
+                        src={s3('home/main/mdash-4x.png')}
+                        srcSet={`${s3('home/main/mdash-2x.png')} 2x, ${s3('home/main/mdash-4x.png')} 3x`}
+                        alt="Dashboard"
+                    />
+                </picture> */}
+
+                {/* <picture className="absolute -z-10 left-1/2 top-52 md:top-72 -translate-x-1/2 -translate-y-1/2 max-w-full md:max-w-3xl">
+                    <source
+                        srcSet={s3('home/main/circle.webp')}
+                        type="image/webp"
+                        media="(min-width: 768px)"
+                    />
+                    <source
+                        srcSet={s3('home/main/circle.png')}
+                        type="image/png"
+                        media="(min-width: 768px)"
+                    />
+
+                    <source
+                        srcSet={s3('home/main/mcircle.webp')}
+                        type="image/webp"
+                    />
+                    <source
+                        srcSet={s3('home/main/mcircle.png')}
+                        type="image/png"
+                    />
+
+                    <img
+                        src={s3('home/main/mcircle.png')}
+                        alt=""
+                        fetchPriority="low"
+                    />
+                </picture> */}
 
                 {/* Desktop Gradient */}
                 <picture className="hidden md:block absolute -z-10 left-1/2 top-52 md:top-72 -translate-x-1/2 -translate-y-1/2 max-w-full md:max-w-3xl">
-                    <source srcSet={s3('jud5sldjbjeceowcua5gkd2wy5za/athenax/main/circle.webp')} type="image/webp" />
-                    <source srcSet={s3('jvds2zvojcry6qnhimc4ijbhii3a/athenax/main/circle.png')} type="image/png" />
-                    <img src={s3('jvds2zvojcry6qnhimc4ijbhii3a/athenax/main/circle.png')} alt="" />
+                    <source srcSet={s3('home/main/circle.webp')} type="image/webp" media="(min-width: 768px)" />
+                    <source srcSet={s3('home/main/circle.png')} type="image/png" media="(min-width: 768px)" />
+                    <img src={s3('home/main/circle.png')} alt="" />
                 </picture>
 
                 {/* Mobile Gradient */}
                 <picture className="md:hidden absolute -z-10 left-0 right-0 w-full -top-1/4 scale-125">
-                    <source srcSet={s3('jvfkgkmazgf3gru5ijfarc5o3waq/athenax/main/mcircle.webp')} type="image/webp" />
-                    <source srcSet={s3('jwk5552zlcanxzurhq6ur4dmwoiq/athenax/main/mcircle.png')} type="image/png" />
-                    <img src={s3('jwk5552zlcanxzurhq6ur4dmwoiq/athenax/main/mcircle.png')} alt="" />
+                    <source srcSet={s3('home/main/mcircle.webp')} type="image/webp" media="(max-width: 767px)" />
+                    <source srcSet={s3('home/main/mcircle.png')} type="image/png" media="(max-width: 767px)" />
+                    <img src={s3('home/main/mcircle.png')} alt="" />
                 </picture>
             </div>
         </main>

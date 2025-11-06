@@ -3,12 +3,9 @@ import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import CustomSection from "@/views/home/components/customSection";
 import { s3 } from '@/utils';
 
-// import gradient from '@/assets/home/desc-gradient.png'
-
 
 // const paragraph = 'Athena X is a cryptocurrency research and data analytics platform with a mission to bring transparency to the cryptoeconomy. It targets investors, regulators, founders, builders, business developers, and professional services in the crypto space, offering tools to navigate the complex cryptocurrency landscape.'
 const paragraph = 'Athena X is a cryptocurrency data and research analytics platform built to bring transparency to the cryptoeconomy. We empower investors, regulators, founders, builders, business developers, and service professionals with powerful tools to navigate the complex world of crypto. Our mission is to simplify insights, support smarter decisions, and shape a more transparent digital asset landscape.'
-
 
 
 interface DescriptionProps { }
@@ -60,9 +57,14 @@ export const Description: React.FC<DescriptionProps> = ({ }) => {
         </div>
       </CustomSection>
       <picture>
-        <source srcSet={s3('jubytcdptnushzbz3frhn5ez7vda/athenax/description-gradient.webp')} type="image/webp" />
-        <source srcSet={s3('jvj2rauokxbycdjhh4iv5zvc4wja/athenax/description-gradient.png')} type="image/png" />
-        <img src={s3('jvj2rauokxbycdjhh4iv5zvc4wja/athenax/description-gradient.png')} srcSet={s3('jvj2rauokxbycdjhh4iv5zvc4wja/athenax/description-gradient.png')} alt="Desc gradient" className="-z-10 absolute right-0 bottom-0 translate-y-1/3 w-4xl" />
+        <source srcSet={s3('home/description/description-gradient.webp')} type="image/webp" />
+        <source srcSet={s3('home/description/description-gradient.png')} type="image/png" />
+        <img
+          src={s3('home/description/description-gradient.png')}
+          srcSet={s3('home/description/description-gradient.png')}
+          alt="Desc gradient"
+          className="-z-10 absolute right-0 bottom-0 translate-y-1/3 w-4xl"
+        />
       </picture>
     </div>
   )
