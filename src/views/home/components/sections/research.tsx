@@ -25,12 +25,12 @@ export const Research: React.FC<ResearchProps> = () => {
                 <Card className="p-6 md:p-10 flex flex-col justify-between">
                     <div className="flex justify-center -mr-6 md:-mr-10">
                         <picture>
-                            <source srcSet={s3("ju2w2pwwq3t7q4qtotibpugp4oxq/athenax/research/fees.webp")} type="image/webp" />
-                            <source srcSet={s3("jw4tpfuylnazzkngfpvffpsny3eq/athenax/research/fees.png")} type="image/png" />
+                            <source srcSet={s3('home/research/fees.webp')} type="image/webp" />
+                            <source srcSet={s3('home/research/fees.png')} type="image/png" />
                             <img
-                                src={s3("jw4tpfuylnazzkngfpvffpsny3eq/athenax/research/fees.png")}
-                                srcSet={s3("jw4tpfuylnazzkngfpvffpsny3eq/athenax/research/fees.png")}
-                                alt="News"
+                                src={s3('home/research/fees.png')}
+                                srcSet={s3('home/research/fees.png')}
+                                alt="TVL and Revenue Dashboard"
                             />
                         </picture>
                     </div>
@@ -44,12 +44,12 @@ export const Research: React.FC<ResearchProps> = () => {
                 <Card className="p-6 md:p-10 flex flex-col justify-between">
                     <div className="flex justify-center  -mr-6 md:-mr-10">
                         <picture>
-                            <source srcSet={s3("juvjf2t434ghmlga7oo7qskdlcxq/athenax/research/token.webp")} type="image/webp" />
-                            <source srcSet={s3("jwt72edk7q4igwwh46qds6ldydsq/athenax/research/token.png")} type="image/png" />
+                            <source srcSet={s3('home/research/token.webp')} type="image/webp" />
+                            <source srcSet={s3('home/research/token.png')} type="image/png" />
                             <img
-                                src={s3("jwt72edk7q4igwwh46qds6ldydsq/athenax/research/token.png")}
-                                srcSet={s3("jwt72edk7q4igwwh46qds6ldydsq/athenax/research/token.png")}
-                                alt="News"
+                                src={s3('home/research/token.png')}
+                                srcSet={s3('home/research/token.png')}
+                                alt="Token Unlocks Dashboard"
                             />
                         </picture>
                     </div>

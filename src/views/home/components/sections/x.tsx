@@ -61,12 +61,12 @@ export const X: React.FC<XProps> = () => {
                 className="max-h-[180px] lg:max-h-[227px] -mr-[20%] -mt-[10%] z-[2]"
               />
               <picture>
-                <source srcSet={s3("jw4svo7bhaz4crrajogzytmkd3lq/athenax/x/followers.webp")} type="image/webp" />
-                <source srcSet={s3("jvjf4wr2gbuog2vsupvi3e23osoq/athenax/x/followers.png")} type="image/png" />
+                <source srcSet={s3('home/x/followers.webp')} type="image/webp" />
+                <source srcSet={s3('home/x/followers.png')} type="image/png" />
                 <img
-                  src={s3("jvjf4wr2gbuog2vsupvi3e23osoq/athenax/x/followers.png")}
-                  srcSet={s3("jvjf4wr2gbuog2vsupvi3e23osoq/athenax/x/followers.png")}
-                  alt="Dashboard"
+                  src={s3('home/x/followers.png')}
+                  srcSet={s3('home/x/followers.png')}
+                  alt="Followers Analytics"
                   className="max-h-[190px] lg:max-h-[233px] absolute bottom-2 lg:bottom-0 left-10"
                 />
               </picture>
@@ -80,23 +80,17 @@ export const X: React.FC<XProps> = () => {
             {/* Mobile */}
             <picture className="flex justify-center md:hidden w-full">
               <source
-                srcSet={`${s3("jxbx2bk3mb6crq4ooucdthvis7tq/athenax/x/x-2x.webp")} 2x, ${s3(
-                  "jx7n4jtbuaga7q7hc5zfxrz36v5q/athenax/x/x-3x.webp"
-                )} 3x`}
+                srcSet={`${s3('home/x/x-2x.webp')} 2x, ${s3('home/x/x-3x.webp')} 3x`}
                 type="image/webp"
               />
               <source
-                srcSet={`${s3("jx34skqr5fbvr46f3t2gcx6slgea/athenax/x/x-2x.png")} 2x, ${s3(
-                  "juduffrluxgs5urc6q2ds3fzupgq/athenax/x/x-3x.png"
-                )} 3x`}
+                srcSet={`${s3('home/x/x-2x.png')} 2x, ${s3('home/x/x-3x.png')} 3x`}
                 type="image/png"
               />
               <img
-                src={s3("juduffrluxgs5urc6q2ds3fzupgq/athenax/x/x-3x.png")}
-                srcSet={`${s3("jx34skqr5fbvr46f3t2gcx6slgea/athenax/x/x-2x.png")} 2x, ${s3(
-                  "juduffrluxgs5urc6q2ds3fzupgq/athenax/x/x-3x.png"
-                )} 3x`}
-                alt="News"
+                src={s3('home/x/x-3x.png')}
+                srcSet={`${s3('home/x/x-2x.png')} 2x, ${s3('home/x/x-3x.png')} 3x`}
+                alt="Twitter Analytics"
               />
             </picture>
           </div>

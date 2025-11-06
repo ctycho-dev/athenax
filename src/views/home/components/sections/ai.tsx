@@ -27,16 +27,16 @@ export const AI: React.FC<AIProps> = () => {
             <div className="flex justify-center">
               <picture>
                 <source
-                  srcSet={`${s3("jvvfs2xh7wjofaxtzdp4w3rsd5aa/athenax/ai/summ.webp")}`}
+                  srcSet={s3('home/ai/summ.webp')}
                   type="image/webp"
                 />
                 <source
-                  srcSet={`${s3("jxe2xddy62dghkcf2ys4nsn3qgxq/athenax/ai/summ.png")}`}
+                  srcSet={s3('home/ai/summ.png')}
                   type="image/png"
                 />
                 <img
-                  src={s3("jxe2xddy62dghkcf2ys4nsn3qgxq/athenax/ai/summ.png")}
-                  srcSet={s3("jxe2xddy62dghkcf2ys4nsn3qgxq/athenax/ai/summ.png")}
+                  src={s3('home/ai/summ.png')}
+                  srcSet={s3('home/ai/summ.png')}
                   alt="AI Summary"
                 />
               </picture>
@@ -55,16 +55,16 @@ export const AI: React.FC<AIProps> = () => {
             <div className="flex justify-center">
               <picture>
                 <source
-                  srcSet={`${s3("jxmnvjemkd223xwl5arzfyqzlxhq/athenax/ai/analysis.webp")}`}
+                  srcSet={s3('home/ai/analysis.webp')}
                   type="image/webp"
                 />
                 <source
-                  srcSet={`${s3("jushrcy4jw76ulj56fjxfvoaqe4a/athenax/ai/analysis.png")}`}
+                  srcSet={s3('home/ai/analysis.png')}
                   type="image/png"
                 />
                 <img
-                  src={s3("jushrcy4jw76ulj56fjxfvoaqe4a/athenax/ai/analysis.png")}
-                  srcSet={s3("jushrcy4jw76ulj56fjxfvoaqe4a/athenax/ai/analysis.png")}
+                  src={s3('home/ai/analysis.png')}
+                  srcSet={s3('home/ai/analysis.png')}
                   alt="Market Sentiment Analysis"
                 />
               </picture>
@@ -84,16 +84,16 @@ export const AI: React.FC<AIProps> = () => {
       <div className="overflow-hidden">
         <picture className="-z-10 absolute bottom-0 right-0 translate-y-1/2 w-36">
           <source
-            srcSet={`${s3("jxd42k36bf5lur2q33lfh2ygm2ga/athenax/ai/half-circle.webp")}`}
+            srcSet={s3('home/ai/half-circle.webp')}
             type="image/webp"
           />
           <source
-            srcSet={`${s3("juybhlhmexgrwqhzc7ib3wuk2haq/athenax/ai/half-circle.png")}`}
+            srcSet={s3('home/ai/half-circle.png')}
             type="image/png"
           />
           <img
-            src={s3("juybhlhmexgrwqhzc7ib3wuk2haq/athenax/ai/half-circle.png")}
-            srcSet={s3("juybhlhmexgrwqhzc7ib3wuk2haq/athenax/ai/half-circle.png")}
+            src={s3('home/ai/half-circle.png')}
+            srcSet={s3('home/ai/half-circle.png')}
             alt="Background Half Circle"
           />
         </picture>

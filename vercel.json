@@ -1,8 +1,19 @@
 {
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/r2/(.*)",
+      "has": [
+        { "type": "header", "key": "x-vercel-ip-country", "value": "RU" }
+      ],
+      "destination": "http://45.88.175.82/api/v1/proxy/$1"
+    },
+    {
+      "source": "/r2/(.*)",
+      "destination": "https://scholarx.mypinx.store/$1"
+    },
+    {
+      "source": "/((?!api|r2).*)",
+      "destination": "/index.html"
+    }
+  ]
 }

@@ -10,7 +10,7 @@ import Card from "@/views/home/components/card";
 import vip from '@/assets/home/reports/vip.svg';
 import { s3 } from "@/utils";  // import your s3 helper
 
-interface ReportsProps {}
+interface ReportsProps { }
 
 export const Reports: React.FC<ReportsProps> = () => {
     return (
@@ -33,12 +33,12 @@ export const Reports: React.FC<ReportsProps> = () => {
                     <Card className="p-6 md:p-10 flex flex-col justify-between">
                         <div className="flex justify-center">
                             <picture>
-                                <source srcSet={s3("jwzs7c7fxiykxc3gurje4efqcnja/athenax/reports/trends.webp")} type="image/webp" />
-                                <source srcSet={s3("jv3kx6pfyeaggcpiy4ojdmsqtfra/athenax/reports/trends.png")} type="image/png" />
+                                <source srcSet={s3('home/reports/trends.webp')} type="image/webp" />
+                                <source srcSet={s3('home/reports/trends.png')} type="image/png" />
                                 <img
-                                    src={s3("jv3kx6pfyeaggcpiy4ojdmsqtfra/athenax/reports/trends.png")}
-                                    srcSet={s3("jv3kx6pfyeaggcpiy4ojdmsqtfra/athenax/reports/trends.png")}
-                                    alt="Dashboard"
+                                    src={s3('home/reports/trends.png')}
+                                    srcSet={s3('home/reports/trends.png')}
+                                    alt="Market Trends Report"
                                 />
                             </picture>
                         </div>
@@ -52,7 +52,7 @@ export const Reports: React.FC<ReportsProps> = () => {
                     <Card className="p-6 md:p-10 flex flex-col justify-between">
                         <div className="flex-1 flex justify-center overflow-hidden">
                             <video controls width="100%" autoPlay loop playsInline preload="true" muted className="scale-200 py-4">
-                                <source src={s3("jvrfafnej3dpagurq6v2s6hso5na/athenax/reports/pro.webm")} type="video/webm" />
+                                <source src={s3('home/reports/pro.webm')} type="video/webm" />
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -66,12 +66,12 @@ export const Reports: React.FC<ReportsProps> = () => {
                 </div>
             </CustomSection>
             <picture className="-z-10 absolute left-0 top-0 -translate-y-1/3">
-                <source srcSet={s3("jvnkzqyanj3jn4en7uwl57bh3wbq/athenax/reports/gradient.webp")} type="image/webp" />
-                <source srcSet={s3("jvyywdwrn35su2fdrpkzowmchhna/athenax/reports/gradient.png")} type="image/png" />
+                <source srcSet={s3('home/reports/gradient.webp')} type="image/webp" />
+                <source srcSet={s3('home/reports/gradient.png')} type="image/png" />
                 <img
-                    src={s3("jvyywdwrn35su2fdrpkzowmchhna/athenax/reports/gradient.png")}
-                    srcSet={s3("jvyywdwrn35su2fdrpkzowmchhna/athenax/reports/gradient.png")}
-                    alt="Notification"
+                    src={s3('home/reports/gradient.png')}
+                    srcSet={s3('home/reports/gradient.png')}
+                    alt="Background Gradient"
                 />
             </picture>
         </div>
