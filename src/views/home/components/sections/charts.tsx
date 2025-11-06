@@ -5,7 +5,7 @@ import Title from '@/views/home/components/title'
 import Subtitle from '@/views/home/components/subtitle'
 import CardTitle from '@/views/home/components/cardTitle'
 import CardSubtitle from "@/views/home/components/cardSubtitle";
-
+import { s3 } from '@/utils';
 
 interface ChartsProps { }
 
@@ -43,15 +43,35 @@ export const Charts: React.FC<ChartsProps> = ({ }) => {
                 <div className="flex justify-center md:justify-end">
                     {/* Desktop */}
                     <picture className="hidden md:block w-full max-w-3xl">
-                        <source srcSet="https://link.storjshare.io/raw/jw2scactzpq6d3lvr4hyymsnzyya/athenax/chart/chart-2x.webp 2x, https://link.storjshare.io/raw/jwnsx647s3ba6zjybncw5n5ndrxa/athenax/chart/chart-3x.webp 3x" type="image/webp" />
-                        <source srcSet="https://link.storjshare.io/raw/jxdqeqvpwvkmt5ojxwcgvt5hcbaq/athenax/chart/chart-2x.png 2x, https://link.storjshare.io/raw/juuqcugrznt2l56do4ncrmpjgt7a/athenax/chart/chart-3x.png 3x" type="image/png" />
-                        <img src="https://link.storjshare.io/raw/juuqcugrznt2l56do4ncrmpjgt7a/athenax/chart/chart-3x.png" srcSet="https://link.storjshare.io/raw/jxdqeqvpwvkmt5ojxwcgvt5hcbaq/athenax/chart/chart-2x.png 2x, https://link.storjshare.io/raw/juuqcugrznt2l56do4ncrmpjgt7a/athenax/chart/chart-3x.png 3x" alt="Chart" />
+                        <source 
+                            srcSet={`${s3('home/charts/chart-2x.webp')} 2x, ${s3('home/charts/chart-3x.webp')} 3x`} 
+                            type="image/webp" 
+                        />
+                        <source 
+                            srcSet={`${s3('home/charts/chart-2x.png')} 2x, ${s3('home/charts/chart-3x.png')} 3x`} 
+                            type="image/png" 
+                        />
+                        <img 
+                            src={s3('home/charts/chart-3x.png')} 
+                            srcSet={`${s3('home/charts/chart-2x.png')} 2x, ${s3('home/charts/chart-3x.png')} 3x`} 
+                            alt="Chart" 
+                        />
                     </picture>
                     {/* Mobile */}
                     <picture className="md:hidden mt-12 flex-1 w-full max-w-96 flex justify-center">
-                        <source srcSet="https://link.storjshare.io/raw/jxfdevmuj4gzoyjwrxu7aia5p3za/athenax/chart/mchart-2x.webp 2x, https://link.storjshare.io/raw/jxzkn6vjgrfdeulmvt2yqybypcfq/athenax/chart/mchart-3x.webp 3x" type="image/webp" />
-                        <source srcSet="https://link.storjshare.io/raw/jxdray46kzw7hagkfw2zhiqclgha/athenax/chart/mchart-2x.png 2x, https://link.storjshare.io/raw/jw4thu77cnd32zi743etzmczxmmq/athenax/chart/mchart-3x.png 3x" type="image/png" />
-                        <img src="https://link.storjshare.io/raw/jw4thu77cnd32zi743etzmczxmmq/athenax/chart/mchart-3x.png" srcSet="https://link.storjshare.io/raw/jxdray46kzw7hagkfw2zhiqclgha/athenax/chart/mchart-2x.png 2x, https://link.storjshare.io/raw/jw4thu77cnd32zi743etzmczxmmq/athenax/chart/mchart-3x.png 3x" alt="Chart" />
+                        <source 
+                            srcSet={`${s3('home/charts/mchart-2x.webp')} 2x, ${s3('home/charts/mchart-3x.webp')} 3x`} 
+                            type="image/webp" 
+                        />
+                        <source 
+                            srcSet={`${s3('home/charts/mchart-2x.png')} 2x, ${s3('home/charts/mchart-3x.png')} 3x`} 
+                            type="image/png" 
+                        />
+                        <img 
+                            src={s3('home/charts/mchart-3x.png')} 
+                            srcSet={`${s3('home/charts/mchart-2x.png')} 2x, ${s3('home/charts/mchart-3x.png')} 3x`} 
+                            alt="Chart" 
+                        />
                     </picture>
                 </div>
             </div>

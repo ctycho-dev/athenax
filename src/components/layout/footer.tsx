@@ -14,6 +14,7 @@ import {
 import { FaLinkedin } from "react-icons/fa6";
 // import { FaTelegram } from "react-icons/fa6";
 import checkIcon from '@/assets/home/check.svg';
+import { s3 } from "@/utils";
 
 
 
@@ -104,9 +105,13 @@ export const Footer: React.FC<FooterProps> = ({ formRef }) => {
             </div>
             <div className="absolute left-0 bottom-0 -z-10 w-96">
                 <picture>
-                    <source srcSet="https://link.storjshare.io/raw/jwrof5hro7gcailiwsxdjr4nzuqq/athenax/footer-gradient.webp" type="image/webp" />
-                    <source srcSet="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" type="image/png" />
-                    <img src="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" srcSet="https://link.storjshare.io/raw/jxq6kkwr3jptldjtqi35umni6chq/athenax/footer-gradient.png" alt="Footer gradient" />
+                    <source srcSet={s3('home/footer/footer-gradient.webp')} type="image/webp" />
+                    <source srcSet={s3('home/footer/footer-gradient.png')} type="image/png" />
+                    <img 
+                        src={s3('home/footer/footer-gradient.png')} 
+                        srcSet={s3('home/footer/footer-gradient.png')} 
+                        alt="Footer gradient" 
+                    />
                 </picture>
             </div>
             <Toaster richColors position="top-right" />

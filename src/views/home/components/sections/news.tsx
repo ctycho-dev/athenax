@@ -21,6 +21,7 @@ import img9 from '@/assets/home/news/img_9.svg'
 
 interface NewsProps { }
 
+
 export const News: React.FC<NewsProps> = ({ }) => {
 
     return (
@@ -38,30 +39,16 @@ export const News: React.FC<NewsProps> = ({ }) => {
                         <div className="mb-6">
                             <picture>
                                 <source
-                                    srcSet={`${s3(
-                                        'jxtfgdwv6l5qa4xoccju7y5gslza/athenax/news/news-2x.webp'
-                                    )} 2x, ${s3(
-                                        'jwm5csk2omaaw62khyq36bf56z7q/athenax/news/news-3x.webp'
-                                    )} 3x`}
+                                    srcSet={`${s3('home/news/news-2x.webp')} 2x, ${s3('home/news/news-3x.webp')} 3x`}
                                     type="image/webp"
                                 />
                                 <source
-                                    srcSet={`${s3(
-                                        'jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png'
-                                    )} 2x, ${s3(
-                                        'jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png'
-                                    )} 3x`}
+                                    srcSet={`${s3('home/news/news-2x.png')} 2x, ${s3('home/news/news-3x.png')} 3x`}
                                     type="image/png"
                                 />
                                 <img
-                                    src={s3(
-                                        'jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png'
-                                    )}
-                                    srcSet={`${s3(
-                                        'jvj3pkyjfl3yihr5ewkouva4o5ja/athenax/news/news-2x.png'
-                                    )} 2x, ${s3(
-                                        'jwwe5cmqxwlammto4tpllftn45ma/athenax/news/news-3x.png'
-                                    )} 3x`}
+                                    src={s3('home/news/news-3x.png')}
+                                    srcSet={`${s3('home/news/news-2x.png')} 2x, ${s3('home/news/news-3x.png')} 3x`}
                                     alt="News"
                                 />
                             </picture>

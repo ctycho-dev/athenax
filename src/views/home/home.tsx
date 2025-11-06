@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Toaster } from 'sonner';
 
+import { LazySection } from "@/components/LazySection";
 import { Header } from "@/components/layout/header";
 import { Main } from "@/views/home/components/sections/main";
 import { Description } from "@/views/home/components/sections/description";
@@ -32,15 +33,33 @@ export const Home: React.FC<HomeProps> = ({ }) => {
         <div>
             <Header />
             <Main scrollToWishlist={scrollToWishlist} />
-            <Description />
-            <News />
-            <Trackers />
-            <Reports />
-            <Charts />
-            <AI />
-            <Research />
-            <X />
-            <Footer formRef={wishlistRef} />
+            <LazySection>
+                <Description />
+            </LazySection>
+            <LazySection>
+                <News />
+            </LazySection>
+            <LazySection>
+                <Trackers />
+            </LazySection>
+            <LazySection>
+                <Reports />
+            </LazySection>
+            <LazySection>
+                <Charts />
+            </LazySection>
+            <LazySection>
+                <AI />
+            </LazySection>
+            <LazySection>
+                <Research />
+            </LazySection>
+            <LazySection>
+                <X />
+            </LazySection>
+            <LazySection>
+                <Footer formRef={wishlistRef} />
+            </LazySection>
             <Toaster richColors position="top-right" />
         </div>
     );
